@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4442A0211B926784007251E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442A0201B926784007251E6 /* AppDelegate.swift */; };
+		4442A0231B926784007251E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0221B926784007251E6 /* Assets.xcassets */; };
+		4442A0261B926784007251E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0241B926784007251E6 /* MainMenu.xib */; };
+		449044681B93751B000A77BA /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449044671B93751B000A77BA /* Async.swift */; settings = {ASSET_TAGS = (); }; };
+		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4442A01D1B926784007251E6 /* Radish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radish.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4442A0201B926784007251E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4442A0221B926784007251E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4442A0251B926784007251E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4442A0271B926784007251E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		449044671B93751B000A77BA /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.swift; path = External/Async.swift; sourceTree = "<group>"; };
+		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleViewWindowController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4442A01A1B926784007251E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0ADB30DD40705169F7CE942E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4442A0141B926784007251E6 = {
+			isa = PBXGroup;
+			children = (
+				4442A01F1B926784007251E6 /* Radish */,
+				4442A01E1B926784007251E6 /* Products */,
+				0ADB30DD40705169F7CE942E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4442A01E1B926784007251E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4442A01D1B926784007251E6 /* Radish.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4442A01F1B926784007251E6 /* Radish */ = {
+			isa = PBXGroup;
+			children = (
+				449044661B9374F4000A77BA /* External */,
+				4442A0201B926784007251E6 /* AppDelegate.swift */,
+				4442A0221B926784007251E6 /* Assets.xcassets */,
+				4442A0241B926784007251E6 /* MainMenu.xib */,
+				4442A0271B926784007251E6 /* Info.plist */,
+				44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */,
+			);
+			path = Radish;
+			sourceTree = "<group>";
+		};
+		449044661B9374F4000A77BA /* External */ = {
+			isa = PBXGroup;
+			children = (
+				449044671B93751B000A77BA /* Async.swift */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4442A01C1B926784007251E6 /* Radish */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4442A02A1B926784007251E6 /* Build configuration list for PBXNativeTarget "Radish" */;
+			buildPhases = (
+				4442A0191B926784007251E6 /* Sources */,
+				4442A01A1B926784007251E6 /* Frameworks */,
+				4442A01B1B926784007251E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Radish;
+			productName = Radish;
+			productReference = 4442A01D1B926784007251E6 /* Radish.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4442A0151B926784007251E6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = rangic.com;
+				TargetAttributes = {
+					4442A01C1B926784007251E6 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 4442A0181B926784007251E6 /* Build configuration list for PBXProject "Radish" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4442A0141B926784007251E6;
+			productRefGroup = 4442A01E1B926784007251E6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4442A01C1B926784007251E6 /* Radish */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4442A01B1B926784007251E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4442A0231B926784007251E6 /* Assets.xcassets in Resources */,
+				4442A0261B926784007251E6 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+
+/* Begin PBXSourcesBuildPhase section */
+		4442A0191B926784007251E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */,
+				449044681B93751B000A77BA /* Async.swift in Sources */,
+				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4442A0241B926784007251E6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4442A0251B926784007251E6 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4442A0281B926784007251E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4442A0291B926784007251E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4442A02B1B926784007251E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Radish/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4442A02C1B926784007251E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Radish/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4442A0181B926784007251E6 /* Build configuration list for PBXProject "Radish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4442A0281B926784007251E6 /* Debug */,
+				4442A0291B926784007251E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4442A02A1B926784007251E6 /* Build configuration list for PBXNativeTarget "Radish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4442A02B1B926784007251E6 /* Debug */,
+				4442A02C1B926784007251E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4442A0151B926784007251E6 /* Project object */;
+}
