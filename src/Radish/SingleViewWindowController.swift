@@ -20,11 +20,6 @@ class SingleViewWindowController: NSWindowController
     @IBOutlet weak var statusFilename: NSTextField!
 
 
-    var imageTypes = [String]()
-    let videoTypes = [AVFileTypeAIFC, AVFileTypeAIFF, AVFileTypeCoreAudioFormat, AVFileTypeAppleM4V, AVFileTypeMPEG4,
-        AVFileTypeAppleM4A, AVFileTypeQuickTimeMovie, AVFileTypeWAVE, AVFileTypeAMR, AVFileTypeAC3, AVFileTypeMPEGLayer3, AVFileTypeSunAU]
-
-    var supportedTypes = [String]()
     var allFiles = [NSURL]()
     var currentFileIndex = 0
 
@@ -37,20 +32,13 @@ class SingleViewWindowController: NSWindowController
         imageViewer.hidden = true
 
         updateStatusView()
-
-        let cgImageTypes: NSArray = CGImageSourceCopyTypeIdentifiers()
-        imageTypes = cgImageTypes as [AnyObject] as! [String]
-
-        supportedTypes.appendContentsOf(imageTypes)
-        supportedTypes.appendContentsOf(videoTypes)
-
     }
 
     @IBAction func openFile(sender: AnyObject)
     {
         let dialog = NSOpenPanel()
 
-        dialog.allowedFileTypes = supportedTypes
+        dialog.allowedFileTypes = SupportedTypes.all()
         dialog.canChooseDirectories = true
         dialog.allowsMultipleSelection = false
         if 1 != dialog.runModal() || dialog.URLs.count < 1
@@ -134,12 +122,12 @@ class SingleViewWindowController: NSWindowController
         updateStatusView()
 
         let fileType = getFileType(localFile.path!)
-        if imageTypes.contains(fileType)
+        if SupportedTypes.images().contains(fileType)
         {
             displayImage(localFile)
         }
         else
-            if videoTypes.contains(fileType)
+            if SupportedTypes.videos().contains(fileType)
             {
                 displayVideo(localFile)
             }
@@ -162,16 +150,16 @@ class SingleViewWindowController: NSWindowController
 
         Async.background
         {
-            self.log("Loading \(fileUrl.lastPathComponent!)")
+            Logger.log("Loading \(fileUrl.lastPathComponent!)")
             let imageSource = CGImageSourceCreateWithURL(fileUrl, nil)
             let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
             let nsImage = NSImage(CGImage: image!, size: NSSize(width: CGImageGetWidth(image), height: CGImageGetHeight(image)))
 
             Async.main
             {
-                self.log("Setting the image...")
+                Logger.log("Setting the image...")
                 self.imageViewer.image = nsImage;
-                self.log("...Done")
+                Logger.log("...Done")
             }
         }
     }
@@ -210,7 +198,7 @@ class SingleViewWindowController: NSWindowController
         {
         }
 
-        return supportedTypes.contains(itemUti!)
+        return SupportedTypes.all().contains(itemUti!)
     }
 
     func getFileType(filename:String) -> String
@@ -241,12 +229,4 @@ class SingleViewWindowController: NSWindowController
         }
     }
 
-    func log(message:String)
-    {
-        NSLog(message)
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "HH:mm:ss A"
-//        let now = dateFormatter.stringFromDate(NSDate())
-//        print("\(now) - \(message)")
-    }
 }
