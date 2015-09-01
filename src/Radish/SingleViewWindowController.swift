@@ -22,6 +22,7 @@ class SingleViewWindowController: NSWindowController
 
     let gatherer = MediaGatherer()
     var currentFileIndex = 0
+    private var dateFormatter:NSDateFormatter? = nil
 
 
     func initialize()
@@ -30,6 +31,9 @@ class SingleViewWindowController: NSWindowController
 
         videoPlayer.hidden = true
         imageViewer.hidden = true
+
+        dateFormatter = NSDateFormatter()
+        dateFormatter!.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
         updateStatusView()
     }
@@ -154,6 +158,7 @@ class SingleViewWindowController: NSWindowController
 
             statusIndex.stringValue = "\(currentFileIndex + 1) of \(gatherer.mediaFiles.count)"
             statusFilename.stringValue = "\(media.name)"
+            statusTimestamp.stringValue = "\(dateFormatter!.stringFromDate(media.timestamp!))"
         }
     }
 

@@ -38,10 +38,15 @@ class MediaGatherer
                     let mediaType = SupportedTypes.getType(f)
                     if mediaType == SupportedTypes.MediaType.Image || mediaType == SupportedTypes.MediaType.Video
                     {
-                        mediaFiles.append(FileMediaData(fileUrl:f, type:mediaType))
+                        var value:AnyObject?
+                        try! f.getResourceValue(&value, forKey: NSURLContentModificationDateKey)
+                        let date = value as! NSDate?
+                        mediaFiles.append(FileMediaData(fileUrl:f, type:mediaType, date:date))
                     }
                 }
             }
+
+            mediaFiles.sortInPlace({(m1:MediaData, m2:MediaData) -> Bool in return m1.timestamp!.compare(m2.timestamp!) == NSComparisonResult.OrderedAscending })
         }
     }
 
@@ -51,7 +56,7 @@ class MediaGatherer
         {
             return try NSFileManager.defaultManager().contentsOfDirectoryAtURL(
                 NSURL(fileURLWithPath: folderName),
-                includingPropertiesForKeys: nil,
+                includingPropertiesForKeys: [NSURLContentModificationDateKey],
                 options:NSDirectoryEnumerationOptions.SkipsHiddenFiles)
         }
         catch
