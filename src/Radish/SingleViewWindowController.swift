@@ -36,49 +36,27 @@ class SingleViewWindowController: NSWindowController
 
     @IBAction func openFile(sender: AnyObject)
     {
-        let dialog = NSOpenPanel()
-
-        dialog.allowedFileTypes = SupportedTypes.all()
-        dialog.canChooseDirectories = true
-        dialog.allowsMultipleSelection = true
-        if 1 != dialog.runModal() || dialog.URLs.count < 1
-        {
-            return
-        }
-
-
-        let localFile = dialog.URLs[0]
-        var isFolder:ObjCBool = false
-        let fileExists = NSFileManager.defaultManager().fileExistsAtPath(localFile.path!, isDirectory:&isFolder)
-        if !fileExists
-        {
-            return
-        }
+        let folders = selectFoldersToAdd()
+        if (folders.urls == nil) { return }
 
         currentFileIndex = 0;
         gatherer.clear()
 
-        for folderUrl in dialog.URLs
-        {
-            gatherer.addFolder(folderUrl.path!)
-        }
-
-        var index = 0
-        for f in gatherer.mediaFiles
-        {
-            if f.url == localFile
-            {
-                currentFileIndex = index
-                break
-            }
-
-            ++index
-        }
+        addFolders(folders.urls, selected: folders.selected)
 
         if (gatherer.mediaFiles.count > 0)
         {
             displayFile(gatherer.mediaFiles[currentFileIndex])
         }
+    }
+
+    @IBAction func addFile(sender: AnyObject)
+    {
+        let folders = selectFoldersToAdd()
+        if (folders.urls == nil) { return }
+
+        addFolders(folders.urls, selected: gatherer.mediaFiles[currentFileIndex].url)
+        updateStatusView()
     }
 
     @IBAction func nextFile(sender: AnyObject)
@@ -172,11 +150,57 @@ class SingleViewWindowController: NSWindowController
         }
         else
         {
-            let file = gatherer.mediaFiles[currentFileIndex]
+            let media = gatherer.mediaFiles[currentFileIndex]
 
             statusIndex.stringValue = "\(currentFileIndex + 1) of \(gatherer.mediaFiles.count)"
-            statusFilename.stringValue = "\(file.name)"
+            statusFilename.stringValue = "\(media.name)"
         }
     }
 
+    func selectFoldersToAdd() -> (urls:[NSURL]!,selected:NSURL!)
+    {
+        let dialog = NSOpenPanel()
+
+        dialog.allowedFileTypes = SupportedTypes.all()
+        dialog.canChooseDirectories = true
+        dialog.allowsMultipleSelection = true
+        if 1 != dialog.runModal() || dialog.URLs.count < 1
+        {
+            return (nil, nil)
+        }
+
+
+        let localFile = dialog.URLs[0]
+        var isFolder:ObjCBool = false
+        let fileExists = NSFileManager.defaultManager().fileExistsAtPath(localFile.path!, isDirectory:&isFolder)
+        if !fileExists
+        {
+            return (nil, nil)
+        }
+
+        return (dialog.URLs, localFile)
+    }
+
+    func addFolders(urls:[NSURL], selected:NSURL!)
+    {
+        for folderUrl in urls
+        {
+            gatherer.addFolder(folderUrl.path!)
+        }
+
+        if (selected != nil)
+        {
+            var index = 0
+            for f in gatherer.mediaFiles
+            {
+                if f.url == selected
+                {
+                    currentFileIndex = index
+                    break
+                }
+
+                ++index
+            }
+        }
+    }
 }
