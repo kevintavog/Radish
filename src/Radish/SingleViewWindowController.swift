@@ -20,7 +20,7 @@ class SingleViewWindowController: NSWindowController
 
 
 
-    let gatherer = MediaGatherer()
+    let mediaProvider = MediaProvider()
     var currentFileIndex = 0
     private var dateFormatter:NSDateFormatter? = nil
 
@@ -44,13 +44,13 @@ class SingleViewWindowController: NSWindowController
         if (folders.urls == nil) { return }
 
         currentFileIndex = 0;
-        gatherer.clear()
+        mediaProvider.clear()
 
         addFolders(folders.urls, selected: folders.selected)
 
-        if (gatherer.mediaFiles.count > 0)
+        if (mediaProvider.mediaFiles.count > 0)
         {
-            displayFile(gatherer.mediaFiles[currentFileIndex])
+            displayFile(mediaProvider.mediaFiles[currentFileIndex])
         }
     }
 
@@ -59,7 +59,7 @@ class SingleViewWindowController: NSWindowController
         let folders = selectFoldersToAdd()
         if (folders.urls == nil) { return }
 
-        addFolders(folders.urls, selected: gatherer.mediaFiles[currentFileIndex].url)
+        addFolders(folders.urls, selected: mediaProvider.mediaFiles[currentFileIndex].url)
         updateStatusView()
     }
 
@@ -75,13 +75,13 @@ class SingleViewWindowController: NSWindowController
 
     func displayFileByIndex(index: Int)
     {
-        if (gatherer.mediaFiles.count > 0)
+        if (mediaProvider.mediaFiles.count > 0)
         {
             currentFileIndex = index
-            if (currentFileIndex < 0) { currentFileIndex = gatherer.mediaFiles.count - 1; }
-            if (currentFileIndex >= gatherer.mediaFiles.count) { currentFileIndex = 0; }
+            if (currentFileIndex < 0) { currentFileIndex = mediaProvider.mediaFiles.count - 1; }
+            if (currentFileIndex >= mediaProvider.mediaFiles.count) { currentFileIndex = 0; }
 
-            displayFile(gatherer.mediaFiles[currentFileIndex])
+            displayFile(mediaProvider.mediaFiles[currentFileIndex])
         }
     }
 
@@ -117,7 +117,10 @@ class SingleViewWindowController: NSWindowController
             let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
             let nsImage = NSImage(CGImage: image!, size: NSSize(width: CGImageGetWidth(image), height: CGImageGetHeight(image)))
 
-            self.imageViewer.image = nsImage;
+            Async.main
+            {
+                self.imageViewer.image = nsImage;
+            }
         }
     }
 
@@ -144,7 +147,7 @@ class SingleViewWindowController: NSWindowController
 
     func updateStatusView()
     {
-        if (currentFileIndex < 0 || currentFileIndex >= gatherer.mediaFiles.count || gatherer.mediaFiles.count == 0)
+        if (currentFileIndex < 0 || currentFileIndex >= mediaProvider.mediaFiles.count || mediaProvider.mediaFiles.count == 0)
         {
             statusFilename.stringValue = ""
             statusTimestamp.stringValue = ""
@@ -154,9 +157,9 @@ class SingleViewWindowController: NSWindowController
         }
         else
         {
-            let media = gatherer.mediaFiles[currentFileIndex]
+            let media = mediaProvider.mediaFiles[currentFileIndex]
 
-            statusIndex.stringValue = "\(currentFileIndex + 1) of \(gatherer.mediaFiles.count)"
+            statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider.mediaFiles.count)"
             statusFilename.stringValue = "\(media.name)"
             statusTimestamp.stringValue = "\(dateFormatter!.stringFromDate(media.timestamp!))"
         }
@@ -190,13 +193,13 @@ class SingleViewWindowController: NSWindowController
     {
         for folderUrl in urls
         {
-            gatherer.addFolder(folderUrl.path!)
+            mediaProvider.addFolder(folderUrl.path!)
         }
 
         if (selected != nil)
         {
             var index = 0
-            for f in gatherer.mediaFiles
+            for f in mediaProvider.mediaFiles
             {
                 if f.url == selected
                 {

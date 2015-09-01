@@ -4,7 +4,7 @@
 
 import Foundation
 
-class MediaGatherer
+class MediaProvider
 {
     var folders:[String] = []
     var mediaFiles:[MediaData] = []
