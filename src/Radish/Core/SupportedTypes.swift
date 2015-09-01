@@ -1,5 +1,4 @@
 //
-//  SupportedTypes.swift
 //  Radish
 //
 
@@ -7,6 +6,11 @@ import AVFoundation
 
 class SupportedTypes
 {
+    enum MediaType
+    {
+        case Image, Video, Unknown
+    }
+
     static private var imageTypes:[String]? = nil
     static private var videoTypes:[String]? = nil
 
@@ -23,6 +27,25 @@ class SupportedTypes
 
         }
         return supportedTypes!;
+    }
+
+    static func isSupportedFile(fullUrl:NSURL) -> Bool
+    {
+        return all().contains(getFileType(fullUrl))
+    }
+
+    static func getType(fullUrl:NSURL) -> MediaType
+    {
+        let fileType = getFileType(fullUrl)
+        if images().contains(fileType)
+        {
+            return MediaType.Image
+        }
+        if videos().contains(fileType)
+        {
+            return MediaType.Video
+        }
+        return MediaType.Unknown
     }
 
     static func images() -> [String]
@@ -43,5 +66,19 @@ class SupportedTypes
                 AVFileTypeAppleM4A, AVFileTypeQuickTimeMovie, AVFileTypeWAVE, AVFileTypeAMR, AVFileTypeAC3, AVFileTypeMPEGLayer3, AVFileTypeSunAU]
         }
         return videoTypes!
+    }
+
+    static func getFileType(fullUrl:NSURL) -> String
+    {
+        var uti:AnyObject?
+        do
+        {
+            try fullUrl.getResourceValue(&uti, forKey:NSURLTypeIdentifierKey)
+            return uti as! String
+        }
+        catch
+        {
+        }
+        return ""
     }
 }

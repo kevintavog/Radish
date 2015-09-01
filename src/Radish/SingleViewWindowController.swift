@@ -1,5 +1,4 @@
 //
-//  SingleViewWindowController.swift
 //  Radish
 //
 
@@ -20,7 +19,8 @@ class SingleViewWindowController: NSWindowController
     @IBOutlet weak var statusFilename: NSTextField!
 
 
-    var allFiles = [NSURL]()
+
+    let gatherer = MediaGatherer()
     var currentFileIndex = 0
 
 
@@ -40,7 +40,7 @@ class SingleViewWindowController: NSWindowController
 
         dialog.allowedFileTypes = SupportedTypes.all()
         dialog.canChooseDirectories = true
-        dialog.allowsMultipleSelection = false
+        dialog.allowsMultipleSelection = true
         if 1 != dialog.runModal() || dialog.URLs.count < 1
         {
             return
@@ -55,43 +55,29 @@ class SingleViewWindowController: NSWindowController
             return
         }
 
-        var localFolder = localFile.path
-        if !isFolder
+        currentFileIndex = 0;
+        gatherer.clear()
+
+        for folderUrl in dialog.URLs
         {
-            localFolder = localFile.URLByDeletingLastPathComponent?.path
+            gatherer.addFolder(folderUrl.path!)
         }
 
-        let filesInFolder = (try! NSFileManager.defaultManager().contentsOfDirectoryAtPath(localFolder!)) as NSArray
-        allFiles = []
-        currentFileIndex = 0;
-
         var index = 0
-        for f in filesInFolder
+        for f in gatherer.mediaFiles
         {
-            var fullName = localFolder! as NSString
-            fullName = fullName.stringByAppendingPathComponent(f as! String)
-
-            let fullUrl = NSURL(fileURLWithPath: fullName as String)
-            if (isSupportedFile(fullUrl))
+            if f.url == localFile
             {
-                allFiles.append(fullUrl)
-
-                if fullName == localFile.path
-                {
-                    currentFileIndex = allFiles.count - 1
-                }
-            }
-            else
-            {
-                print("Ignoring file \(fullName)")
+                currentFileIndex = index
+                break
             }
 
             ++index
         }
-        
-        if (allFiles.count > 0)
+
+        if (gatherer.mediaFiles.count > 0)
         {
-            displayFile(allFiles[currentFileIndex])
+            displayFile(gatherer.mediaFiles[currentFileIndex])
         }
     }
 
@@ -107,37 +93,32 @@ class SingleViewWindowController: NSWindowController
 
     func displayFileByIndex(index: Int)
     {
-        if (allFiles.count > 0)
+        if (gatherer.mediaFiles.count > 0)
         {
             currentFileIndex = index
-            if (currentFileIndex < 0) { currentFileIndex = allFiles.count - 1; }
-            if (currentFileIndex >= allFiles.count) { currentFileIndex = 0; }
+            if (currentFileIndex < 0) { currentFileIndex = gatherer.mediaFiles.count - 1; }
+            if (currentFileIndex >= gatherer.mediaFiles.count) { currentFileIndex = 0; }
 
-            displayFile(allFiles[currentFileIndex])
+            displayFile(gatherer.mediaFiles[currentFileIndex])
         }
     }
 
-    func displayFile(localFile: NSURL)
+    func displayFile(media:MediaData)
     {
         updateStatusView()
 
-        let fileType = getFileType(localFile.path!)
-        if SupportedTypes.images().contains(fileType)
+        switch media.type!
         {
-            displayImage(localFile)
+        case .Image:
+            displayImage(media)
+        case .Video:
+            displayVideo(media)
+        default:
+            displayUnsupportedFileType(media)
         }
-        else
-            if SupportedTypes.videos().contains(fileType)
-            {
-                displayVideo(localFile)
-            }
-            else
-            {
-                displayUnsupportedFileType(localFile, fileType:fileType)
-            }
     }
 
-    func displayImage(fileUrl: NSURL)
+    func displayImage(media:MediaData)
     {
         videoPlayer.player?.pause()
 
@@ -150,23 +131,17 @@ class SingleViewWindowController: NSWindowController
 
         Async.background
         {
-            Logger.log("Loading \(fileUrl.lastPathComponent!)")
-            let imageSource = CGImageSourceCreateWithURL(fileUrl, nil)
+            let imageSource = CGImageSourceCreateWithURL(media.url, nil)
             let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
             let nsImage = NSImage(CGImage: image!, size: NSSize(width: CGImageGetWidth(image), height: CGImageGetHeight(image)))
 
-            Async.main
-            {
-                Logger.log("Setting the image...")
-                self.imageViewer.image = nsImage;
-                Logger.log("...Done")
-            }
+            self.imageViewer.image = nsImage;
         }
     }
 
-    func displayVideo(fileUrl: NSURL)
+    func displayVideo(media:MediaData)
     {
-        videoPlayer.player = AVPlayer(URL: fileUrl)
+        videoPlayer.player = AVPlayer(URL: media.url)
         if (videoPlayer.hidden)
         {
             videoPlayer.hidden = false
@@ -176,43 +151,18 @@ class SingleViewWindowController: NSWindowController
         videoPlayer.player?.play()
     }
 
-    func displayUnsupportedFileType(fileUrl: NSURL, fileType: String)
+    func displayUnsupportedFileType(media:MediaData)
     {
         videoPlayer.player?.pause()
         videoPlayer.hidden = true
         imageViewer.hidden = true
 
-        print("Unhandled file type \(fileType) for '\(fileUrl)'")
-    }
-
-    func isSupportedFile(fullUrl:NSURL) -> Bool
-    {
-        var itemUti:String?
-        var uti:AnyObject?
-        do
-        {
-            try fullUrl.getResourceValue(&uti, forKey:NSURLTypeIdentifierKey)
-            itemUti = uti as? String
-        }
-        catch
-        {
-        }
-
-        return SupportedTypes.all().contains(itemUti!)
-    }
-
-    func getFileType(filename:String) -> String
-    {
-        do {
-            return try NSWorkspace.sharedWorkspace().typeOfFile(filename)
-        } catch  {
-            return "";
-        }
+        print("Unhandled file: '\(media.name)'")
     }
 
     func updateStatusView()
     {
-        if (currentFileIndex < 0 || currentFileIndex >= allFiles.count || allFiles.count == 0)
+        if (currentFileIndex < 0 || currentFileIndex >= gatherer.mediaFiles.count || gatherer.mediaFiles.count == 0)
         {
             statusFilename.stringValue = ""
             statusTimestamp.stringValue = ""
@@ -222,10 +172,10 @@ class SingleViewWindowController: NSWindowController
         }
         else
         {
-            let fileUrl = allFiles[currentFileIndex]
+            let file = gatherer.mediaFiles[currentFileIndex]
 
-            statusIndex.stringValue = "\(currentFileIndex + 1) of \(allFiles.count)"
-            statusFilename.stringValue = "\(fileUrl.lastPathComponent!)"
+            statusIndex.stringValue = "\(currentFileIndex + 1) of \(gatherer.mediaFiles.count)"
+            statusFilename.stringValue = "\(file.name)"
         }
     }
 
