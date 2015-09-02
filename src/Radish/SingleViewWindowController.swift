@@ -193,7 +193,20 @@ class SingleViewWindowController: NSWindowController
     {
         for folderUrl in urls
         {
-            mediaProvider.addFolder(folderUrl.path!)
+            var isFolder: ObjCBool = false
+            let fileExists = NSFileManager.defaultManager().fileExistsAtPath(folderUrl.path!, isDirectory:&isFolder)
+            if !fileExists
+            {
+                continue
+            }
+
+            var url = folderUrl
+            if !isFolder
+            {
+                url = folderUrl.URLByDeletingLastPathComponent!
+            }
+
+            mediaProvider.addFolder(url.path!)
         }
 
         if (selected != nil)
