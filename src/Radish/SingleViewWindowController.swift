@@ -20,13 +20,16 @@ class SingleViewWindowController: NSWindowController
 
 
 
-    let mediaProvider = MediaProvider()
+    var mediaProvider: MediaProvider?
     var currentFileIndex = 0
-    private var dateFormatter:NSDateFormatter? = nil
+    private var dateFormatter: NSDateFormatter? = nil
 
 
-    func initialize()
+
+    func initialize(mediaProvider: MediaProvider)
     {
+        self.mediaProvider = mediaProvider
+
         window?.backgroundColor = NSColor.darkGrayColor()
 
         videoPlayer.hidden = true
@@ -38,28 +41,28 @@ class SingleViewWindowController: NSWindowController
         updateStatusView()
     }
 
-    @IBAction func openFile(sender: AnyObject)
+    @IBAction func openFolder(sender: AnyObject)
     {
         let folders = selectFoldersToAdd()
         if (folders.urls == nil) { return }
 
         currentFileIndex = 0;
-        mediaProvider.clear()
+        mediaProvider!.clear()
 
         addFolders(folders.urls, selected: folders.selected)
 
-        if (mediaProvider.mediaFiles.count > 0)
+        if (mediaProvider!.mediaFiles.count > 0)
         {
-            displayFile(mediaProvider.mediaFiles[currentFileIndex])
+            displayFile(mediaProvider!.mediaFiles[currentFileIndex])
         }
     }
 
-    @IBAction func addFile(sender: AnyObject)
+    @IBAction func addFolder(sender: AnyObject)
     {
         let folders = selectFoldersToAdd()
         if (folders.urls == nil) { return }
 
-        addFolders(folders.urls, selected: mediaProvider.mediaFiles[currentFileIndex].url)
+        addFolders(folders.urls, selected: mediaProvider!.mediaFiles[currentFileIndex].url)
         updateStatusView()
     }
 
@@ -75,13 +78,13 @@ class SingleViewWindowController: NSWindowController
 
     func displayFileByIndex(index: Int)
     {
-        if (mediaProvider.mediaFiles.count > 0)
+        if (mediaProvider!.mediaFiles.count > 0)
         {
             currentFileIndex = index
-            if (currentFileIndex < 0) { currentFileIndex = mediaProvider.mediaFiles.count - 1; }
-            if (currentFileIndex >= mediaProvider.mediaFiles.count) { currentFileIndex = 0; }
+            if (currentFileIndex < 0) { currentFileIndex = mediaProvider!.mediaFiles.count - 1; }
+            if (currentFileIndex >= mediaProvider!.mediaFiles.count) { currentFileIndex = 0; }
 
-            displayFile(mediaProvider.mediaFiles[currentFileIndex])
+            displayFile(mediaProvider!.mediaFiles[currentFileIndex])
         }
     }
 
@@ -147,7 +150,7 @@ class SingleViewWindowController: NSWindowController
 
     func updateStatusView()
     {
-        if (currentFileIndex < 0 || currentFileIndex >= mediaProvider.mediaFiles.count || mediaProvider.mediaFiles.count == 0)
+        if (currentFileIndex < 0 || currentFileIndex >= mediaProvider!.mediaFiles.count || mediaProvider!.mediaFiles.count == 0)
         {
             statusFilename.stringValue = ""
             statusTimestamp.stringValue = ""
@@ -157,9 +160,9 @@ class SingleViewWindowController: NSWindowController
         }
         else
         {
-            let media = mediaProvider.mediaFiles[currentFileIndex]
+            let media = mediaProvider!.mediaFiles[currentFileIndex]
 
-            statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider.mediaFiles.count)"
+            statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider!.mediaFiles.count)"
             statusFilename.stringValue = "\(media.name)"
             statusTimestamp.stringValue = "\(dateFormatter!.stringFromDate(media.timestamp!))"
         }
@@ -206,13 +209,13 @@ class SingleViewWindowController: NSWindowController
                 url = folderUrl.URLByDeletingLastPathComponent!
             }
 
-            mediaProvider.addFolder(url.path!)
+            mediaProvider!.addFolder(url.path!)
         }
 
         if (selected != nil)
         {
             var index = 0
-            for f in mediaProvider.mediaFiles
+            for f in mediaProvider!.mediaFiles
             {
                 if f.url == selected
                 {

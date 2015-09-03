@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		442232721B968DB2009123F0 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 442232711B968DB2009123F0 /* Quartz.framework */; };
+		442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */; settings = {ASSET_TAGS = (); }; };
 		4442A0211B926784007251E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442A0201B926784007251E6 /* AppDelegate.swift */; };
 		4442A0231B926784007251E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0221B926784007251E6 /* Assets.xcassets */; };
 		4442A0261B926784007251E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0241B926784007251E6 /* MainMenu.xib */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		442232711B968DB2009123F0 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailViewWindowController.swift; sourceTree = "<group>"; };
 		4442A01D1B926784007251E6 /* Radish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4442A0201B926784007251E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4442A0221B926784007251E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				442232721B968DB2009123F0 /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +55,7 @@
 		0ADB30DD40705169F7CE942E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				442232711B968DB2009123F0 /* Quartz.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -83,6 +89,7 @@
 				4442A0241B926784007251E6 /* MainMenu.xib */,
 				4442A0271B926784007251E6 /* Info.plist */,
 				44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */,
+				442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */,
 			);
 			path = Radish;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 				44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */,
 				44FEF9791B9531B300DB2E1D /* MediaData.swift in Sources */,
 				44FEF97B1B95339400DB2E1D /* Location.swift in Sources */,
+				442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */,
 				44BB2F931B93913800B79B95 /* SupportedTypes.swift in Sources */,
 				449044681B93751B000A77BA /* Async.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,

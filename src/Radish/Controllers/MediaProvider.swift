@@ -6,6 +6,10 @@ import Foundation
 
 class MediaProvider
 {
+    static let MediaProviderCleared = "MediaProviderCleared"
+    static let MediaProviderUpdatedNotification = "MediaProviderUpdatedNotification"
+
+
     var folders:[String] = []
     var mediaFiles:[MediaData] = []
 
@@ -17,6 +21,8 @@ class MediaProvider
     {
         folders = []
         mediaFiles = []
+
+        NSNotificationCenter.defaultCenter().postNotificationName(MediaProvider.MediaProviderCleared, object: self)
     }
 
     func addFolder(folderName:String)
@@ -47,6 +53,8 @@ class MediaProvider
             }
 
             mediaFiles.sortInPlace({(m1:MediaData, m2:MediaData) -> Bool in return m1.timestamp!.compare(m2.timestamp!) == NSComparisonResult.OrderedAscending })
+
+            NSNotificationCenter.defaultCenter().postNotificationName(MediaProvider.MediaProviderUpdatedNotification, object: self)
         }
     }
 
