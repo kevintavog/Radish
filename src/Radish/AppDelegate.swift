@@ -8,8 +8,6 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate
 {
     @IBOutlet weak var window: NSWindow!
-    @IBAction func openFolder(sender: AnyObject) {
-    }
     @IBOutlet weak var singleViewWindowController: SingleViewWindowController!
     @IBOutlet weak var thumbnailViewWindowController: ThumbnailViewWindowController!
 
@@ -19,6 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
     func applicationDidFinishLaunching(aNotification: NSNotification)
     {
+        Preferences.setMissingDefaults()
+
         singleViewWindowController.initialize(mediaProvider)
         thumbnailViewWindowController.initialize(mediaProvider)
     }

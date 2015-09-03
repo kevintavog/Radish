@@ -27,8 +27,18 @@ class ThumbnailViewWindowController : NSWindowController
         newAttrs?.setValue(NSColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         imageBrowser?.setValue(newAttrs, forKey: IKImageBrowserCellsTitleAttributesKey)
 
+
+        imageBrowser.setZoomValue(Preferences.thumbnailZoom)
+
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mediaUpdated:",
             name: MediaProvider.MediaProviderUpdatedNotification, object: self.mediaProvider)
+    }
+
+    @IBAction func updateThumbnailSize(sender: AnyObject)
+    {
+        Preferences.thumbnailZoom = sizeSlider.floatValue
+        imageBrowser.setZoomValue(sizeSlider.floatValue)
     }
 
     func mediaUpdated(notification: NSNotification)

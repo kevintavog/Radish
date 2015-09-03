@@ -513,6 +513,9 @@
                         <rect key="frame" x="530" y="1" width="128" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="0.10000000000000001" maxValue="2" doubleValue="0.75" tickMarkPosition="above" numberOfTickMarks="10" sliderType="linear" id="IgH-Mr-dW0"/>
+                        <connections>
+                            <action selector="updateThumbnailSize:" target="dfr-kY-uXo" id="QsJ-FH-Bxf"/>
+                        </connections>
                     </slider>
                     <scrollView horizontalLineScroll="176" horizontalPageScroll="10" verticalLineScroll="176" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="07J-DC-aly">
                         <rect key="frame" x="0.0" y="29" width="666" height="556"/>

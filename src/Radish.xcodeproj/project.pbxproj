@@ -20,6 +20,7 @@
 		44FEF9791B9531B300DB2E1D /* MediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEF9781B9531B300DB2E1D /* MediaData.swift */; settings = {ASSET_TAGS = (); }; };
 		44FEF97B1B95339400DB2E1D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEF97A1B95339400DB2E1D /* Location.swift */; settings = {ASSET_TAGS = (); }; };
 		44FEF97D1B9534C100DB2E1D /* FileMediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEF97C1B9534C100DB2E1D /* FileMediaData.swift */; settings = {ASSET_TAGS = (); }; };
+		44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FF5FD21B97D69F00DC4947 /* Preferences.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		44FEF9781B9531B300DB2E1D /* MediaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaData.swift; path = Models/MediaData.swift; sourceTree = "<group>"; };
 		44FEF97A1B95339400DB2E1D /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = Models/Location.swift; sourceTree = "<group>"; };
 		44FEF97C1B9534C100DB2E1D /* FileMediaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMediaData.swift; sourceTree = "<group>"; };
+		44FF5FD21B97D69F00DC4947 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Core/Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				44BB2F901B93892700B79B95 /* Logger.swift */,
 				44BB2F921B93913800B79B95 /* SupportedTypes.swift */,
+				44FF5FD21B97D69F00DC4947 /* Preferences.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			files = (
 				44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */,
 				44FEF9791B9531B300DB2E1D /* MediaData.swift in Sources */,
+				44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */,
 				44FEF97B1B95339400DB2E1D /* Location.swift in Sources */,
 				442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */,
 				44BB2F931B93913800B79B95 /* SupportedTypes.swift in Sources */,
