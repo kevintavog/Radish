@@ -81,11 +81,25 @@ class ThumbnailViewItem : NSObject
     }
 
     override func imageRepresentationType() -> String! {
-        return IKImageBrowserNSURLRepresentationType
+        switch mediaData.type! {
+        case .Image:
+            return IKImageBrowserNSURLRepresentationType
+        case .Video:
+            return IKImageBrowserQTMoviePathRepresentationType
+        default:
+            return IKImageBrowserNSURLRepresentationType
+        }
     }
 
     override func imageRepresentation() -> AnyObject! {
-        return mediaData.url
+        switch mediaData.type! {
+        case .Image:
+            return mediaData.url
+        case .Video:
+            return mediaData.url
+        default:
+            return mediaData.url
+        }
     }
 
     override func imageTitle() -> String! {
