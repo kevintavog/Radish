@@ -65,6 +65,11 @@ class ThumbnailViewWindowController : NSWindowController
     {
         return thumbnailItems[index]
     }
+
+//    func newCellForRepresentedItem(item: AnyObject!) -> IKImageBrowserCell!
+//    {
+//
+//    }
 }
 
 class ThumbnailViewItem : NSObject
