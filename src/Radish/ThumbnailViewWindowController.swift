@@ -68,23 +68,23 @@ class ThumbnailViewItem : NSObject
     private let mediaData: MediaData
 
 
-    init(mediaData: MediaData)
-    {
+    init(mediaData: MediaData) {
         self.mediaData = mediaData
     }
 
-    override func imageUID() -> String!
-    {
+    override func imageUID() -> String! {
         return mediaData.url.path
     }
 
-    override func imageRepresentationType() -> String!
-    {
+    override func imageRepresentationType() -> String! {
         return IKImageBrowserNSURLRepresentationType
     }
 
-    override func imageRepresentation() -> AnyObject!
-    {
+    override func imageRepresentation() -> AnyObject! {
         return mediaData.url
+    }
+
+    override func imageTitle() -> String! {
+        return mediaData.name
     }
 }

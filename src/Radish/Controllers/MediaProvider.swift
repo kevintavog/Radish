@@ -13,9 +13,6 @@ class MediaProvider
     var folders:[String] = []
     var mediaFiles:[MediaData] = []
 
-    init()
-    {
-    }
 
     func clear()
     {
@@ -44,10 +41,7 @@ class MediaProvider
                     let mediaType = SupportedTypes.getType(f)
                     if mediaType == SupportedTypes.MediaType.Image || mediaType == SupportedTypes.MediaType.Video
                     {
-                        var value:AnyObject?
-                        try! f.getResourceValue(&value, forKey: NSURLContentModificationDateKey)
-                        let date = value as! NSDate?
-                        mediaFiles.append(FileMediaData(fileUrl:f, type:mediaType, date:date))
+                        mediaFiles.append(FileMediaData.create(f, mediaType: mediaType))
                     }
                 }
             }

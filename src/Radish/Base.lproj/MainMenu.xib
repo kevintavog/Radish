@@ -527,7 +527,7 @@
                                 <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.4969293475151062" id="u4j-KG-YLU">
                                     <rect key="frame" x="0.0" y="0.0" width="664" height="554"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <ikCellsStyle key="cellsStyleMask" shadowed="YES" outlined="YES"/>
+                                    <ikCellsStyle key="cellsStyleMask" shadowed="YES" outlined="YES" titled="YES"/>
                                     <autoresizingMask key="contentResizingMask" heightSizable="YES"/>
                                     <size key="cellSize" width="165" height="165"/>
                                     <connections>

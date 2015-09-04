@@ -164,7 +164,20 @@ class SingleViewWindowController: NSWindowController
 
             statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider!.mediaFiles.count)"
             statusFilename.stringValue = "\(media.name)"
-            statusTimestamp.stringValue = "\(dateFormatter!.stringFromDate(media.timestamp!))"
+            statusLocation.stringValue = media.locationString()
+            statusKeywords.stringValue = media.keywordsString()
+
+            let timestamp = "\(dateFormatter!.stringFromDate(media.timestamp!))"
+            if media.doFileAndExifTimestampsMatch() {
+                statusTimestamp.stringValue = timestamp
+            }
+            else {
+                let fullRange = NSRange(location: 0, length: timestamp.characters.count)
+                let attributeString = NSMutableAttributedString(string: timestamp)
+                attributeString.addAttribute(NSForegroundColorAttributeName, value: NSColor.yellowColor(), range: fullRange)
+                attributeString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: fullRange)
+                statusTimestamp.attributedStringValue = attributeString
+            }
         }
     }
 

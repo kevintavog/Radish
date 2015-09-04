@@ -4,9 +4,9 @@
 
 import AVFoundation
 
-class SupportedTypes
+public class SupportedTypes
 {
-    enum MediaType
+    public enum MediaType
     {
         case Image, Video, Unknown
     }
@@ -17,68 +17,63 @@ class SupportedTypes
     static private var supportedTypes:[String]? = nil
 
 
-    static func all() -> [String]
+    static public func all() -> [String]
     {
-        if (supportedTypes == nil)
-        {
+        if (supportedTypes == nil) {
             supportedTypes = [String]()
             supportedTypes!.appendContentsOf(images())
             supportedTypes!.appendContentsOf(videos())
-
         }
         return supportedTypes!;
     }
 
-    static func isSupportedFile(fullUrl:NSURL) -> Bool
+    static public func isSupportedFile(fullUrl:NSURL) -> Bool
     {
         return all().contains(getFileType(fullUrl))
     }
 
-    static func getType(fullUrl:NSURL) -> MediaType
+    static public func getType(fullUrl:NSURL) -> MediaType
     {
         let fileType = getFileType(fullUrl)
-        if images().contains(fileType)
-        {
+
+        if images().contains(fileType) {
             return MediaType.Image
         }
-        if videos().contains(fileType)
-        {
+
+        if videos().contains(fileType) {
             return MediaType.Video
         }
+
         return MediaType.Unknown
     }
 
-    static func images() -> [String]
+    static public func images() -> [String]
     {
-        if (imageTypes == nil)
-        {
+        if (imageTypes == nil) {
             let cgImageTypes: NSArray = CGImageSourceCopyTypeIdentifiers()
             imageTypes = (cgImageTypes as [AnyObject] as! [String])
         }
         return imageTypes!;
     }
 
-    static func videos() -> [String]
+    static public func videos() -> [String]
     {
-        if (videoTypes == nil)
-        {
+        if (videoTypes == nil) {
             videoTypes = [AVFileTypeAIFC, AVFileTypeAIFF, AVFileTypeCoreAudioFormat, AVFileTypeAppleM4V, AVFileTypeMPEG4,
                 AVFileTypeAppleM4A, AVFileTypeQuickTimeMovie, AVFileTypeWAVE, AVFileTypeAMR, AVFileTypeAC3, AVFileTypeMPEGLayer3, AVFileTypeSunAU]
         }
         return videoTypes!
     }
 
-    static func getFileType(fullUrl:NSURL) -> String
+    static public func getFileType(fullUrl:NSURL) -> String
     {
         var uti:AnyObject?
-        do
-        {
+        do {
             try fullUrl.getResourceValue(&uti, forKey:NSURLTypeIdentifierKey)
             return uti as! String
         }
-        catch
-        {
+        catch {
+            return ""
         }
-        return ""
     }
 }

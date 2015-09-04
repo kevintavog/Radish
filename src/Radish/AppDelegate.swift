@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
     let mediaProvider = MediaProvider()
 
 
+    // MARK: Application hooks
     func applicationDidFinishLaunching(aNotification: NSNotification)
     {
         Preferences.setMissingDefaults()
@@ -23,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate
         thumbnailViewWindowController.initialize(mediaProvider)
     }
 
+
+    // MARK: IBActions
     @IBAction func viewThumbnails(sender: AnyObject)
     {
         thumbnailViewWindowController.showWindow(sender)
