@@ -25,7 +25,7 @@ class SingleViewWindowController: NSWindowController
     private var dateFormatter: NSDateFormatter? = nil
 
 
-
+    // MARK: Initialize
     func initialize(mediaProvider: MediaProvider)
     {
         self.mediaProvider = mediaProvider
@@ -41,6 +41,8 @@ class SingleViewWindowController: NSWindowController
         updateStatusView()
     }
 
+
+    // MARK: Actions
     @IBAction func openFolder(sender: AnyObject)
     {
         let folders = selectFoldersToAdd()
@@ -51,8 +53,7 @@ class SingleViewWindowController: NSWindowController
 
         addFolders(folders.urls, selected: folders.selected)
 
-        if (mediaProvider!.mediaFiles.count > 0)
-        {
+        if (mediaProvider!.mediaFiles.count > 0) {
             displayFile(mediaProvider!.mediaFiles[currentFileIndex])
         }
     }
@@ -76,10 +77,11 @@ class SingleViewWindowController: NSWindowController
         displayFileByIndex(currentFileIndex - 1)
     }
 
+
+    // MARK: Display files
     func displayFileByIndex(index: Int)
     {
-        if (mediaProvider!.mediaFiles.count > 0)
-        {
+        if (mediaProvider!.mediaFiles.count > 0) {
             currentFileIndex = index
             if (currentFileIndex < 0) { currentFileIndex = mediaProvider!.mediaFiles.count - 1; }
             if (currentFileIndex >= mediaProvider!.mediaFiles.count) { currentFileIndex = 0; }
@@ -92,8 +94,7 @@ class SingleViewWindowController: NSWindowController
     {
         updateStatusView()
 
-        switch media.type!
-        {
+        switch media.type! {
         case .Image:
             displayImage(media)
         case .Video:
@@ -108,20 +109,17 @@ class SingleViewWindowController: NSWindowController
         videoPlayer.player?.pause()
 
         imageViewer.image = nil
-        if (imageViewer.hidden)
-        {
+        if (imageViewer.hidden) {
             imageViewer.hidden = false
             videoPlayer.hidden = true
         }
 
-        Async.background
-        {
+        Async.background {
             let imageSource = CGImageSourceCreateWithURL(media.url, nil)
             let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
             let nsImage = NSImage(CGImage: image!, size: NSSize(width: CGImageGetWidth(image), height: CGImageGetHeight(image)))
 
-            Async.main
-            {
+            Async.main {
                 self.imageViewer.image = nsImage;
             }
         }
@@ -130,8 +128,7 @@ class SingleViewWindowController: NSWindowController
     func displayVideo(media:MediaData)
     {
         videoPlayer.player = AVPlayer(URL: media.url)
-        if (videoPlayer.hidden)
-        {
+        if (videoPlayer.hidden) {
             videoPlayer.hidden = false
             imageViewer.hidden = true
             imageViewer.image = nil
@@ -148,18 +145,17 @@ class SingleViewWindowController: NSWindowController
         print("Unhandled file: '\(media.name)'")
     }
 
+    // MARK: Update UI elements
     func updateStatusView()
     {
-        if (currentFileIndex < 0 || currentFileIndex >= mediaProvider!.mediaFiles.count || mediaProvider!.mediaFiles.count == 0)
-        {
+        if (currentFileIndex < 0 || currentFileIndex >= mediaProvider!.mediaFiles.count || mediaProvider!.mediaFiles.count == 0) {
             statusFilename.stringValue = ""
             statusTimestamp.stringValue = ""
             statusLocation.stringValue = ""
             statusKeywords.stringValue = ""
             statusIndex.stringValue = ""
         }
-        else
-        {
+        else {
             let media = mediaProvider!.mediaFiles[currentFileIndex]
 
             statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider!.mediaFiles.count)"
@@ -188,8 +184,7 @@ class SingleViewWindowController: NSWindowController
         dialog.allowedFileTypes = SupportedTypes.all()
         dialog.canChooseDirectories = true
         dialog.allowsMultipleSelection = true
-        if 1 != dialog.runModal() || dialog.URLs.count < 1
-        {
+        if 1 != dialog.runModal() || dialog.URLs.count < 1 {
             return (nil, nil)
         }
 
@@ -197,8 +192,7 @@ class SingleViewWindowController: NSWindowController
         let localFile = dialog.URLs[0]
         var isFolder:ObjCBool = false
         let fileExists = NSFileManager.defaultManager().fileExistsAtPath(localFile.path!, isDirectory:&isFolder)
-        if !fileExists
-        {
+        if !fileExists {
             return (nil, nil)
         }
 
@@ -211,14 +205,12 @@ class SingleViewWindowController: NSWindowController
         {
             var isFolder: ObjCBool = false
             let fileExists = NSFileManager.defaultManager().fileExistsAtPath(folderUrl.path!, isDirectory:&isFolder)
-            if !fileExists
-            {
+            if !fileExists {
                 continue
             }
 
             var url = folderUrl
-            if !isFolder
-            {
+            if !isFolder {
                 url = folderUrl.URLByDeletingLastPathComponent!
             }
 
@@ -228,10 +220,8 @@ class SingleViewWindowController: NSWindowController
         if (selected != nil)
         {
             var index = 0
-            for f in mediaProvider!.mediaFiles
-            {
-                if f.url == selected
-                {
+            for f in mediaProvider!.mediaFiles {
+                if f.url == selected {
                     currentFileIndex = index
                     break
                 }

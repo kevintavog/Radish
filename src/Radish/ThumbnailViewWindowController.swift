@@ -15,6 +15,7 @@ class ThumbnailViewWindowController : NSWindowController
     var thumbnailItems = [ThumbnailViewItem]()
 
 
+    // MARK: Initialize
     func initialize(mediaProvider: MediaProvider)
     {
         self.mediaProvider = mediaProvider
@@ -35,12 +36,14 @@ class ThumbnailViewWindowController : NSWindowController
             name: MediaProvider.MediaProviderUpdatedNotification, object: self.mediaProvider)
     }
 
+    // MARK: Actions
     @IBAction func updateThumbnailSize(sender: AnyObject)
     {
         Preferences.thumbnailZoom = sizeSlider.floatValue
         imageBrowser.setZoomValue(sizeSlider.floatValue)
     }
 
+    // MARK: Notification handlers
     func mediaUpdated(notification: NSNotification)
     {
         Logger.log("mediaUpdated")
@@ -52,6 +55,7 @@ class ThumbnailViewWindowController : NSWindowController
         imageBrowser.reloadData()
     }
 
+    // MARK: ImageBrowser data provider
     override func numberOfItemsInImageBrowser(browser: IKImageBrowserView!) -> Int
     {
         return thumbnailItems.count
