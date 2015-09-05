@@ -51,7 +51,15 @@ public class SupportedTypes
     {
         if (imageTypes == nil) {
             let cgImageTypes: NSArray = CGImageSourceCopyTypeIdentifiers()
-            imageTypes = (cgImageTypes as [AnyObject] as! [String])
+            imageTypes = [String]()
+
+            // Filter out the slow-loading RAW iamge types; this preference can be exposed if it's ever important
+            for cgType in cgImageTypes {
+                let type = cgType as! String
+                if !type.containsString("raw") {
+                    imageTypes?.append(type)
+                }
+            }
         }
         return imageTypes!;
     }
