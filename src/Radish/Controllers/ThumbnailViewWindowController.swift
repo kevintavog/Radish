@@ -20,8 +20,6 @@ class ThumbnailViewWindowController : NSWindowController
     {
         self.mediaProvider = mediaProvider
 
-        super.awakeFromNib()
-
         imageBrowser.setValue(NSColor.darkGrayColor(), forKey: IKImageBrowserBackgroundColorKey)
 
         let newAttrs = imageBrowser.valueForKey(IKImageBrowserCellsTitleAttributesKey)?.mutableCopy()
@@ -29,7 +27,7 @@ class ThumbnailViewWindowController : NSWindowController
         imageBrowser?.setValue(newAttrs, forKey: IKImageBrowserCellsTitleAttributesKey)
 
 
-        imageBrowser.setZoomValue(Preferences.thumbnailZoom)
+        sizeSlider.floatValue = Preferences.thumbnailZoom
         imageBrowser.setIntercellSpacing(NSSize(width: 16, height: 16))
 
 
@@ -47,10 +45,8 @@ class ThumbnailViewWindowController : NSWindowController
     // MARK: Notification handlers
     func mediaUpdated(notification: NSNotification)
     {
-        Logger.log("mediaUpdated")
         thumbnailItems = [ThumbnailViewItem]()
-        for m in mediaProvider!.mediaFiles
-        {
+        for m in mediaProvider!.mediaFiles {
             thumbnailItems.append(ThumbnailViewItem(mediaData: m))
         }
         imageBrowser.reloadData()

@@ -13,7 +13,6 @@ public class RadishImageBrowserCell : IKImageBrowserCell
         NSFontAttributeName : NSFont.labelFontOfSize(14),
         NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
     ]
-    private let minimumContainerImageHeightDifference: CGFloat = 0.0
 
 
     // MARK: layer for type
@@ -191,6 +190,7 @@ public class RadishImageBrowserCell : IKImageBrowserCell
         return NSInsetRect(super.frame(), -3, -3)
     }
 
+    // MARK: line height helper
     static private func getLineHeight() -> CGFloat
     {
         if lineHeight == nil {
