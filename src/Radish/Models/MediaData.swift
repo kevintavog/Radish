@@ -7,6 +7,8 @@ import Foundation
 
 public class MediaData
 {
+    static private var dateFormatter: NSDateFormatter? = nil
+
     public var name: String!
     public var url: NSURL!
     public var timestamp: NSDate!
@@ -38,5 +40,15 @@ public class MediaData
         else {
             return ""
         }
+    }
+
+    public func formattedTime() -> String
+    {
+        if MediaData.dateFormatter == nil {
+            MediaData.dateFormatter = NSDateFormatter()
+            MediaData.dateFormatter!.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        }
+
+        return MediaData.dateFormatter!.stringFromDate(timestamp!)
     }
 }

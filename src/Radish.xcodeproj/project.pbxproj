@@ -12,6 +12,8 @@
 		4442A0211B926784007251E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442A0201B926784007251E6 /* AppDelegate.swift */; };
 		4442A0231B926784007251E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0221B926784007251E6 /* Assets.xcassets */; };
 		4442A0261B926784007251E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0241B926784007251E6 /* MainMenu.xib */; };
+		444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */; settings = {ASSET_TAGS = (); }; };
+		444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322621B994A6D009043F4 /* RadishImageBrowserView.swift */; settings = {ASSET_TAGS = (); }; };
 		449044681B93751B000A77BA /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449044671B93751B000A77BA /* Async.swift */; settings = {ASSET_TAGS = (); }; };
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
 		44BB2F911B93892700B79B95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB2F901B93892700B79B95 /* Logger.swift */; settings = {ASSET_TAGS = (); }; };
@@ -31,6 +33,8 @@
 		4442A0221B926784007251E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4442A0251B926784007251E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4442A0271B926784007251E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserCell.swift; path = Controllers/RadishImageBrowserCell.swift; sourceTree = "<group>"; };
+		444322621B994A6D009043F4 /* RadishImageBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserView.swift; path = Controllers/RadishImageBrowserView.swift; sourceTree = "<group>"; };
 		449044671B93751B000A77BA /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.swift; path = External/Async.swift; sourceTree = "<group>"; };
 		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleViewWindowController.swift; path = Controllers/SingleViewWindowController.swift; sourceTree = "<group>"; };
 		44BB2F901B93892700B79B95 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Core/Logger.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 			children = (
 				44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */,
 				442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */,
+				444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */,
+				444322621B994A6D009043F4 /* RadishImageBrowserView.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -222,7 +228,9 @@
 				44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */,
 				44FEF97B1B95339400DB2E1D /* Location.swift in Sources */,
 				442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */,
+				444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */,
 				44BB2F931B93913800B79B95 /* SupportedTypes.swift in Sources */,
+				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
 				449044681B93751B000A77BA /* Async.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
 				44BB2F911B93892700B79B95 /* Logger.swift in Sources */,

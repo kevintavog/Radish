@@ -512,7 +512,7 @@
                     <slider verticalHuggingPriority="750" id="0Kd-fe-JhN">
                         <rect key="frame" x="530" y="1" width="128" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="0.10000000000000001" maxValue="2" doubleValue="0.75" tickMarkPosition="above" numberOfTickMarks="10" sliderType="linear" id="IgH-Mr-dW0"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="0.34999999999999998" maxValue="2" doubleValue="0.75" tickMarkPosition="above" numberOfTickMarks="10" sliderType="linear" id="IgH-Mr-dW0"/>
                         <connections>
                             <action selector="updateThumbnailSize:" target="dfr-kY-uXo" id="QsJ-FH-Bxf"/>
                         </connections>
@@ -524,12 +524,12 @@
                             <rect key="frame" x="1" y="1" width="664" height="554"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.4969293475151062" id="u4j-KG-YLU">
+                                <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.49487167596817017" id="u4j-KG-YLU" customClass="RadishImageBrowserView" customModule="Radish" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="664" height="554"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <ikCellsStyle key="cellsStyleMask" shadowed="YES" outlined="YES" titled="YES"/>
+                                    <ikCellsStyle key="cellsStyleMask" shadowed="YES" outlined="YES"/>
                                     <autoresizingMask key="contentResizingMask" heightSizable="YES"/>
-                                    <size key="cellSize" width="165" height="165"/>
+                                    <size key="cellSize" width="164" height="164"/>
                                     <connections>
                                         <outlet property="dataSource" destination="dfr-kY-uXo" id="J48-cR-zat"/>
                                         <outlet property="delegate" destination="dfr-kY-uXo" id="ggE-Im-46A"/>
@@ -542,7 +542,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="8Rt-uP-OO1">
-                            <rect key="frame" x="650" y="1" width="15" height="554"/>
+                            <rect key="frame" x="649" y="1" width="16" height="554"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>

@@ -30,6 +30,7 @@ class ThumbnailViewWindowController : NSWindowController
 
 
         imageBrowser.setZoomValue(Preferences.thumbnailZoom)
+        imageBrowser.setIntercellSpacing(NSSize(width: 16, height: 16))
 
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mediaUpdated:",
@@ -65,27 +66,22 @@ class ThumbnailViewWindowController : NSWindowController
     {
         return thumbnailItems[index]
     }
-
-//    func newCellForRepresentedItem(item: AnyObject!) -> IKImageBrowserCell!
-//    {
-//
-//    }
 }
 
-class ThumbnailViewItem : NSObject
+public class ThumbnailViewItem : NSObject
 {
-    private let mediaData: MediaData
+    public let mediaData: MediaData
 
 
     init(mediaData: MediaData) {
         self.mediaData = mediaData
     }
 
-    override func imageUID() -> String! {
+    public override func imageUID() -> String! {
         return mediaData.url.path
     }
 
-    override func imageRepresentationType() -> String! {
+    public override func imageRepresentationType() -> String! {
         switch mediaData.type! {
         case .Image:
             return IKImageBrowserNSURLRepresentationType
@@ -96,7 +92,7 @@ class ThumbnailViewItem : NSObject
         }
     }
 
-    override func imageRepresentation() -> AnyObject! {
+    public override func imageRepresentation() -> AnyObject! {
         switch mediaData.type! {
         case .Image:
             return mediaData.url
@@ -105,9 +101,5 @@ class ThumbnailViewItem : NSObject
         default:
             return mediaData.url
         }
-    }
-
-    override func imageTitle() -> String! {
-        return mediaData.name
     }
 }
