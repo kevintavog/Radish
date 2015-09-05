@@ -28,6 +28,7 @@ class ThumbnailViewWindowController : NSWindowController
 
 
         sizeSlider.floatValue = Preferences.thumbnailZoom
+        imageBrowser.setZoomValue(Preferences.thumbnailZoom)
         imageBrowser.setIntercellSpacing(NSSize(width: 16, height: 16))
 
 
