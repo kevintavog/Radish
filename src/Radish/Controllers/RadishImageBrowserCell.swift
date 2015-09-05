@@ -8,6 +8,11 @@ public class RadishImageBrowserCell : IKImageBrowserCell
 {
     static private var lineHeight: CGFloat?
     static private let textAttrs = [NSForegroundColorAttributeName : NSColor.whiteColor(), NSFontAttributeName : NSFont.labelFontOfSize(14)]
+    static private let badDateAttrs = [
+        NSForegroundColorAttributeName : NSColor.yellowColor(),
+        NSFontAttributeName : NSFont.labelFontOfSize(14),
+        NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
+    ]
     private let minimumContainerImageHeightDifference: CGFloat = 0.0
 
 
@@ -90,15 +95,20 @@ public class RadishImageBrowserCell : IKImageBrowserCell
 
         let item = representedItem() as! ThumbnailViewItem
 
-        let nameRect = drawString(item.mediaData.name, x: 4, y: 2)
-        drawString(item.mediaData.formattedTime(), x: 4, y: nameRect.height)
+        let nameRect = drawString(item.mediaData.name, x: 4, y: 2, attributes: RadishImageBrowserCell.textAttrs)
+        if item.mediaData.doFileAndExifTimestampsMatch() {
+            drawString(item.mediaData.formattedTime(), x: 4, y: nameRect.height, attributes: RadishImageBrowserCell.textAttrs)
+        }
+        else {
+            drawString(item.mediaData.formattedTime(), x: 4, y: nameRect.height, attributes: RadishImageBrowserCell.badDateAttrs)
+        }
 
         NSGraphicsContext.restoreGraphicsState()
     }
 
-    private func drawString(str: String, x: CGFloat, y: CGFloat) -> NSRect
+    private func drawString(str: String, x: CGFloat, y: CGFloat, attributes: [String:AnyObject]) -> NSRect
     {
-        let attrStr = NSMutableAttributedString(string: str, attributes: RadishImageBrowserCell.textAttrs)
+        let attrStr = NSMutableAttributedString(string: str, attributes: attributes)
         let bounds = CTLineGetBoundsWithOptions(CTLineCreateWithAttributedString(attrStr), CTLineBoundsOptions.UseHangingPunctuation)
 
         var updatedX = x
