@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		442232721B968DB2009123F0 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 442232711B968DB2009123F0 /* Quartz.framework */; };
 		442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */; settings = {ASSET_TAGS = (); }; };
+		443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D90891B9CD55F0022A268 /* Notifications.swift */; settings = {ASSET_TAGS = (); }; };
 		4442A0211B926784007251E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442A0201B926784007251E6 /* AppDelegate.swift */; };
 		4442A0231B926784007251E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0221B926784007251E6 /* Assets.xcassets */; };
 		4442A0261B926784007251E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0241B926784007251E6 /* MainMenu.xib */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		442232711B968DB2009123F0 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThumbnailViewWindowController.swift; path = Controllers/ThumbnailViewWindowController.swift; sourceTree = "<group>"; };
+		443D90891B9CD55F0022A268 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Application/Notifications.swift; sourceTree = "<group>"; };
 		4442A01D1B926784007251E6 /* Radish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4442A0201B926784007251E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Application/AppDelegate.swift; sourceTree = "<group>"; };
 		4442A0221B926784007251E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				4442A0201B926784007251E6 /* AppDelegate.swift */,
+				443D90891B9CD55F0022A268 /* Notifications.swift */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */,
 				44BB2F931B93913800B79B95 /* SupportedTypes.swift in Sources */,
 				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
+				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
 				449044681B93751B000A77BA /* Async.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
 				44BB2F911B93892700B79B95 /* Logger.swift in Sources */,

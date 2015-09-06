@@ -39,6 +39,8 @@ class SingleViewWindowController: NSWindowController
         dateFormatter!.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
         updateStatusView()
+
+        Notifications.addObserver(self, selector: "viewMediaData:", name: Notifications.SingleView.MediaData, object: nil)
     }
 
 
@@ -77,6 +79,18 @@ class SingleViewWindowController: NSWindowController
         displayFileByIndex(currentFileIndex - 1)
     }
 
+    // MARK: Notification handlers
+    func viewMediaData(notification: NSNotification)
+    {
+        if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
+            if let mediaData = userInfo["MediaData"] {
+                if selectByUrl(mediaData.url, display: true) == nil {
+                    Logger.log("Unable to find \(mediaData.url)")
+                }
+                self.showWindow(nil)
+            }
+        }
+    }
 
     // MARK: Display files
     func displayFileByIndex(index: Int)
@@ -142,7 +156,7 @@ class SingleViewWindowController: NSWindowController
         videoPlayer.hidden = true
         imageViewer.hidden = true
 
-        print("Unhandled file: '\(media.name)'")
+        Logger.log("Unhandled file: '\(media.name)'")
     }
 
     // MARK: Update UI elements
@@ -177,7 +191,7 @@ class SingleViewWindowController: NSWindowController
         }
     }
 
-    func selectFoldersToAdd() -> (urls:[NSURL]!,selected:NSURL!)
+    func selectFoldersToAdd() -> (urls: [NSURL]!, selected: NSURL!)
     {
         let dialog = NSOpenPanel()
 
@@ -199,10 +213,9 @@ class SingleViewWindowController: NSWindowController
         return (dialog.URLs, localFile)
     }
 
-    func addFolders(urls:[NSURL], selected:NSURL!)
+    func addFolders(urls: [NSURL], selected: NSURL!)
     {
-        for folderUrl in urls
-        {
+        for folderUrl in urls {
             var isFolder: ObjCBool = false
             let fileExists = NSFileManager.defaultManager().fileExistsAtPath(folderUrl.path!, isDirectory:&isFolder)
             if !fileExists {
@@ -217,17 +230,23 @@ class SingleViewWindowController: NSWindowController
             mediaProvider!.addFolder(url.path!)
         }
 
-        if (selected != nil)
-        {
-            var index = 0
-            for f in mediaProvider!.mediaFiles {
-                if f.url == selected {
-                    currentFileIndex = index
-                    break
-                }
+        if (selected != nil) {
+            selectByUrl(selected, display: false)
+        }
+    }
 
-                ++index
+    func selectByUrl(url: NSURL, display: Bool) -> Int?
+    {
+        for (index, mediaFile) in mediaProvider!.mediaFiles.enumerate() {
+            if mediaFile.url == url {
+                currentFileIndex = index
+                if display {
+                    displayFileByIndex(currentFileIndex)
+                }
+                return currentFileIndex
             }
         }
+
+        return nil
     }
 }

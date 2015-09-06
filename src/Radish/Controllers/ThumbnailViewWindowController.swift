@@ -6,10 +6,10 @@ import AppKit
 import Foundation
 import Quartz
 
-class ThumbnailViewWindowController : NSWindowController
+class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserViewDelegate
 {
     @IBOutlet weak var sizeSlider: NSSlider!
-    @IBOutlet weak var imageBrowser: IKImageBrowserView!
+    @IBOutlet weak var imageBrowser: RadishImageBrowserView!
 
     var mediaProvider: MediaProvider?
     var thumbnailItems = [ThumbnailViewItem]()
@@ -26,14 +26,13 @@ class ThumbnailViewWindowController : NSWindowController
         newAttrs?.setValue(NSColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         imageBrowser?.setValue(newAttrs, forKey: IKImageBrowserCellsTitleAttributesKey)
 
+        imageBrowser.viewFileDelegate = self
 
         sizeSlider.floatValue = Preferences.thumbnailZoom
         imageBrowser.setZoomValue(Preferences.thumbnailZoom)
         imageBrowser.setIntercellSpacing(NSSize(width: 16, height: 16))
 
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mediaUpdated:",
-            name: MediaProvider.MediaProviderUpdatedNotification, object: self.mediaProvider)
+        Notifications.addObserver(self, selector: "mediaUpdated:", name: Notifications.MediaProvider.UpdatedNotification, object: self.mediaProvider)
     }
 
     // MARK: Actions
@@ -41,6 +40,28 @@ class ThumbnailViewWindowController : NSWindowController
     {
         Preferences.thumbnailZoom = sizeSlider.floatValue
         imageBrowser.setZoomValue(sizeSlider.floatValue)
+    }
+
+    override func imageBrowser(browser: IKImageBrowserView!, cellWasDoubleClickedAtIndex index: Int)
+    {
+        viewFileAtIndex(index)
+    }
+
+    func viewSelectedFile()
+    {
+        if imageBrowser.selectionIndexes().count == 1 {
+            viewFileAtIndex(imageBrowser.selectionIndexes().firstIndex)
+        }
+    }
+
+    func viewFileAtIndex(index: Int)
+    {
+        if index < mediaProvider?.mediaFiles.count {
+            let mediaItem = mediaProvider?.mediaFiles[index]
+            var userInfo = Dictionary<String, MediaData>()
+            userInfo["MediaData"] = mediaItem
+            Notifications.postNotification(Notifications.SingleView.MediaData, object: self, userInfo:userInfo)
+        }
     }
 
     // MARK: Notification handlers
