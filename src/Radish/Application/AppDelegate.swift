@@ -8,6 +8,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate
 {
     @IBOutlet weak var window: NSWindow!
+    @IBOutlet weak var fileInformationController: FileInformationController!
     @IBOutlet weak var singleViewWindowController: SingleViewWindowController!
     @IBOutlet weak var thumbnailViewWindowController: ThumbnailViewWindowController!
 
@@ -22,6 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
         singleViewWindowController.initialize(mediaProvider)
         thumbnailViewWindowController.initialize(mediaProvider)
+        fileInformationController.initialize()
     }
 
 
@@ -34,5 +36,10 @@ class AppDelegate: NSObject, NSApplicationDelegate
     @IBAction func viewImage(sender: AnyObject)
     {
         singleViewWindowController.showWindow(sender)
+    }
+
+    @IBAction func toggleFileInformation(sender: AnyObject)
+    {
+        fileInformationController.toggleVisibility()
     }
 }

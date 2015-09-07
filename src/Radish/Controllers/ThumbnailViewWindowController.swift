@@ -58,8 +58,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     {
         if index < mediaProvider?.mediaFiles.count {
             let mediaItem = mediaProvider?.mediaFiles[index]
-            var userInfo = Dictionary<String, MediaData>()
-            userInfo["MediaData"] = mediaItem
+            let userInfo: [String: MediaData] = ["MediaData": mediaItem!]
             Notifications.postNotification(Notifications.SingleView.MediaData, object: self, userInfo:userInfo)
         }
     }

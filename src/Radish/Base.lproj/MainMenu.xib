@@ -14,8 +14,9 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Radish" customModuleProvider="target">
+        <customObject id="Voe-Tx-rLC" userLabel="AppDelegate" customClass="AppDelegate" customModule="Radish" customModuleProvider="target">
             <connections>
+                <outlet property="fileInformationController" destination="5d8-H3-ibH" id="6Em-PT-Kfs"/>
                 <outlet property="singleViewWindowController" destination="lzO-hK-yhB" id="tQT-6R-aEA"/>
                 <outlet property="thumbnailViewWindowController" destination="dfr-kY-uXo" id="7bK-vF-quZ"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -38,6 +39,12 @@
                 <outlet property="imageBrowser" destination="u4j-KG-YLU" id="zT8-jl-nNJ"/>
                 <outlet property="sizeSlider" destination="0Kd-fe-JhN" id="Fxj-5k-bwk"/>
                 <outlet property="window" destination="427-Wt-dfS" id="d6U-h8-RQm"/>
+            </connections>
+        </customObject>
+        <customObject id="5d8-H3-ibH" customClass="FileInformationController" customModule="Radish" customModuleProvider="target">
+            <connections>
+                <outlet property="panel" destination="Dr0-CK-BYn" id="ILF-ns-USL"/>
+                <outlet property="tableView" destination="ttM-yo-p95" id="VXQ-Z7-56B"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -364,6 +371,11 @@
                                     <action selector="viewImage:" target="Voe-Tx-rLC" id="BhN-ml-krH"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Information" keyEquivalent="i" id="7IW-ak-yZy">
+                                <connections>
+                                    <action selector="toggleFileInformation:" target="Voe-Tx-rLC" id="LHK-ul-dr2"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Thumbnails" keyEquivalent="t" id="Qll-au-h7h">
                                 <connections>
                                     <action selector="viewThumbnails:" target="Voe-Tx-rLC" id="YKW-KZ-HUM"/>
@@ -542,13 +554,97 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="8Rt-uP-OO1">
-                            <rect key="frame" x="650" y="1" width="15" height="554"/>
+                            <rect key="frame" x="649" y="1" width="16" height="554"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="45" y="1116"/>
+            <point key="canvasLocation" x="-101" y="1117"/>
+        </window>
+        <window title="File information" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="FileInformationPanel" animationBehavior="default" id="Dr0-CK-BYn" userLabel="File information View" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES" HUD="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="136" y="189" width="819" height="488"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" id="diT-xV-xnY">
+                <rect key="frame" x="0.0" y="0.0" width="819" height="488"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" id="chj-Ha-0y5">
+                        <rect key="frame" x="5" y="8" width="802" height="475"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="GJc-Pt-HQX">
+                            <rect key="frame" x="0.0" y="0.0" width="802" height="475"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="FileInformationTable" id="ttM-yo-p95">
+                                    <rect key="frame" x="0.0" y="0.0" width="802" height="19"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn editable="NO" width="108" minWidth="40" maxWidth="1000" id="1DX-n5-BaI">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" alignment="left" tag="1" title="Text Cell" drawsBackground="YES" id="Ce4-7j-4Y6">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        </tableColumn>
+                                        <tableColumn editable="NO" width="198" minWidth="40" maxWidth="1000" id="BHa-EH-Uzb">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" alignment="left" tag="2" title="Text Cell" id="zGQ-gE-LN1">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        </tableColumn>
+                                        <tableColumn editable="NO" width="487" minWidth="40" maxWidth="1000" id="P6x-2c-ZNv">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" alignment="left" tag="3" title="Text Cell" id="rMU-dy-d46">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        </tableColumn>
+                                    </tableColumns>
+                                    <connections>
+                                        <outlet property="dataSource" destination="5d8-H3-ibH" id="XOC-i0-27i"/>
+                                        <outlet property="delegate" destination="5d8-H3-ibH" id="wXV-SC-NNO"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                            <nil key="backgroundColor"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="fcV-nX-hmH">
+                            <rect key="frame" x="0.0" y="471" width="821" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="0Bc-aW-WHe">
+                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-100.5" y="1764"/>
         </window>
     </objects>
 </document>

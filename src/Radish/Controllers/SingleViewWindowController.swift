@@ -116,6 +116,9 @@ class SingleViewWindowController: NSWindowController
         default:
             displayUnsupportedFileType(media)
         }
+
+        let userInfo: [String: MediaData] = ["MediaData": media]
+        Notifications.postNotification(Notifications.Selection.MediaData, object: self, userInfo: userInfo)
     }
 
     func displayImage(media:MediaData)

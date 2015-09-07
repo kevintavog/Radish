@@ -14,8 +14,14 @@ public class Notifications
 
     public class SingleView
     {
-        static let MediaData = "MediaData"
+        static let MediaData = "SingleView.MediaData"
     }
+
+    public class Selection
+    {
+        static let MediaData = "Selection.MediaData"
+    }
+
 
     static public func postNotification(notification: String, object: AnyObject? = nil, userInfo: [NSObject : AnyObject]? = nil)
     {

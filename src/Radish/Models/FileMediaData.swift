@@ -91,6 +91,11 @@ class FileMediaData : MediaData
         return fileMediaData
     }
 
+    internal override func loadDetails() -> [MediaDataDetail]
+    {
+        return FileExifProvider.getDetails(url.path!)
+    }
+
     private override init()
     {
         super.init()

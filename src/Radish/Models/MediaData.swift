@@ -17,6 +17,19 @@ public class MediaData
     public var type: SupportedTypes.MediaType!
     public var keywords: [String]!
 
+    public var details: [MediaDataDetail]! {
+        get {
+            if cachedDetails == nil {
+                Logger.log("Load details for \(name)")
+                cachedDetails = loadDetails()
+            }
+            return cachedDetails
+        }
+    }
+
+    private var cachedDetails: [MediaDataDetail]!
+
+
     public func doFileAndExifTimestampsMatch() -> Bool
     {
         return timestamp == fileTimestamp
@@ -50,5 +63,10 @@ public class MediaData
         }
 
         return MediaData.dateFormatter!.stringFromDate(timestamp!)
+    }
+
+    internal func loadDetails() -> [MediaDataDetail]
+    {
+        return [MediaDataDetail]()
     }
 }
