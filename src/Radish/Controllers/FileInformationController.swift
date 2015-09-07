@@ -27,7 +27,7 @@ class FileInformationController : NSViewController
             panel.orderOut(self)
         }
         else {
-            reloadAndSizeColumns()
+            updateView()
             panel.makeKeyAndOrderFront(self)
         }
     }
@@ -40,29 +40,17 @@ class FileInformationController : NSViewController
             if let mediaData = userInfo["MediaData"] {
                 currentMediaData = mediaData
                 if panel.visible {
-                    reloadAndSizeColumns()
+                    updateView()
                 }
             }
         }
     }
 
 
-    func reloadAndSizeColumns()
+    func updateView()
     {
         panel.title = "File Information - \(currentMediaData!.name!)"
         tableView.reloadData()
-
-        for column in tableView.tableColumns {
-            var biggestWidth: CGFloat = 0.0
-            for row in 0..<tableView.numberOfRows {
-                let cellWidth = column.dataCellForRow(row).cellSize.width
-//                Logger.log("max: \(biggestWidth), current: \(cellWidth): \(column.dataCellForRow(row).cellSize)")
-                biggestWidth = max(biggestWidth, cellWidth)
-            }
-
-//            column.width = biggestWidth
-//            column.maxWidth = biggestWidth
-        }
     }
 
     // MARK: table view data
