@@ -20,7 +20,6 @@ public class MediaData
     public var details: [MediaDataDetail]! {
         get {
             if cachedDetails == nil {
-                Logger.log("Load details for \(name)")
                 cachedDetails = loadDetails()
             }
             return cachedDetails

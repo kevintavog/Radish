@@ -171,6 +171,7 @@ class SingleViewWindowController: NSWindowController
             statusLocation.stringValue = ""
             statusKeywords.stringValue = ""
             statusIndex.stringValue = ""
+            window?.title = "Radish - <No files>"
         }
         else {
             let media = mediaProvider!.mediaFiles[currentFileIndex]
@@ -191,6 +192,8 @@ class SingleViewWindowController: NSWindowController
                 attributeString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: fullRange)
                 statusTimestamp.attributedStringValue = attributeString
             }
+
+            window?.title = "Radish - \(media.name)"
         }
     }
 
