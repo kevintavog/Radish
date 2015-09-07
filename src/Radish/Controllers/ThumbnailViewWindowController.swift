@@ -83,6 +83,17 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     {
         return thumbnailItems[index]
     }
+
+    // MARK: ImageBrowser Delegate
+    override func imageBrowserSelectionDidChange(browser: IKImageBrowserView!)
+    {
+        if imageBrowser.selectionIndexes().count == 1 {
+            let media = mediaProvider?.mediaFiles[imageBrowser.selectionIndexes().firstIndex]
+            let userInfo: [String: MediaData] = ["MediaData": media!]
+            Notifications.postNotification(Notifications.Selection.MediaData, object: self, userInfo: userInfo)
+        }
+
+    }
 }
 
 public class ThumbnailViewItem : NSObject

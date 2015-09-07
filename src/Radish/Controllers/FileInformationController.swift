@@ -49,6 +49,7 @@ class FileInformationController : NSViewController
 
     func reloadAndSizeColumns()
     {
+        panel.title = "File Information - \(currentMediaData!.name!)"
         tableView.reloadData()
 
         for column in tableView.tableColumns {
