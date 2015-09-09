@@ -5,13 +5,28 @@
 import Foundation
 import Alamofire
 
-public class StandardLookupProvider
+public class StandardLookupProvider: LookupProvider
 {
-    /// Asynchronously resolves latitude/longitude into a dictionary of component names. "DisplayName" is a single string
-    static public func lookup(latitude: Double, longitude: Double, completion: (placename: OrderedDictionary<String,String>) -> () )
+    /// Synchronously resolves latitude/longitude into a dictionary of component names. "DisplayName" is a single string while the rest of
+    /// the items are address details, ordered from most detailed to least detailed
+    public func lookup(latitude: Double, longitude: Double) -> OrderedDictionary<String,String>
+    {
+        let mutex = Mutex()
+
+        var result: OrderedDictionary<String,String>? = nil
+
+        asyncLookup(latitude, longitude: longitude, completion: { (placename: OrderedDictionary<String,String>) -> () in
+            result = placename
+            mutex.signal()
+        })
+
+        mutex.wait()
+        return result!
+    }
+
+    private func asyncLookup(latitude: Double, longitude: Double, completion: (placename: OrderedDictionary<String,String>) -> ())
     {
         var result = OrderedDictionary<String,String>()
-
         Alamofire.request(
             .GET,
             "http://open.mapquestapi.com/nominatim/v1/reverse",
@@ -46,7 +61,6 @@ public class StandardLookupProvider
                                     var matched = false
                                     for (key, value) in address {
                                         if value.stringValue == trimmedValue {
-                                            Logger.log("Adding '\(key) - '\(value.stringValue)'")
                                             result[key] = value.stringValue
                                             matched = true
                                             break
@@ -66,8 +80,9 @@ public class StandardLookupProvider
                         }
                     }
                 }
-
+                
                 completion(placename: result)
         }
+
     }
 }

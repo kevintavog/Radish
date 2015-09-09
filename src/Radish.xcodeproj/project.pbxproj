@@ -17,6 +17,8 @@
 		444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322621B994A6D009043F4 /* RadishImageBrowserView.swift */; settings = {ASSET_TAGS = (); }; };
 		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; settings = {ASSET_TAGS = (); }; };
 		44620BE71B9D1EFE0024F403 /* MediaDataDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE61B9D1EFE0024F403 /* MediaDataDetail.swift */; settings = {ASSET_TAGS = (); }; };
+		446F3A5E1B9FC07700AF2F8E /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3A5D1B9FC07700AF2F8E /* Mutex.swift */; settings = {ASSET_TAGS = (); }; };
+		446F3A621B9FD12600AF2F8E /* LookupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3A611B9FD12600AF2F8E /* LookupProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		449044681B93751B000A77BA /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449044671B93751B000A77BA /* Async.swift */; settings = {ASSET_TAGS = (); }; };
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
 		44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; };
@@ -64,6 +66,8 @@
 		444322621B994A6D009043F4 /* RadishImageBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserView.swift; path = Controllers/RadishImageBrowserView.swift; sourceTree = "<group>"; };
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
 		44620BE61B9D1EFE0024F403 /* MediaDataDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaDataDetail.swift; path = Models/MediaDataDetail.swift; sourceTree = "<group>"; };
+		446F3A5D1B9FC07700AF2F8E /* Mutex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mutex.swift; path = Core/Mutex.swift; sourceTree = "<group>"; };
+		446F3A611B9FD12600AF2F8E /* LookupProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LookupProvider.swift; path = Providers/LookupProvider.swift; sourceTree = "<group>"; };
 		449044671B93751B000A77BA /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.swift; path = External/Async.swift; sourceTree = "<group>"; };
 		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleViewWindowController.swift; path = Controllers/SingleViewWindowController.swift; sourceTree = "<group>"; };
 		44B540AE1B9E412A006BC28A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				44FF5FD21B97D69F00DC4947 /* Preferences.swift */,
 				44D177F41B9D46220073712D /* ProcessInvoker.swift */,
 				44B540B81B9E58F1006BC28A /* OrderedDictionary.swift */,
+				446F3A5D1B9FC07700AF2F8E /* Mutex.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 		44FEF9741B9530B600DB2E1D /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				446F3A611B9FD12600AF2F8E /* LookupProvider.swift */,
 				44B540B21B9E434D006BC28A /* StandardLookupProvider.swift */,
 				44FEF9751B9530E500DB2E1D /* MediaProvider.swift */,
 				44D177F21B9D397B0073712D /* FileExifProvider.swift */,
@@ -275,6 +281,7 @@
 			files = (
 				44D177F51B9D46220073712D /* ProcessInvoker.swift in Sources */,
 				44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */,
+				446F3A621B9FD12600AF2F8E /* LookupProvider.swift in Sources */,
 				44FEF9791B9531B300DB2E1D /* MediaData.swift in Sources */,
 				44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */,
 				44FEF97B1B95339400DB2E1D /* Location.swift in Sources */,
@@ -295,6 +302,7 @@
 				44620BE71B9D1EFE0024F403 /* MediaDataDetail.swift in Sources */,
 				44FEF97D1B9534C100DB2E1D /* FileMediaData.swift in Sources */,
 				44B540B91B9E58F1006BC28A /* OrderedDictionary.swift in Sources */,
+				446F3A5E1B9FC07700AF2F8E /* Mutex.swift in Sources */,
 				44FEF9761B9530E500DB2E1D /* MediaProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

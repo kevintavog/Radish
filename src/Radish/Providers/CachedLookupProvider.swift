@@ -4,25 +4,22 @@
 
 import Foundation
 
-public class CachedLookupProvider
+public class CachedLookupProvider: LookupProvider
 {
     static var cache = Dictionary<String, OrderedDictionary<String,String>>()
+    let innerLookupProvider: LookupProvider = StandardLookupProvider()
 
     /// Asynchronously resolves latitude/longitude into a dictionary of component names. "DisplayName" is a single string
-    static public func lookup(latitude: Double, longitude: Double, completion: (placename: OrderedDictionary<String,String>) -> () )
+    public func lookup(latitude: Double, longitude: Double) -> OrderedDictionary<String,String>
     {
         let key = Location.toDms(latitude, longitude: longitude)
-        if let result = cache[key] {
-            Logger.log("Found cached item for \(key)")
-            completion(placename: result)
+        if let result = CachedLookupProvider.cache[key] {
+            return result
         }
         else {
-            StandardLookupProvider.lookup(latitude, longitude: longitude, completion: { (placename: OrderedDictionary<String,String>) -> () in
-                Logger.log("Caching \(key)")
-
-                cache[key] = placename
-                completion(placename: placename)
-                })
+            let result = innerLookupProvider.lookup(latitude, longitude: longitude)
+            CachedLookupProvider.cache[key] = result
+            return result
         }
     }
 

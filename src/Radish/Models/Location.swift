@@ -9,6 +9,8 @@ public class Location
     var latitude: Double
     var longitude: Double
     private var placenameComponents: Placename?
+    private let lookupProvider: LookupProvider = CachedLookupProvider()
+
 
     init(latitude:Double, longitude:Double)
     {
@@ -65,15 +67,9 @@ public class Location
     public func placename() -> String
     {
         if placenameComponents == nil {
-            CachedLookupProvider.lookup(latitude, longitude: longitude, completion: { (placename: OrderedDictionary<String,String>) -> () in
-
-                self.placenameComponents = Placename(components: placename)
-            })
-
-            return ""
+            self.placenameComponents = Placename(components: lookupProvider.lookup(latitude, longitude: longitude))
         }
-        else {
-            return (placenameComponents?.name(.Detailed))!
-        }
+
+        return (placenameComponents?.name(.Detailed))!
     }
 }
