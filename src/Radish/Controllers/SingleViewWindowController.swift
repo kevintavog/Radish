@@ -125,7 +125,7 @@ class SingleViewWindowController: NSWindowController
 
     func displayImage(media:MediaData)
     {
-        videoPlayer.player?.pause()
+        stopVideoPlayer()
 
         imageViewer.image = nil
         if (imageViewer.hidden) {
@@ -146,12 +146,19 @@ class SingleViewWindowController: NSWindowController
 
     func displayVideo(media:MediaData)
     {
+        stopVideoPlayer()
+
         videoPlayer.player = AVPlayer(URL: media.url)
+        videoPlayer.player?.volume = Preferences.videoPlayerVolume
+
         if (videoPlayer.hidden) {
             videoPlayer.hidden = false
             imageViewer.hidden = true
             imageViewer.image = nil
         }
+
+        videoPlayer.player?.addObserver(self, forKeyPath: "volume", options: .New, context: nil)
+
         videoPlayer.player?.play()
     }
 
@@ -163,6 +170,30 @@ class SingleViewWindowController: NSWindowController
 
         Logger.log("Unhandled file: '\(media.name)'")
     }
+
+    // MARK: Video helpers
+    func stopVideoPlayer()
+    {
+        if let player = videoPlayer.player {
+            player.removeObserver(self, forKeyPath: "volume", context: nil)
+            player.pause()
+            videoPlayer.player = nil
+        }
+    }
+
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
+    {
+        switch keyPath! {
+        case "volume":
+            if let volume = change![NSKeyValueChangeNewKey] as? Float {
+                Preferences.videoPlayerVolume = volume
+            }
+
+        default:
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+        }
+    }
+
 
     // MARK: Update UI elements
     func updateStatusView()
@@ -210,6 +241,7 @@ class SingleViewWindowController: NSWindowController
         }
     }
 
+    // MARK: add/open folder helpers
     func selectFoldersToAdd() -> (urls: [NSURL]!, selected: NSURL!)
     {
         let dialog = NSOpenPanel()
