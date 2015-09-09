@@ -15,11 +15,12 @@
 		4442A0261B926784007251E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0241B926784007251E6 /* MainMenu.xib */; };
 		444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */; settings = {ASSET_TAGS = (); }; };
 		444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322621B994A6D009043F4 /* RadishImageBrowserView.swift */; settings = {ASSET_TAGS = (); }; };
+		444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; };
+		444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; settings = {ASSET_TAGS = (); }; };
 		44620BE71B9D1EFE0024F403 /* MediaDataDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE61B9D1EFE0024F403 /* MediaDataDetail.swift */; settings = {ASSET_TAGS = (); }; };
 		446F3A5E1B9FC07700AF2F8E /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3A5D1B9FC07700AF2F8E /* Mutex.swift */; settings = {ASSET_TAGS = (); }; };
 		446F3A621B9FD12600AF2F8E /* LookupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3A611B9FD12600AF2F8E /* LookupProvider.swift */; settings = {ASSET_TAGS = (); }; };
-		449044681B93751B000A77BA /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449044671B93751B000A77BA /* Async.swift */; settings = {ASSET_TAGS = (); }; };
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
 		44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; };
 		44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -47,6 +48,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */,
+				444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,11 +66,11 @@
 		4442A0271B926784007251E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserCell.swift; path = Controllers/RadishImageBrowserCell.swift; sourceTree = "<group>"; };
 		444322621B994A6D009043F4 /* RadishImageBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserView.swift; path = Controllers/RadishImageBrowserView.swift; sourceTree = "<group>"; };
+		444FBF911B9FD78D00A32991 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = Carthage/Build/Mac/Async.framework; sourceTree = "<group>"; };
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
 		44620BE61B9D1EFE0024F403 /* MediaDataDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaDataDetail.swift; path = Models/MediaDataDetail.swift; sourceTree = "<group>"; };
 		446F3A5D1B9FC07700AF2F8E /* Mutex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mutex.swift; path = Core/Mutex.swift; sourceTree = "<group>"; };
 		446F3A611B9FD12600AF2F8E /* LookupProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LookupProvider.swift; path = Providers/LookupProvider.swift; sourceTree = "<group>"; };
-		449044671B93751B000A77BA /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.swift; path = External/Async.swift; sourceTree = "<group>"; };
 		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleViewWindowController.swift; path = Controllers/SingleViewWindowController.swift; sourceTree = "<group>"; };
 		44B540AE1B9E412A006BC28A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		44B540B21B9E434D006BC28A /* StandardLookupProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardLookupProvider.swift; path = Providers/StandardLookupProvider.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			files = (
 				442232721B968DB2009123F0 /* Quartz.framework in Frameworks */,
 				44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */,
+				444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +114,7 @@
 		4442A0141B926784007251E6 = {
 			isa = PBXGroup;
 			children = (
+				444FBF911B9FD78D00A32991 /* Async.framework */,
 				44B540AE1B9E412A006BC28A /* Alamofire.framework */,
 				4442A01F1B926784007251E6 /* Radish */,
 				4442A01E1B926784007251E6 /* Products */,
@@ -158,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				44D177F61B9D51FA0073712D /* SwiftyJSON.swift */,
-				449044671B93751B000A77BA /* Async.swift */,
 			);
 			name = External;
 			sourceTree = "<group>";
@@ -296,7 +299,6 @@
 				44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */,
 				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
 				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
-				449044681B93751B000A77BA /* Async.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
 				44BB2F911B93892700B79B95 /* Logger.swift in Sources */,
 				44620BE71B9D1EFE0024F403 /* MediaDataDetail.swift in Sources */,
