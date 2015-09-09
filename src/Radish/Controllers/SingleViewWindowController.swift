@@ -194,6 +194,12 @@ class SingleViewWindowController: NSWindowController
             }
 
             window?.title = "Radish - \(media.name)"
+
+            if media.location != nil {
+                Async.background {
+                    Logger.log("Placename: '\(media.location.placename())'")
+                }
+            }
         }
     }
 
