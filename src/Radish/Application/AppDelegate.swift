@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
 
     let mediaProvider = MediaProvider()
+    private var filename:String?
 
 
     // MARK: Application hooks
@@ -24,8 +25,21 @@ class AppDelegate: NSObject, NSApplicationDelegate
         singleViewWindowController.initialize(mediaProvider)
         thumbnailViewWindowController.initialize(mediaProvider)
         fileInformationController.initialize()
+
+        if filename != nil {
+            singleViewWindowController.openFolderOrFile(filename!)
+        }
     }
 
+    func application(sender: NSApplication, openFile filename: String) -> Bool
+    {
+        if singleViewWindowController == nil {
+            self.filename = filename
+            return true
+        }
+
+        return singleViewWindowController.openFolderOrFile(filename)
+    }
 
     // MARK: IBActions
     @IBAction func viewThumbnails(sender: AnyObject)

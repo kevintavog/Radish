@@ -242,6 +242,27 @@ class SingleViewWindowController: NSWindowController
     }
 
     // MARK: add/open folder helpers
+    func openFolderOrFile(filename: String) -> Bool
+    {
+        var isFolder:ObjCBool = false
+        let fileExists = NSFileManager.defaultManager().fileExistsAtPath(filename, isDirectory:&isFolder)
+        if !fileExists {
+            return false
+        }
+
+        currentFileIndex = 0;
+        mediaProvider!.clear()
+
+        let url = [NSURL(fileURLWithPath: filename)]
+        addFolders(url, selected: url[0])
+
+        if (mediaProvider!.mediaFiles.count > 0) {
+            displayFile(mediaProvider!.mediaFiles[currentFileIndex])
+        }
+
+        return true
+    }
+
     func selectFoldersToAdd() -> (urls: [NSURL]!, selected: NSURL!)
     {
         let dialog = NSOpenPanel()
@@ -284,6 +305,8 @@ class SingleViewWindowController: NSWindowController
         if (selected != nil) {
             selectByUrl(selected, display: false)
         }
+
+        NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(urls[0])
     }
 
     func selectByUrl(url: NSURL, display: Bool) -> Int?
