@@ -98,12 +98,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
-                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
+                            <menuItem title="Open…" tag="1" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="openFolder:" target="lzO-hK-yhB" id="rrl-mW-ekA"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Add…" keyEquivalent="O" id="t5j-YZ-Oca">
+                            <menuItem title="Add…" tag="1" keyEquivalent="O" id="t5j-YZ-Oca">
                                 <connections>
                                     <action selector="addFolder:" target="lzO-hK-yhB" id="vPt-fw-66H"/>
                                 </connections>
@@ -122,20 +122,52 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
-                            <menuItem title="Next" keyEquivalent="" id="log-Gs-n1Q">
+                            <menuItem title="Search" tag="1" keyEquivalent="f" id="LdE-VM-AqQ"/>
+                            <menuItem isSeparatorItem="YES" id="Kk0-7c-Q8P"/>
+                            <menuItem title="Next" tag="2" keyEquivalent="" id="log-Gs-n1Q">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="nextFile:" target="-1" id="6YT-cg-Mj6"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Previous" keyEquivalent="" id="Io6-qz-eaJ">
+                            <menuItem title="Previous" tag="2" keyEquivalent="" id="Io6-qz-eaJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="previousFile:" target="-1" id="erc-IG-Y4O"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="gqz-bj-OhC"/>
-                            <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
+                            <menuItem title="Reveal in Finder" tag="2" id="eqj-aJ-5BS">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="revealInFinder:" target="-1" id="9Yr-p1-m67"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Set File date to EXIF date" tag="2" keyEquivalent="D" id="qMg-ei-tK2">
+                                <connections>
+                                    <action selector="setFileDateFromExifDate:" target="-1" id="622-k2-mzf"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="qzJ-xe-HDB">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Auto Rotate (Lossless)" tag="2" keyEquivalent="r" id="JBL-kj-ETr">
+                                <connections>
+                                    <action selector="autoRotate:" target="-1" id="tAt-y2-lvf"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Move to Trash" tag="2" id="yEe-yY-Qsl">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <connections>
+                                    <action selector="moveToTrash:" target="-1" id="e2H-yz-X39"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="npr-0j-kVZ">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Close" tag="1" keyEquivalent="w" id="DVo-aG-piG">
                                 <connections>
                                     <action selector="performClose:" target="-1" id="HmO-Ls-i7Q"/>
                                 </connections>
@@ -554,7 +586,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="8Rt-uP-OO1">
-                            <rect key="frame" x="649" y="1" width="16" height="554"/>
+                            <rect key="frame" x="650" y="1" width="15" height="554"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -579,7 +611,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="FileInformationTable" headerView="9Q3-Jp-b7s" id="ttM-yo-p95">
-                                    <rect key="frame" x="0.0" y="0.0" width="802" height="458"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="802" height="19"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -9,6 +9,10 @@ import Foundation
 
 import Async
 
+enum MenuItemTag: Int
+{
+    case AlwaysEnable = 1, RequiresFile = 2
+}
 
 class SingleViewWindowController: NSWindowController
 {
@@ -22,6 +26,7 @@ class SingleViewWindowController: NSWindowController
 
 
 
+    let trashSoundPath = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif"
     var mediaProvider: MediaProvider?
     var currentFileIndex = 0
     private var dateFormatter: NSDateFormatter? = nil
@@ -47,6 +52,16 @@ class SingleViewWindowController: NSWindowController
 
 
     // MARK: Actions
+    override func validateMenuItem(menuItem: NSMenuItem) -> Bool
+    {
+        switch MenuItemTag(rawValue: menuItem.tag)! {
+        case .AlwaysEnable:
+            return true
+        case .RequiresFile:
+            return mediaProvider?.mediaFiles.count > 0
+        }
+    }
+
     @IBAction func openFolder(sender: AnyObject)
     {
         let folders = selectFoldersToAdd()
@@ -79,6 +94,47 @@ class SingleViewWindowController: NSWindowController
     @IBAction func previousFile(sender: AnyObject)
     {
         displayFileByIndex(currentFileIndex - 1)
+    }
+
+    @IBAction func revealInFinder(sender: AnyObject)
+    {
+        NSWorkspace.sharedWorkspace().selectFile(mediaProvider?.mediaFiles[currentFileIndex].url!.path!, inFileViewerRootedAtPath: "")
+    }
+
+    @IBAction func setFileDateFromExifDate(sender: AnyObject)
+    {
+        Logger.log("setFileDateFromExifDate")
+    }
+
+    @IBAction func autoRotate(sender: AnyObject)
+    {
+        Logger.log("autoRotate")
+    }
+
+    @IBAction func moveToTrash(sender: AnyObject)
+    {
+        let url = mediaProvider?.mediaFiles[currentFileIndex].url!
+        Logger.log("moveToTrash: \((url?.path!)!)")
+
+        let folder = url?.URLByDeletingLastPathComponent?.path
+        let filename = (url?.lastPathComponent!)!
+        let succeeded = NSWorkspace.sharedWorkspace().performFileOperation(
+            NSWorkspaceRecycleOperation,
+            source: folder!,
+            destination: "",
+            files: [filename],
+            tag: nil)
+
+        if !succeeded {
+            let alert = NSAlert()
+            alert.messageText = "Failed moving '\(filename)' to trash."
+            alert.alertStyle = NSAlertStyle.WarningAlertStyle
+            alert.addButtonWithTitle("Close")
+            alert.runModal()
+        }
+        else {
+            NSSound(contentsOfFile: trashSoundPath, byReference: false)?.play()
+        }
     }
 
     // MARK: Notification handlers
