@@ -148,6 +148,12 @@
                                     <action selector="setFileDateFromExifDate:" target="-1" id="622-k2-mzf"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Refresh" tag="2" keyEquivalent="" id="hHj-0X-Mup">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="refreshFiles:" target="lzO-hK-yhB" id="uK5-ot-HCr"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="qzJ-xe-HDB">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -586,7 +592,7 @@ CA
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="8Rt-uP-OO1">
-                            <rect key="frame" x="650" y="1" width="15" height="554"/>
+                            <rect key="frame" x="649" y="1" width="16" height="554"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>

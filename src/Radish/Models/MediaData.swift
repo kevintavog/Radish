@@ -17,6 +17,7 @@ public class MediaData
     public var type: SupportedTypes.MediaType!
     public var keywords: [String]!
 
+
     public var details: [MediaDataDetail]! {
         get {
             if cachedDetails == nil {
@@ -28,6 +29,10 @@ public class MediaData
 
     private var cachedDetails: [MediaDataDetail]!
 
+    public func doesExist() -> Bool
+    {
+        return true
+    }
 
     public func doFileAndExifTimestampsMatch() -> Bool
     {

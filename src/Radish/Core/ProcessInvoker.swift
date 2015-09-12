@@ -36,6 +36,9 @@ public class ProcessInvoker
         let errorPipe = NSPipe()
         task.standardError = errorPipe
 
+        // This executable may depend on another executable in the same folder - make sure the path is updated
+        task.environment = ["PATH": (launchPath as NSString).stringByDeletingLastPathComponent]
+
         task.launch()
 
         let output = String(data: outputPipe.fileHandleForReading.readDataToEndOfFile(), encoding: NSUTF8StringEncoding)

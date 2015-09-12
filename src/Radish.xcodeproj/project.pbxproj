@@ -17,6 +17,10 @@
 		444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322621B994A6D009043F4 /* RadishImageBrowserView.swift */; settings = {ASSET_TAGS = (); }; };
 		444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; };
 		444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		444FBF9A1BA3334300A32991 /* RangicFsEventStreamWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 444FBF991BA3334300A32991 /* RangicFsEventStreamWrapper.m */; settings = {ASSET_TAGS = (); }; };
+		445500861BA385A7007543D8 /* jhead in Resources */ = {isa = PBXBuildFile; fileRef = 445500841BA385A7007543D8 /* jhead */; settings = {ASSET_TAGS = (); }; };
+		445500871BA385A7007543D8 /* jpegtran in Resources */ = {isa = PBXBuildFile; fileRef = 445500851BA385A7007543D8 /* jpegtran */; settings = {ASSET_TAGS = (); }; };
+		445500891BA38C73007543D8 /* JheadInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445500881BA38C73007543D8 /* JheadInvoker.swift */; settings = {ASSET_TAGS = (); }; };
 		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; settings = {ASSET_TAGS = (); }; };
 		44620BE71B9D1EFE0024F403 /* MediaDataDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE61B9D1EFE0024F403 /* MediaDataDetail.swift */; settings = {ASSET_TAGS = (); }; };
 		446F3A5E1B9FC07700AF2F8E /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3A5D1B9FC07700AF2F8E /* Mutex.swift */; settings = {ASSET_TAGS = (); }; };
@@ -67,6 +71,12 @@
 		444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserCell.swift; path = Controllers/RadishImageBrowserCell.swift; sourceTree = "<group>"; };
 		444322621B994A6D009043F4 /* RadishImageBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserView.swift; path = Controllers/RadishImageBrowserView.swift; sourceTree = "<group>"; };
 		444FBF911B9FD78D00A32991 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = Carthage/Build/Mac/Async.framework; sourceTree = "<group>"; };
+		444FBF991BA3334300A32991 /* RangicFsEventStreamWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RangicFsEventStreamWrapper.m; path = Core/RangicFsEventStreamWrapper.m; sourceTree = "<group>"; };
+		444FBF9C1BA3346600A32991 /* RangicFsEventStreamWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RangicFsEventStreamWrapper.h; path = Core/RangicFsEventStreamWrapper.h; sourceTree = "<group>"; };
+		444FBF9D1BA3346600A32991 /* Radish-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Radish-Bridging-Header.h"; path = "Core/Radish-Bridging-Header.h"; sourceTree = "<group>"; };
+		445500841BA385A7007543D8 /* jhead */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = jhead; path = Resources/Executables/jhead; sourceTree = "<group>"; };
+		445500851BA385A7007543D8 /* jpegtran */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = jpegtran; path = Resources/Executables/jpegtran; sourceTree = "<group>"; };
+		445500881BA38C73007543D8 /* JheadInvoker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JheadInvoker.swift; path = Core/JheadInvoker.swift; sourceTree = "<group>"; };
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
 		44620BE61B9D1EFE0024F403 /* MediaDataDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaDataDetail.swift; path = Models/MediaDataDetail.swift; sourceTree = "<group>"; };
 		446F3A5D1B9FC07700AF2F8E /* Mutex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mutex.swift; path = Core/Mutex.swift; sourceTree = "<group>"; };
@@ -133,6 +143,7 @@
 		4442A01F1B926784007251E6 /* Radish */ = {
 			isa = PBXGroup;
 			children = (
+				445500821BA3856A007543D8 /* Resources */,
 				44F803A31B9945890019589A /* Application */,
 				44FEF9771B95319900DB2E1D /* Models */,
 				44FEF9741B9530B600DB2E1D /* Providers */,
@@ -158,6 +169,23 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		445500821BA3856A007543D8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				445500831BA38595007543D8 /* Executable */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		445500831BA38595007543D8 /* Executable */ = {
+			isa = PBXGroup;
+			children = (
+				445500841BA385A7007543D8 /* jhead */,
+				445500851BA385A7007543D8 /* jpegtran */,
+			);
+			name = Executable;
+			sourceTree = "<group>";
+		};
 		449044661B9374F4000A77BA /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,12 +197,16 @@
 		44BB2F8F1B9388F300B79B95 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				444FBF9C1BA3346600A32991 /* RangicFsEventStreamWrapper.h */,
+				444FBF991BA3334300A32991 /* RangicFsEventStreamWrapper.m */,
+				444FBF9D1BA3346600A32991 /* Radish-Bridging-Header.h */,
 				44BB2F901B93892700B79B95 /* Logger.swift */,
 				44BB2F921B93913800B79B95 /* SupportedTypes.swift */,
 				44FF5FD21B97D69F00DC4947 /* Preferences.swift */,
 				44D177F41B9D46220073712D /* ProcessInvoker.swift */,
 				44B540B81B9E58F1006BC28A /* OrderedDictionary.swift */,
 				446F3A5D1B9FC07700AF2F8E /* Mutex.swift */,
+				445500881BA38C73007543D8 /* JheadInvoker.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -239,6 +271,7 @@
 		4442A0151B926784007251E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = rangic.com;
 				TargetAttributes = {
@@ -270,8 +303,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				445500861BA385A7007543D8 /* jhead in Resources */,
 				4442A0231B926784007251E6 /* Assets.xcassets in Resources */,
 				4442A0261B926784007251E6 /* MainMenu.xib in Resources */,
+				445500871BA385A7007543D8 /* jpegtran in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,11 +332,13 @@
 				44BB2F931B93913800B79B95 /* SupportedTypes.swift in Sources */,
 				44B540B71B9E5297006BC28A /* Placename.swift in Sources */,
 				44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */,
+				444FBF9A1BA3334300A32991 /* RangicFsEventStreamWrapper.m in Sources */,
 				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
 				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
 				44BB2F911B93892700B79B95 /* Logger.swift in Sources */,
 				44620BE71B9D1EFE0024F403 /* MediaDataDetail.swift in Sources */,
+				445500891BA38C73007543D8 /* JheadInvoker.swift in Sources */,
 				44FEF97D1B9534C100DB2E1D /* FileMediaData.swift in Sources */,
 				44B540B91B9E58F1006BC28A /* OrderedDictionary.swift in Sources */,
 				446F3A5E1B9FC07700AF2F8E /* Mutex.swift in Sources */,
@@ -407,6 +444,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -416,6 +454,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Radish/Core/Radish-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -423,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -432,6 +473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Radish/Core/Radish-Bridging-Header.h";
 			};
 			name = Release;
 		};

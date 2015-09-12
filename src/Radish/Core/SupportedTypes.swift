@@ -27,6 +27,23 @@ public class SupportedTypes
         return supportedTypes!;
     }
 
+    static public func getTypeFromFileExtension(fileExtension: String) -> MediaType
+    {
+        if fileExtension.characters.count > 0 {
+            let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, nil)!.takeRetainedValue()
+
+            if images().contains(uti as String) {
+                return MediaType.Image
+            }
+
+            if videos().contains(uti as String) {
+                return MediaType.Video
+            }
+        }
+
+        return MediaType.Unknown
+    }
+
     static public func isSupportedFile(fullUrl:NSURL) -> Bool
     {
         return all().contains(getFileType(fullUrl))

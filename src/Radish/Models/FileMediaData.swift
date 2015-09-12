@@ -64,10 +64,6 @@ class FileMediaData : MediaData
                     {
                         fileMediaData.keywords = keywords as! [String]
                     }
-                    else
-                    {
-                        Logger.log("keywords were nil")
-                    }
                 }
 
                 // location (GPS.Latitude, LatitudeRef, Longitude, LongitudeRef)
@@ -94,6 +90,11 @@ class FileMediaData : MediaData
     internal override func loadDetails() -> [MediaDataDetail]
     {
         return FileExifProvider.getDetails(url.path!)
+    }
+
+    override func doesExist() -> Bool
+    {
+        return NSFileManager.defaultManager().fileExistsAtPath(url.path!)
     }
 
     private override init()

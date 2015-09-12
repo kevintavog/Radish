@@ -68,7 +68,7 @@ public class StandardLookupProvider: LookupProvider
                                     }
 
                                     if !matched {
-                                        Logger.log("Failed matching detail value: '\(trimmedValue)'")
+                                        Logger.log("Failed matching detail value: '\(trimmedValue)' (\(address))")
                                     }
                                 }
                             }
