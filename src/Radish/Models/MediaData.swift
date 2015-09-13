@@ -18,7 +18,8 @@ public class MediaData
     public var keywords: [String]!
 
 
-    public var details: [MediaDataDetail]! {
+    public var details: [MediaDataDetail]!
+    {
         get {
             if cachedDetails == nil {
                 cachedDetails = loadDetails()
@@ -72,5 +73,10 @@ public class MediaData
     internal func loadDetails() -> [MediaDataDetail]
     {
         return [MediaDataDetail]()
+    }
+
+    public func setFileDateToExifDate() -> (succeeded:Bool, errorMessage:String)
+    {
+        return (false, "Not implemented")
     }
 }

@@ -11,6 +11,27 @@ class MediaProvider
     var folderWatcher:[RangicFsEventStreamWrapper] = []
 
 
+    func setFileDatesToExifDates(files: [MediaData]) -> (allSucceeded:Bool, failedFiles:[MediaData], errorMessage: String)
+    {
+        var response = (allSucceeded: true, failedFiles: [MediaData](), errorMessage: "")
+
+        for mf in files {
+            let result = mf.setFileDateToExifDate()
+            if !result.succeeded {
+
+                response.allSucceeded = false
+                response.failedFiles.append(mf)
+
+                if response.errorMessage.characters.count < 1 {
+                    response.errorMessage = result.errorMessage
+                }
+            }
+        }
+
+        Notifications.postNotification(Notifications.MediaProvider.UpdatedNotification, object: self)
+        return response
+    }
+
     func clear()
     {
         folders = []

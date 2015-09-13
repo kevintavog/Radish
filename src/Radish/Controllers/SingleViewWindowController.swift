@@ -112,7 +112,17 @@ class SingleViewWindowController: NSWindowController
 
     @IBAction func setFileDateFromExifDate(sender: AnyObject)
     {
-        Logger.log("setFileDateFromExifDate")
+        let filename = currentMediaData!.url.path!
+        Logger.log("setFileDateFromExifDate: \(filename)")
+
+        let result = mediaProvider?.setFileDatesToExifDates([currentMediaData!])
+        if !result!.allSucceeded {
+            let alert = NSAlert()
+            alert.messageText = "Set file date of '\(filename)' failed: \(result!.errorMessage)."
+            alert.alertStyle = NSAlertStyle.WarningAlertStyle
+            alert.addButtonWithTitle("Close")
+            alert.runModal()
+        }
     }
 
     @IBAction func autoRotate(sender: AnyObject)
@@ -127,9 +137,7 @@ class SingleViewWindowController: NSWindowController
             alert.alertStyle = NSAlertStyle.WarningAlertStyle
             alert.addButtonWithTitle("Close")
             alert.runModal()
-
         }
-        print(" --> returned \(jheadInvoker.processInvoker.exitCode)")
     }
 
     @IBAction func moveToTrash(sender: AnyObject)

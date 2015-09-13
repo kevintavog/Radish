@@ -4,11 +4,11 @@
 
 import Foundation
 
-class FileMediaData : MediaData
+public class FileMediaData : MediaData
 {
     static private var dateFormatter: NSDateFormatter?
 
-    static func create(url: NSURL, mediaType: SupportedTypes.MediaType) -> FileMediaData
+    public static func create(url: NSURL, mediaType: SupportedTypes.MediaType) -> FileMediaData
     {
         if (dateFormatter == nil)
         {
@@ -92,9 +92,30 @@ class FileMediaData : MediaData
         return FileExifProvider.getDetails(url.path!)
     }
 
-    override func doesExist() -> Bool
+    public override func doesExist() -> Bool
     {
         return NSFileManager.defaultManager().fileExistsAtPath(url.path!)
+    }
+
+    public override func setFileDateToExifDate()  -> (succeeded:Bool, errorMessage:String)
+    {
+        let updatedDates:[String:AnyObject] = [NSFileCreationDate:timestamp, NSFileModificationDate:timestamp]
+        do {
+            try NSFileManager.defaultManager().setAttributes(updatedDates, ofItemAtPath: url.path!)
+
+            var value:AnyObject?
+            try! url.getResourceValue(&value, forKey: NSURLContentModificationDateKey)
+            let date = value as! NSDate?
+            fileTimestamp = date
+        }
+        catch let error as NSError {
+            return (false, "\(error.code) - \(error.localizedDescription)")
+        }
+        catch {
+            return (false, "Failed setting timestamp")
+        }
+
+        return (true, "")
     }
 
     private override init()
