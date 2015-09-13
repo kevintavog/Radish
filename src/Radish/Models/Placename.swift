@@ -4,7 +4,7 @@
 
 public class Placename
 {
-    let components: OrderedDictionary<String,String>
+    public let components: OrderedDictionary<String,String>
 
     public init(components: OrderedDictionary<String,String>)
     {

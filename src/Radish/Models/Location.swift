@@ -8,7 +8,7 @@ public class Location
 {
     var latitude: Double
     var longitude: Double
-    private var placenameComponents: Placename?
+    private var placename: Placename?
     private let lookupProvider: LookupProvider = CachedLookupProvider()
 
 
@@ -16,7 +16,7 @@ public class Location
     {
         self.latitude = latitude
         self.longitude = longitude
-        self.placenameComponents = nil
+        self.placename = nil
     }
 
     init(latitude:Double, latitudeReference:String, longitude:Double, longitudeReference:String)
@@ -64,12 +64,25 @@ public class Location
         return s
     }
 
-    public func placename() -> String
+    public func placenameAsString() -> String
     {
-        if placenameComponents == nil {
-            self.placenameComponents = Placename(components: lookupProvider.lookup(latitude, longitude: longitude))
+        if !hasPlacename() {
+            self.placename = Placename(components: lookupProvider.lookup(latitude, longitude: longitude))
         }
 
-        return (placenameComponents?.name(.Detailed))!
+        return (placename?.name(.Detailed))!
+    }
+
+    public func asPlacename() -> Placename?
+    {
+        if !hasPlacename() {
+            self.placename = Placename(components: lookupProvider.lookup(latitude, longitude: longitude))
+        }
+        return placename
+    }
+
+    public func hasPlacename() -> Bool
+    {
+        return placename != nil
     }
 }

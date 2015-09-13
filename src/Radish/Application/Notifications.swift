@@ -10,6 +10,7 @@ public class Notifications
     {
         static let Cleared = "MediaProvider.Cleared"
         static let UpdatedNotification = "MediaProvider.UpdatedNotification"
+        static let DetailsAvailable = "MediaProvider.DetailsAvailable"
     }
 
     public class SingleView

@@ -89,7 +89,11 @@ public class FileMediaData : MediaData
 
     internal override func loadDetails() -> [MediaDataDetail]
     {
-        return FileExifProvider.getDetails(url.path!)
+        var base = super.loadDetails()
+        for detail in FileExifProvider.getDetails(url.path!) {
+            base.append(detail)
+        }
+        return base
     }
 
     public override func doesExist() -> Bool
