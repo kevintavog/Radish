@@ -42,7 +42,7 @@ static void RangicFSEventStreamWrapperCallback(ConstFSEventStreamRef streamRef,
                                       &context,
                                       (__bridge CFArrayRef)pathArray,
                                       kFSEventStreamEventIdSinceNow,
-                                      0.4,
+                                      0.2,
                                       kFSEventStreamCreateFlagUseCFTypes | kFSEventStreamCreateFlagFileEvents);
         _callback = callback;
 
@@ -99,14 +99,17 @@ static void RangicFSEventStreamWrapperCallback(ConstFSEventStreamRef streamRef,
 - (void) processEvents:(size_t)numEvents eventPaths:(void *)eventPaths eventFlags:(const FSEventStreamEventFlags[])eventFlags
 {
     NSArray *pathArray = (__bridge NSArray*)eventPaths;
+    RangicFsEventType rangicTypes[numEvents];
+
     for (int index = 0; index < numEvents; ++index) {
         NSString* path = [pathArray objectAtIndex:index];
-        RangicFsEventType type = [self typeFromFlags: eventFlags[index] filePath: path];
+        rangicTypes[index] = [self typeFromFlags: eventFlags[index] filePath: path];
 
 //        NSLog(@"0x%08X - %ld - %@", eventFlags[index], (long)type, path);
 
-        _callback(type, path);
     }
+
+    _callback((int) numEvents, rangicTypes, pathArray);
 }
 
 

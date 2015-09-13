@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, RangicFsEventType)
 
 };
 
-typedef void(^RangicFsEventStreamWrapperCallback)(RangicFsEventType eventType, NSString *eventPath);
+typedef void(^RangicFsEventStreamWrapperCallback)(int numEvents, const RangicFsEventType eventType[], NSArray *eventPaths);
 
 
 @interface RangicFsEventStreamWrapper : NSObject

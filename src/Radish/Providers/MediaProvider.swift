@@ -37,7 +37,6 @@ class MediaProvider
 
                 for f in files {
                     let mediaType = SupportedTypes.getTypeFromFileExtension(((f.path!) as NSString).pathExtension)
-//                    let mediaType = SupportedTypes.getType(f)
                     if mediaType == SupportedTypes.MediaType.Image || mediaType == SupportedTypes.MediaType.Video {
                         mediaFiles.append(FileMediaData.create(f, mediaType: mediaType))
                     }
@@ -49,8 +48,12 @@ class MediaProvider
 
             Notifications.postNotification(Notifications.MediaProvider.UpdatedNotification, object: self)
 
-            folderWatcher.append(RangicFsEventStreamWrapper(path: folderName, callback: { (type, path) -> () in
-                self.processFileSystemEvent(type, path: path)
+            folderWatcher.append(RangicFsEventStreamWrapper(path: folderName, callback: { (numEvents, typeArray, pathArray) -> () in
+                var eventTypes = [RangicFsEventType]()
+                for index in 0..<Int(numEvents) {
+                    eventTypes.append(typeArray[index] as RangicFsEventType)
+                }
+                self.processFileSystemEvents(Int(numEvents), eventTypes: eventTypes, pathArray: pathArray as! [String])
             }))
         }
     }
@@ -67,23 +70,31 @@ class MediaProvider
         Notifications.postNotification(Notifications.MediaProvider.UpdatedNotification, object: self)
     }
 
-    func processFileSystemEvent(eventType: RangicFsEventType, path: String)
+    func processFileSystemEvents(numEvents: Int, eventTypes: [RangicFsEventType], pathArray: [String])
     {
-        Logger.log("file system change \(eventType.rawValue) - \(path)")
+        for index in 0..<numEvents {
+            processOneFileSystemEvent(eventTypes[index], path: pathArray[index])
+        }
+
+        Notifications.postNotification(Notifications.MediaProvider.UpdatedNotification, object: self)
+    }
+
+    func processOneFileSystemEvent(eventType: RangicFsEventType, path: String)
+    {
         if eventType == .RescanFolder {
             rescanFolder(path)
         }
         else {
+            let mediaType = SupportedTypes.getTypeFromFileExtension((path as NSString).pathExtension)
+            if mediaType == .Unknown {
+                return
+            }
+
             let url = NSURL(fileURLWithPath: path)
             if eventType == .Removed {
                 removeFile(url)
             }
             else {
-                let mediaType = SupportedTypes.getTypeFromFileExtension(((url.path!) as NSString).pathExtension)
-                if mediaType == .Unknown {
-                    return
-                }
-
                 switch eventType {
                 case .Created:
                     addFile(url, mediaType: mediaType)
@@ -99,8 +110,6 @@ class MediaProvider
                 }
             }
         }
-
-        Notifications.postNotification(Notifications.MediaProvider.UpdatedNotification, object: self)
     }
 
     func rescanFolder(path: String)
@@ -116,11 +125,9 @@ class MediaProvider
             mediaFiles.insert(mediaData, atIndex: -index)
         }
         else {
-            Logger.log("adding a file that seems to exist \(url) - \(mediaFiles[index].url)")
+            mediaFiles.removeAtIndex(index)
             mediaFiles.insert(mediaData, atIndex: index)
         }
-
-        mediaFiles.sortInPlace(isOrderedBefore)
     }
 
     func removeFile(url: NSURL)
@@ -135,13 +142,13 @@ class MediaProvider
 
     func updateFile(url: NSURL, mediaType: SupportedTypes.MediaType)
     {
-        Logger.log("Update \(url)")
         if let index = getFileIndex(url) {
             mediaFiles[index] = FileMediaData.create(url, mediaType: mediaType)
         }
         else {
             Logger.log("Updated file '\(url)' not in list, adding it")
             addFile(url, mediaType: mediaType)
+            mediaFiles.sortInPlace(isOrderedBefore)
         }
     }
 
@@ -162,6 +169,12 @@ class MediaProvider
         var hi = mediaFiles.count - 1
         while lo <= hi {
             let mid = (lo + hi) / 2
+
+            let midPath = mediaFiles[mid].url.path!
+            if midPath.compare(mediaData.url.path!, options: NSStringCompareOptions.CaseInsensitiveSearch) == NSComparisonResult.OrderedSame {
+                return mid
+            }
+
             if isOrderedBefore(mediaFiles[mid], m2:mediaData) {
                 lo = mid + 1
             } else if isOrderedBefore(mediaData, m2:mediaFiles[mid]) {
