@@ -61,6 +61,10 @@ class FileInformationController : NSViewController
         if let name = currentMediaData?.name {
             panel.title = "File Information - \(name)"
         }
+        else {
+            panel.title = "File Information"
+        }
+
         tableView.reloadData()
     }
 

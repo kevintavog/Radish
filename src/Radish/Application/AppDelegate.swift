@@ -41,6 +41,12 @@ class AppDelegate: NSObject, NSApplicationDelegate
         return singleViewWindowController.openFolderOrFile(filename)
     }
 
+    func application(application: NSApplication, willPresentError error: NSError) -> NSError
+    {
+        Logger.log("WillPresentError: \(error)")
+        return error
+    }
+
     // MARK: IBActions
     @IBAction func viewThumbnails(sender: AnyObject)
     {

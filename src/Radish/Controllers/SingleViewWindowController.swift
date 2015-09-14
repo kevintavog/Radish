@@ -436,7 +436,7 @@ class SingleViewWindowController: NSWindowController
         }
 
         if selected != nil {
-            selectByUrl(selected, display: false)
+            selectByUrl(selected, display: true)
         }
 
         NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(urls[0])
