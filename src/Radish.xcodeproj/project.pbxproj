@@ -17,13 +17,10 @@
 		444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322621B994A6D009043F4 /* RadishImageBrowserView.swift */; settings = {ASSET_TAGS = (); }; };
 		444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; };
 		444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		444FBF9A1BA3334300A32991 /* RangicFsEventStreamWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 444FBF991BA3334300A32991 /* RangicFsEventStreamWrapper.m */; settings = {ASSET_TAGS = (); }; };
 		445500861BA385A7007543D8 /* jhead in Resources */ = {isa = PBXBuildFile; fileRef = 445500841BA385A7007543D8 /* jhead */; settings = {ASSET_TAGS = (); }; };
 		445500871BA385A7007543D8 /* jpegtran in Resources */ = {isa = PBXBuildFile; fileRef = 445500851BA385A7007543D8 /* jpegtran */; settings = {ASSET_TAGS = (); }; };
-		445500891BA38C73007543D8 /* JheadInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445500881BA38C73007543D8 /* JheadInvoker.swift */; settings = {ASSET_TAGS = (); }; };
 		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; settings = {ASSET_TAGS = (); }; };
 		44620BE71B9D1EFE0024F403 /* MediaDataDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE61B9D1EFE0024F403 /* MediaDataDetail.swift */; settings = {ASSET_TAGS = (); }; };
-		446F3A5E1B9FC07700AF2F8E /* Mutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3A5D1B9FC07700AF2F8E /* Mutex.swift */; settings = {ASSET_TAGS = (); }; };
 		446F3A621B9FD12600AF2F8E /* LookupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F3A611B9FD12600AF2F8E /* LookupProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
 		44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; };
@@ -31,11 +28,8 @@
 		44B540B31B9E434D006BC28A /* StandardLookupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B540B21B9E434D006BC28A /* StandardLookupProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		44B540B51B9E4B9C006BC28A /* CachedLookupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B540B41B9E4B9C006BC28A /* CachedLookupProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		44B540B71B9E5297006BC28A /* Placename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B540B61B9E5297006BC28A /* Placename.swift */; settings = {ASSET_TAGS = (); }; };
-		44B540B91B9E58F1006BC28A /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B540B81B9E58F1006BC28A /* OrderedDictionary.swift */; settings = {ASSET_TAGS = (); }; };
-		44BB2F911B93892700B79B95 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB2F901B93892700B79B95 /* Logger.swift */; settings = {ASSET_TAGS = (); }; };
 		44BB2F931B93913800B79B95 /* SupportedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB2F921B93913800B79B95 /* SupportedTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		44D177F31B9D397B0073712D /* FileExifProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D177F21B9D397B0073712D /* FileExifProvider.swift */; settings = {ASSET_TAGS = (); }; };
-		44D177F51B9D46220073712D /* ProcessInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D177F41B9D46220073712D /* ProcessInvoker.swift */; settings = {ASSET_TAGS = (); }; };
 		44D177F71B9D51FA0073712D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D177F61B9D51FA0073712D /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
 		44FEF9761B9530E500DB2E1D /* MediaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEF9751B9530E500DB2E1D /* MediaProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		44FEF9791B9531B300DB2E1D /* MediaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEF9781B9531B300DB2E1D /* MediaData.swift */; settings = {ASSET_TAGS = (); }; };
@@ -71,27 +65,20 @@
 		444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserCell.swift; path = Controllers/RadishImageBrowserCell.swift; sourceTree = "<group>"; };
 		444322621B994A6D009043F4 /* RadishImageBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserView.swift; path = Controllers/RadishImageBrowserView.swift; sourceTree = "<group>"; };
 		444FBF911B9FD78D00A32991 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = Carthage/Build/Mac/Async.framework; sourceTree = "<group>"; };
-		444FBF991BA3334300A32991 /* RangicFsEventStreamWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RangicFsEventStreamWrapper.m; path = Core/RangicFsEventStreamWrapper.m; sourceTree = "<group>"; };
-		444FBF9C1BA3346600A32991 /* RangicFsEventStreamWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RangicFsEventStreamWrapper.h; path = Core/RangicFsEventStreamWrapper.h; sourceTree = "<group>"; };
-		444FBF9D1BA3346600A32991 /* Radish-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Radish-Bridging-Header.h"; path = "Core/Radish-Bridging-Header.h"; sourceTree = "<group>"; };
 		445500841BA385A7007543D8 /* jhead */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = jhead; path = Resources/Executables/jhead; sourceTree = "<group>"; };
 		445500851BA385A7007543D8 /* jpegtran */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = jpegtran; path = Resources/Executables/jpegtran; sourceTree = "<group>"; };
-		445500881BA38C73007543D8 /* JheadInvoker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JheadInvoker.swift; path = Core/JheadInvoker.swift; sourceTree = "<group>"; };
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
 		44620BE61B9D1EFE0024F403 /* MediaDataDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaDataDetail.swift; path = Models/MediaDataDetail.swift; sourceTree = "<group>"; };
-		446F3A5D1B9FC07700AF2F8E /* Mutex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mutex.swift; path = Core/Mutex.swift; sourceTree = "<group>"; };
 		446F3A611B9FD12600AF2F8E /* LookupProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LookupProvider.swift; path = Providers/LookupProvider.swift; sourceTree = "<group>"; };
 		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleViewWindowController.swift; path = Controllers/SingleViewWindowController.swift; sourceTree = "<group>"; };
 		44B540AE1B9E412A006BC28A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		44B540B21B9E434D006BC28A /* StandardLookupProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StandardLookupProvider.swift; path = Providers/StandardLookupProvider.swift; sourceTree = "<group>"; };
 		44B540B41B9E4B9C006BC28A /* CachedLookupProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CachedLookupProvider.swift; path = Providers/CachedLookupProvider.swift; sourceTree = "<group>"; };
 		44B540B61B9E5297006BC28A /* Placename.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Placename.swift; path = Models/Placename.swift; sourceTree = "<group>"; };
-		44B540B81B9E58F1006BC28A /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrderedDictionary.swift; path = Core/OrderedDictionary.swift; sourceTree = "<group>"; };
-		44BB2F901B93892700B79B95 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Core/Logger.swift; sourceTree = "<group>"; };
 		44BB2F921B93913800B79B95 /* SupportedTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SupportedTypes.swift; path = Core/SupportedTypes.swift; sourceTree = "<group>"; };
 		44D177F21B9D397B0073712D /* FileExifProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileExifProvider.swift; path = Models/FileExifProvider.swift; sourceTree = "<group>"; };
-		44D177F41B9D46220073712D /* ProcessInvoker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProcessInvoker.swift; path = Core/ProcessInvoker.swift; sourceTree = "<group>"; };
 		44D177F61B9D51FA0073712D /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = External/SwiftyJSON.swift; sourceTree = "<group>"; };
+		44F4200E1BA72CC800ADBB85 /* RangicCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RangicCore.xcodeproj; path = ../../RangicCore/source/RangicCore.xcodeproj; sourceTree = SOURCE_ROOT; };
 		44FEF9751B9530E500DB2E1D /* MediaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaProvider.swift; path = Providers/MediaProvider.swift; sourceTree = "<group>"; };
 		44FEF9781B9531B300DB2E1D /* MediaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaData.swift; path = Models/MediaData.swift; sourceTree = "<group>"; };
 		44FEF97A1B95339400DB2E1D /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = Models/Location.swift; sourceTree = "<group>"; };
@@ -124,6 +111,7 @@
 		4442A0141B926784007251E6 = {
 			isa = PBXGroup;
 			children = (
+				44F4200E1BA72CC800ADBB85 /* RangicCore.xcodeproj */,
 				444FBF911B9FD78D00A32991 /* Async.framework */,
 				44B540AE1B9E412A006BC28A /* Alamofire.framework */,
 				4442A01F1B926784007251E6 /* Radish */,
@@ -197,16 +185,8 @@
 		44BB2F8F1B9388F300B79B95 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				444FBF9C1BA3346600A32991 /* RangicFsEventStreamWrapper.h */,
-				444FBF991BA3334300A32991 /* RangicFsEventStreamWrapper.m */,
-				444FBF9D1BA3346600A32991 /* Radish-Bridging-Header.h */,
-				44BB2F901B93892700B79B95 /* Logger.swift */,
 				44BB2F921B93913800B79B95 /* SupportedTypes.swift */,
 				44FF5FD21B97D69F00DC4947 /* Preferences.swift */,
-				44D177F41B9D46220073712D /* ProcessInvoker.swift */,
-				44B540B81B9E58F1006BC28A /* OrderedDictionary.swift */,
-				446F3A5D1B9FC07700AF2F8E /* Mutex.swift */,
-				445500881BA38C73007543D8 /* JheadInvoker.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -317,7 +297,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44D177F51B9D46220073712D /* ProcessInvoker.swift in Sources */,
 				44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */,
 				446F3A621B9FD12600AF2F8E /* LookupProvider.swift in Sources */,
 				44FEF9791B9531B300DB2E1D /* MediaData.swift in Sources */,
@@ -332,16 +311,11 @@
 				44BB2F931B93913800B79B95 /* SupportedTypes.swift in Sources */,
 				44B540B71B9E5297006BC28A /* Placename.swift in Sources */,
 				44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */,
-				444FBF9A1BA3334300A32991 /* RangicFsEventStreamWrapper.m in Sources */,
 				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
 				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
-				44BB2F911B93892700B79B95 /* Logger.swift in Sources */,
 				44620BE71B9D1EFE0024F403 /* MediaDataDetail.swift in Sources */,
-				445500891BA38C73007543D8 /* JheadInvoker.swift in Sources */,
 				44FEF97D1B9534C100DB2E1D /* FileMediaData.swift in Sources */,
-				44B540B91B9E58F1006BC28A /* OrderedDictionary.swift in Sources */,
-				446F3A5E1B9FC07700AF2F8E /* Mutex.swift in Sources */,
 				44FEF9761B9530E500DB2E1D /* MediaProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,7 +428,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Radish/Core/Radish-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -473,7 +446,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Radish/Core/Radish-Bridging-Header.h";
 			};
 			name = Release;
 		};

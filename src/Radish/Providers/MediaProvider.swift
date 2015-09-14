@@ -4,6 +4,8 @@
 
 import Foundation
 
+import RangicCore
+
 class MediaProvider
 {
     var folders:[String] = []

@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import RangicCore
 
 public class CachedLookupProvider: LookupProvider
 {

@@ -3,6 +3,9 @@
 //
 
 import Foundation
+
+import RangicCore
+
 import Alamofire
 
 public class StandardLookupProvider: LookupProvider

@@ -4,6 +4,8 @@
 
 import Foundation
 
+import RangicCore
+
 public class FileExifProvider
 {
     static public func getDetails(filename: String) -> [MediaDataDetail]

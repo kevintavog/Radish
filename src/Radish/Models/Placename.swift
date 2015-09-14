@@ -2,6 +2,8 @@
 //  Radish
 //
 
+import RangicCore
+
 public class Placename
 {
     public let components: OrderedDictionary<String,String>

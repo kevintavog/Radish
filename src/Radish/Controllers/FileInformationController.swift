@@ -4,6 +4,9 @@
 
 import AppKit
 
+import RangicCore
+
+
 class FileInformationController : NSViewController
 {
     @IBOutlet weak var tableView: NSTableView!

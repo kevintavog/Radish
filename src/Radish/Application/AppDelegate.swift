@@ -3,6 +3,7 @@
 //
 
 import Cocoa
+import RangicCore
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate
