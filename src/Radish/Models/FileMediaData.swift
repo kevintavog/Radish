@@ -1,8 +1,8 @@
 //
-//  Radish
 //
 
 import Foundation
+import RangicCore
 
 public class FileMediaData : MediaData
 {
