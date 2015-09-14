@@ -402,7 +402,7 @@ class SingleViewWindowController: NSWindowController
     {
         let dialog = NSOpenPanel()
 
-        dialog.allowedFileTypes = SupportedTypes.all()
+        dialog.allowedFileTypes = SupportedMediaTypes.all()
         dialog.canChooseDirectories = true
         dialog.allowsMultipleSelection = true
         if 1 != dialog.runModal() || dialog.URLs.count < 1 {

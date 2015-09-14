@@ -20,7 +20,7 @@ class FileInformationController : NSViewController
     {
         tableView.backgroundColor = NSColor.clearColor()
         Notifications.addObserver(self, selector: "fileSelected:", name: Notifications.Selection.MediaData, object: nil)
-        Notifications.addObserver(self, selector: "detailsUpdated:", name: Notifications.MediaProvider.DetailsAvailable, object: nil)
+        Notifications.addObserver(self, selector: "detailsUpdated:", name: CoreNotifications.MediaProvider.DetailsAvailable, object: nil)
     }
 
 

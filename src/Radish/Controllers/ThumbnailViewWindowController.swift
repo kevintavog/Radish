@@ -6,6 +6,8 @@ import AppKit
 import Foundation
 import Quartz
 
+import RangicCore
+
 class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserViewDelegate
 {
     @IBOutlet weak var sizeSlider: NSSlider!
