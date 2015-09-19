@@ -18,6 +18,8 @@
 		444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; };
 		444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; settings = {ASSET_TAGS = (); }; };
+		4499DE891BACE11800BB8D36 /* RangicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44734C451BA782C000C6675C /* RangicCore.framework */; };
+		4499DE8A1BACE2C000BB8D36 /* RangicCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44734C451BA782C000C6675C /* RangicCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
 		44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; };
 		44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -41,6 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4499DE8A1BACE2C000BB8D36 /* RangicCore.framework in Embed Frameworks */,
 				44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */,
 				444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */,
 			);
@@ -73,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4499DE891BACE11800BB8D36 /* RangicCore.framework in Frameworks */,
 				442232721B968DB2009123F0 /* Quartz.framework in Frameworks */,
 				44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */,
 				444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */,
@@ -93,8 +97,8 @@
 		4442A0141B926784007251E6 = {
 			isa = PBXGroup;
 			children = (
-				44F4200E1BA72CC800ADBB85 /* RangicCore.xcodeproj */,
 				4442A01F1B926784007251E6 /* Radish */,
+				44F4200E1BA72CC800ADBB85 /* RangicCore.xcodeproj */,
 				444FBF911B9FD78D00A32991 /* Async.framework */,
 				44B540AE1B9E412A006BC28A /* Alamofire.framework */,
 				4442A01E1B926784007251E6 /* Products */,
