@@ -23,6 +23,9 @@ class AppDelegate: NSObject, NSApplicationDelegate
     {
         Preferences.setMissingDefaults()
 
+        OpenMapLookupProvider.BaseLocationLookup = Preferences.baseLocationLookup
+        Logger.log("Placename lookups via \(OpenMapLookupProvider.BaseLocationLookup)")
+
         singleViewWindowController.initialize(mediaProvider)
         thumbnailViewWindowController.initialize(mediaProvider)
         fileInformationController.initialize()
@@ -62,5 +65,11 @@ class AppDelegate: NSObject, NSApplicationDelegate
     @IBAction func toggleFileInformation(sender: AnyObject)
     {
         fileInformationController.toggleVisibility()
+    }
+
+    @IBAction func preferences(sender: AnyObject)
+    {
+        let preferencesController = PreferencesWindowController(windowNibName: "Preferences")
+        NSApplication.sharedApplication().runModalForWindow(preferencesController.window!)
     }
 }

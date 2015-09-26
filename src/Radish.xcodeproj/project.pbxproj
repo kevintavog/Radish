@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		442232721B968DB2009123F0 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 442232711B968DB2009123F0 /* Quartz.framework */; };
 		442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */; settings = {ASSET_TAGS = (); }; };
+		443402B91BB63EC80001D1A3 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443402B71BB63EC80001D1A3 /* Preferences.xib */; settings = {ASSET_TAGS = (); }; };
+		443402BC1BB63FFB0001D1A3 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */; settings = {ASSET_TAGS = (); }; };
 		443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D90891B9CD55F0022A268 /* Notifications.swift */; settings = {ASSET_TAGS = (); }; };
 		4442A0211B926784007251E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442A0201B926784007251E6 /* AppDelegate.swift */; };
 		4442A0231B926784007251E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0221B926784007251E6 /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 /* Begin PBXFileReference section */
 		442232711B968DB2009123F0 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThumbnailViewWindowController.swift; path = Controllers/ThumbnailViewWindowController.swift; sourceTree = "<group>"; };
+		443402B81BB63EC80001D1A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Preferences.xib; sourceTree = "<group>"; };
+		443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesWindowController.swift; path = Controllers/PreferencesWindowController.swift; sourceTree = "<group>"; };
 		443D90891B9CD55F0022A268 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Application/Notifications.swift; sourceTree = "<group>"; };
 		4442A01D1B926784007251E6 /* Radish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4442A0201B926784007251E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Application/AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 				4442A0221B926784007251E6 /* Assets.xcassets */,
 				4442A0241B926784007251E6 /* MainMenu.xib */,
 				4442A0271B926784007251E6 /* Info.plist */,
+				443402B71BB63EC80001D1A3 /* Preferences.xib */,
 			);
 			path = Radish;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 				444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */,
 				444322621B994A6D009043F4 /* RadishImageBrowserView.swift */,
 				44620BE41B9D00760024F403 /* FileInformationController.swift */,
+				443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -240,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4442A0231B926784007251E6 /* Assets.xcassets in Resources */,
+				443402B91BB63EC80001D1A3 /* Preferences.xib in Resources */,
 				4442A0261B926784007251E6 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +264,7 @@
 				444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */,
 				44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */,
 				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
+				443402BC1BB63FFB0001D1A3 /* PreferencesWindowController.swift in Sources */,
 				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
 			);
@@ -265,6 +273,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		443402B71BB63EC80001D1A3 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				443402B81BB63EC80001D1A3 /* Base */,
+			);
+			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
 		4442A0241B926784007251E6 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
