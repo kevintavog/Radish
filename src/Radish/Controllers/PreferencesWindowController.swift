@@ -18,6 +18,7 @@ class PreferencesWindowController : NSWindowController
 
     @IBOutlet weak var showOnMapMatrix: NSMatrix!
 
+    @IBOutlet weak var placenameLevelMatrix: NSMatrix!
 
     override func awakeFromNib()
     {
@@ -30,12 +31,14 @@ class PreferencesWindowController : NSWindowController
         testOsmErrorMessage.stringValue = ""
 
         showOnMapMatrix.selectCellAtRow(Preferences.showOnMap.rawValue - 1, column: 0)
+        placenameLevelMatrix.selectCellAtRow(Preferences.placenameLevel.rawValue - 1, column: 0)
     }
 
     func windowWillClose(notification: NSNotification)
     {
         updateBaseLocationLookup()
         Preferences.showOnMap = Preferences.ShowOnMap(rawValue: showOnMapMatrix.selectedRow + 1)!
+        Preferences.placenameLevel = Preferences.PlacenameLevel(rawValue: placenameLevelMatrix.selectedRow + 1)!
 
         NSApplication.sharedApplication().stopModal()
     }

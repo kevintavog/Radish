@@ -9,6 +9,7 @@
                 <outlet property="movieVolume" destination="I9e-q1-dBW" id="wcq-BW-hEs"/>
                 <outlet property="movieVolumeLabel" destination="vEe-14-PMr" id="wg1-n3-fPS"/>
                 <outlet property="openStreetMapHost" destination="1GO-gr-wGq" id="j3V-3W-z3A"/>
+                <outlet property="placenameLevelMatrix" destination="7EE-0x-udQ" id="jv9-US-LjC"/>
                 <outlet property="showOnMapMatrix" destination="0fm-G6-VuI" id="wSv-Ju-XLV"/>
                 <outlet property="testOsmErrorMessage" destination="e0p-FT-UX2" id="PHZ-Hb-vRs"/>
                 <outlet property="testOsmResultImage" destination="tMe-wH-Jp4" id="ffx-f8-Wf1"/>
@@ -119,6 +120,40 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <buttonCell type="radio" title="Google" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Jzs-uM-05Z">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </column>
+                        </cells>
+                    </matrix>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b21-my-ExK">
+                        <rect key="frame" x="290" y="71" width="110" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Placename detail:" id="WbD-by-orp">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7EE-0x-udQ">
+                        <rect key="frame" x="406" y="24" width="131" height="64"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="131" height="18"/>
+                        <size key="intercellSpacing" width="0.0" height="5"/>
+                        <buttonCell key="prototype" type="radio" title="Short" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="nGU-wc-TeS">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <cells>
+                            <column>
+                                <buttonCell type="radio" title="Short" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="oCx-HK-cKD">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <buttonCell type="radio" title="Medium" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="gUu-w3-Pwt">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <buttonCell type="radio" title="Long" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Zc2-9M-ojj">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

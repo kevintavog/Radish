@@ -392,7 +392,7 @@ class SingleViewWindowController: NSWindowController
 
             if media.location != nil {
                 Async.background {
-                    let placename = media.location.placenameAsString()
+                    let placename = media.location.placenameAsString(Preferences.placenameFilter)
                     if placename.characters.count > 0 {
                         Async.main {
                             self.statusLocation.stringValue = placename
