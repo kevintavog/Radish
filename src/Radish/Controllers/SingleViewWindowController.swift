@@ -168,6 +168,17 @@ class SingleViewWindowController: NSWindowController
         }
     }
 
+    @IBAction func showOnMap(sender: AnyObject)
+    {
+        Logger.log("showOnMap \(currentMediaData?.location)")
+        if let location = currentMediaData?.location {
+//            NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://maps.google.com/maps?q=\(location.latitude),\(location.longitude)")!)
+            NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://www.bing.com/maps/default.aspx?cp=\(location.latitude)~\(location.longitude)&lvl=17&rtp=pos.\(location.latitude)_\(location.longitude)")!)
+//            NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://www.openstreetmap.org/?&mlat=\(location.latitude)&mlon=\(location.longitude)#map=18/\(location.latitude)/\(location.longitude)")!)
+
+        }
+    }
+
     // MARK: Notification handlers
     func viewMediaData(notification: NSNotification)
     {
