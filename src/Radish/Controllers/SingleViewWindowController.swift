@@ -170,7 +170,7 @@ class SingleViewWindowController: NSWindowController
 
     @IBAction func showOnMap(sender: AnyObject)
     {
-        Logger.log("showOnMap \(currentMediaData?.location)")
+        Logger.log("showOnMap '\((currentMediaData?.locationString())!)'")
         if let location = currentMediaData?.location {
 //            NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://maps.google.com/maps?q=\(location.latitude),\(location.longitude)")!)
             NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://www.bing.com/maps/default.aspx?cp=\(location.latitude)~\(location.longitude)&lvl=17&rtp=pos.\(location.latitude)_\(location.longitude)")!)
