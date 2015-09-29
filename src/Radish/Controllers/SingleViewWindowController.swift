@@ -172,9 +172,21 @@ class SingleViewWindowController: NSWindowController
     {
         Logger.log("showOnMap '\((currentMediaData?.locationString())!)'")
         if let location = currentMediaData?.location {
-//            NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://maps.google.com/maps?q=\(location.latitude),\(location.longitude)")!)
-            NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://www.bing.com/maps/default.aspx?cp=\(location.latitude)~\(location.longitude)&lvl=17&rtp=pos.\(location.latitude)_\(location.longitude)")!)
-//            NSWorkspace.sharedWorkspace().openURL(NSURL(string: "http://www.openstreetmap.org/?&mlat=\(location.latitude)&mlon=\(location.longitude)#map=18/\(location.latitude)/\(location.longitude)")!)
+
+            var url = ""
+            switch Preferences.showOnMap {
+            case .Bing:
+                url = "http://www.bing.com/maps/default.aspx?cp=\(location.latitude)~\(location.longitude)&lvl=17&rtp=pos.\(location.latitude)_\(location.longitude)"
+            case .Google:
+                url = "http://maps.google.com/maps?q=\(location.latitude),\(location.longitude)"
+
+            case .OpenStreetMap:
+                url = "http://www.openstreetmap.org/?&mlat=\(location.latitude)&mlon=\(location.longitude)#map=18/\(location.latitude)/\(location.longitude)"
+            }
+
+            if url.characters.count > 0 {
+                NSWorkspace.sharedWorkspace().openURL(NSURL(string: url)!)
+            }
 
         }
     }

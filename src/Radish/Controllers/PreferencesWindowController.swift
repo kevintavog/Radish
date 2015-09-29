@@ -16,6 +16,8 @@ class PreferencesWindowController : NSWindowController
     @IBOutlet weak var testOsmResultImage: NSImageView!
     @IBOutlet weak var testOsmErrorMessage: NSTextField!
 
+    @IBOutlet weak var showOnMapMatrix: NSMatrix!
+
 
     override func awakeFromNib()
     {
@@ -26,8 +28,18 @@ class PreferencesWindowController : NSWindowController
 
         testOsmWorkingIndicator!.hidden = true
         testOsmErrorMessage.stringValue = ""
+
+        showOnMapMatrix.selectCellAtRow(Preferences.showOnMap.rawValue - 1, column: 0)
     }
 
+    func windowWillClose(notification: NSNotification)
+    {
+        updateBaseLocationLookup()
+        Preferences.showOnMap = Preferences.ShowOnMap(rawValue: showOnMapMatrix.selectedRow + 1)!
+
+        NSApplication.sharedApplication().stopModal()
+    }
+    
     @IBAction func testOpenStreetMapHost(sender: AnyObject)
     {
         updateBaseLocationLookup()
@@ -72,12 +84,6 @@ class PreferencesWindowController : NSWindowController
     {
         movieVolumeLabel!.floatValue = movieVolume!.floatValue
         Preferences.videoPlayerVolume = movieVolume!.floatValue
-    }
-
-    func windowWillClose(notification: NSNotification)
-    {
-        updateBaseLocationLookup()
-        NSApplication.sharedApplication().stopModal()
     }
 
     func updateBaseLocationLookup()
