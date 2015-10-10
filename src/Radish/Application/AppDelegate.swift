@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
 
     let mediaProvider = MediaProvider()
+    private var hasInitialized = false
     private var filename:String?
 
 
@@ -29,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
         singleViewWindowController.initialize(mediaProvider)
         thumbnailViewWindowController.initialize(mediaProvider)
         fileInformationController.initialize()
+        hasInitialized = true
 
         if filename != nil {
             singleViewWindowController.openFolderOrFile(filename!)
@@ -37,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
     func application(sender: NSApplication, openFile filename: String) -> Bool
     {
-        if singleViewWindowController == nil {
+        if !hasInitialized {
             self.filename = filename
             return true
         }
