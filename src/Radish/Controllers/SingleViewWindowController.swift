@@ -35,6 +35,22 @@ class SingleViewWindowController: NSWindowController
     private var dateFormatter: NSDateFormatter? = nil
 
 
+    let keyMappings: [KeySequence: Selector] = [
+        KeySequence(modifierFlags: NSEventModifierFlags.FunctionKeyMask, chars: "\u{F729}"): "moveToFirstItem:",
+        KeySequence(modifierFlags: NSEventModifierFlags.FunctionKeyMask, chars: "\u{F72B}"): "moveToLastItem:",
+
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "1"): "moveToTenPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "2"): "moveToTwentyPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "3"): "moveToThirtyPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "4"): "moveToFortyPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "5"): "moveToFiftyPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "6"): "moveToSixtyPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "7"): "moveToSeventyPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "8"): "moveToEightyPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "9"): "moveToNinetyPercent:",
+    ]
+
+
     // MARK: Initialize
     func initialize(mediaProvider: MediaProvider)
     {
@@ -54,142 +70,6 @@ class SingleViewWindowController: NSWindowController
         Notifications.addObserver(self, selector: "mediaProviderUpdated:", name: Notifications.MediaProvider.UpdatedNotification, object: nil)
     }
 
-
-    // MARK: Actions
-    override func validateMenuItem(menuItem: NSMenuItem) -> Bool
-    {
-        switch MenuItemTag(rawValue: menuItem.tag)! {
-        case .AlwaysEnable:
-            return true
-        case .RequiresFile:
-            return mediaProvider?.mediaFiles.count > 0
-        }
-    }
-
-    @IBAction func openFolder(sender: AnyObject)
-    {
-        let folders = selectFoldersToAdd()
-        if (folders.urls == nil) { return }
-
-        currentMediaData = nil
-        currentFileIndex = 0;
-        mediaProvider!.clear()
-
-        addFolders(folders.urls, selected: folders.selected)
-    }
-
-    @IBAction func addFolder(sender: AnyObject)
-    {
-        if mediaProvider?.mediaFiles.count < 1 {
-            openFolder(sender)
-            return
-        }
-
-        let folders = selectFoldersToAdd()
-        if (folders.urls == nil) { return }
-
-        addFolders(folders.urls, selected: currentMediaData!.url)
-        updateStatusView()
-    }
-
-    @IBAction func refreshFiles(sender: AnyObject)
-    {
-        mediaProvider!.refresh()
-    }
-
-    @IBAction func nextFile(sender: AnyObject)
-    {
-        displayFileByIndex(currentFileIndex + 1)
-    }
-
-    @IBAction func previousFile(sender: AnyObject)
-    {
-        displayFileByIndex(currentFileIndex - 1)
-    }
-
-    @IBAction func revealInFinder(sender: AnyObject)
-    {
-        NSWorkspace.sharedWorkspace().selectFile(currentMediaData!.url!.path!, inFileViewerRootedAtPath: "")
-    }
-
-    @IBAction func setFileDateFromExifDate(sender: AnyObject)
-    {
-        let filename = currentMediaData!.url.path!
-        Logger.log("setFileDateFromExifDate: \(filename)")
-
-        let result = mediaProvider?.setFileDatesToExifDates([currentMediaData!])
-        if !result!.allSucceeded {
-            let alert = NSAlert()
-            alert.messageText = "Set file date of '\(filename)' failed: \(result!.errorMessage)."
-            alert.alertStyle = NSAlertStyle.WarningAlertStyle
-            alert.addButtonWithTitle("Close")
-            alert.runModal()
-        }
-    }
-
-    @IBAction func autoRotate(sender: AnyObject)
-    {
-        let filename = currentMediaData!.url.path!
-        Logger.log("autoRotate: \(filename)")
-
-        let jheadInvoker = JheadInvoker.autoRotate([filename])
-        if jheadInvoker.processInvoker.exitCode != 0 {
-            let alert = NSAlert()
-            alert.messageText = "Auto rotate of '\(filename)' failed: \(jheadInvoker.processInvoker.error)."
-            alert.alertStyle = NSAlertStyle.WarningAlertStyle
-            alert.addButtonWithTitle("Close")
-            alert.runModal()
-        }
-    }
-
-    @IBAction func moveToTrash(sender: AnyObject)
-    {
-        let url = currentMediaData!.url
-        Logger.log("moveToTrash: \((url?.path!)!)")
-
-        let folder = url?.URLByDeletingLastPathComponent?.path
-        let filename = (url?.lastPathComponent!)!
-        let succeeded = NSWorkspace.sharedWorkspace().performFileOperation(
-            NSWorkspaceRecycleOperation,
-            source: folder!,
-            destination: "",
-            files: [filename],
-            tag: nil)
-
-        if !succeeded {
-            let alert = NSAlert()
-            alert.messageText = "Failed moving '\(filename)' to trash."
-            alert.alertStyle = NSAlertStyle.WarningAlertStyle
-            alert.addButtonWithTitle("Close")
-            alert.runModal()
-        }
-        else {
-            NSSound(contentsOfFile: trashSoundPath, byReference: false)?.play()
-        }
-    }
-
-    @IBAction func showOnMap(sender: AnyObject)
-    {
-        Logger.log("showOnMap '\((currentMediaData?.locationString())!)'")
-        if let location = currentMediaData?.location {
-
-            var url = ""
-            switch Preferences.showOnMap {
-            case .Bing:
-                url = "http://www.bing.com/maps/default.aspx?cp=\(location.latitude)~\(location.longitude)&lvl=17&rtp=pos.\(location.latitude)_\(location.longitude)"
-            case .Google:
-                url = "http://maps.google.com/maps?q=\(location.latitude),\(location.longitude)"
-
-            case .OpenStreetMap:
-                url = "http://www.openstreetmap.org/?&mlat=\(location.latitude)&mlon=\(location.longitude)#map=18/\(location.latitude)/\(location.longitude)"
-            }
-
-            if url.characters.count > 0 {
-                NSWorkspace.sharedWorkspace().openURL(NSURL(string: url)!)
-            }
-
-        }
-    }
 
     // MARK: Notification handlers
     func viewMediaData(notification: NSNotification)
@@ -246,9 +126,14 @@ class SingleViewWindowController: NSWindowController
     func displayFileByIndex(index: Int)
     {
         if (mediaProvider!.mediaFiles.count > 0) {
+            let originalIndex = currentFileIndex
             currentFileIndex = index
             if (currentFileIndex < 0) { currentFileIndex = mediaProvider!.mediaFiles.count - 1; }
             if (currentFileIndex >= mediaProvider!.mediaFiles.count) { currentFileIndex = 0; }
+
+            if currentFileIndex == originalIndex {
+                return
+            }
 
             currentMediaData = mediaProvider!.mediaFiles[currentFileIndex]
         }
@@ -483,3 +368,4 @@ class SingleViewWindowController: NSWindowController
         return nil
     }
 }
+

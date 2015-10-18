@@ -128,18 +128,6 @@
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Search" tag="1" keyEquivalent="f" id="LdE-VM-AqQ"/>
                             <menuItem isSeparatorItem="YES" id="Kk0-7c-Q8P"/>
-                            <menuItem title="Next" tag="2" keyEquivalent="" id="log-Gs-n1Q">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="nextFile:" target="-1" id="6YT-cg-Mj6"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Previous" tag="2" keyEquivalent="" id="Io6-qz-eaJ">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="previousFile:" target="-1" id="erc-IG-Y4O"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="gqz-bj-OhC"/>
                             <menuItem title="Reveal in Finder" tag="2" id="eqj-aJ-5BS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -435,6 +423,19 @@ CA
                                     <action selector="showOnMap:" target="-1" id="VhT-mo-bxm"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Wkw-HY-Lef"/>
+                            <menuItem title="Next" tag="2" keyEquivalent="" id="log-Gs-n1Q">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="nextFile:" target="-1" id="6YT-cg-Mj6"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Previous" tag="2" keyEquivalent="" id="Io6-qz-eaJ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="previousFile:" target="-1" id="erc-IG-Y4O"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -608,7 +609,7 @@ CA
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="8Rt-uP-OO1">
-                            <rect key="frame" x="650" y="1" width="15" height="554"/>
+                            <rect key="frame" x="649" y="1" width="16" height="554"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>

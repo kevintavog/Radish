@@ -25,6 +25,8 @@
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
 		44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; };
 		44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		44C0A6461BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */; settings = {ASSET_TAGS = (); }; };
+		44C0A6491BD3F88800205175 /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0A6481BD3F88800205175 /* KeySequence.swift */; settings = {ASSET_TAGS = (); }; };
 		44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FF5FD21B97D69F00DC4947 /* Preferences.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,8 @@
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
 		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleViewWindowController.swift; path = Controllers/SingleViewWindowController.swift; sourceTree = "<group>"; };
 		44B540AE1B9E412A006BC28A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
+		44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SingleViewWindowController-MenuHandling.swift"; path = "Controllers/SingleViewWindowController-MenuHandling.swift"; sourceTree = "<group>"; };
+		44C0A6481BD3F88800205175 /* KeySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeySequence.swift; path = Controllers/KeySequence.swift; sourceTree = "<group>"; };
 		44F4200E1BA72CC800ADBB85 /* RangicCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RangicCore.xcodeproj; path = ../../RangicCore/source/RangicCore.xcodeproj; sourceTree = SOURCE_ROOT; };
 		44FF5FD21B97D69F00DC4947 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Core/Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,12 +139,14 @@
 		444E1A141B9942D1002AED02 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */,
-				442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */,
+				44620BE41B9D00760024F403 /* FileInformationController.swift */,
+				44C0A6481BD3F88800205175 /* KeySequence.swift */,
+				443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */,
 				444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */,
 				444322621B994A6D009043F4 /* RadishImageBrowserView.swift */,
-				44620BE41B9D00760024F403 /* FileInformationController.swift */,
-				443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */,
+				44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */,
+				44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */,
+				442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -261,11 +267,13 @@
 				44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */,
 				44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */,
 				442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */,
+				44C0A6491BD3F88800205175 /* KeySequence.swift in Sources */,
 				444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */,
 				44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */,
 				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
 				443402BC1BB63FFB0001D1A3 /* PreferencesWindowController.swift in Sources */,
 				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
+				44C0A6461BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

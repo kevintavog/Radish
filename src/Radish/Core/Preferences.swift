@@ -7,11 +7,12 @@ import RangicCore
 
 class Preferences : BasePreferences
 {
+    static private let BaseLocationLookupKey = "BaseLocationLookup"
+    static private let PageSizeKey = "PageSize"
+    static private let PlacenameLevelKey = "PlacenameLevel"
+    static private let ShowOnMapKey = "ShowOnMap"
     static private let ThumbnailZoomKey = "ThumbnailZoom"
     static private let VideoPlayerVolume = "VideoPlayerVolume"
-    static private let BaseLocationLookupKey = "BaseLocationLookup"
-    static private let ShowOnMapKey = "ShowOnMap"
-    static private let PlacenameLevelKey = "PlacenameLevel"
 
     enum ShowOnMap: Int
     {
@@ -26,11 +27,12 @@ class Preferences : BasePreferences
 
     static func setMissingDefaults()
     {
+        setDefaultValue("http://open.mapquestapi.com", key: BaseLocationLookupKey)
+        setDefaultValue(10, key: PageSizeKey)
+        setDefaultValue(PlacenameLevel.Medium.rawValue, key: PlacenameLevelKey)
+        setDefaultValue(ShowOnMap.OpenStreetMap.rawValue, key: ShowOnMapKey)
         setDefaultValue(Float(0.43), key: ThumbnailZoomKey)
         setDefaultValue(Float(0.5), key: VideoPlayerVolume)
-        setDefaultValue("http://open.mapquestapi.com", key: BaseLocationLookupKey)
-        setDefaultValue(ShowOnMap.OpenStreetMap.rawValue, key: ShowOnMapKey)
-        setDefaultValue(PlacenameLevel.Medium.rawValue, key: PlacenameLevelKey)
     }
 
     static var baseLocationLookup: String
@@ -39,24 +41,12 @@ class Preferences : BasePreferences
         set { super.setValue(newValue, key: BaseLocationLookupKey) }
     }
     
-    static var thumbnailZoom: Float
+    static var pageSize: Int
     {
-        get { return floatForKey(ThumbnailZoomKey) }
-        set { super.setValue(newValue, key: ThumbnailZoomKey) }
+        get { return intForKey(PageSizeKey) }
+        set { super.setValue(newValue, key: PageSizeKey) }
     }
-
-    static var videoPlayerVolume: Float
-    {
-        get { return floatForKey(VideoPlayerVolume) }
-        set { setValue(newValue, key: VideoPlayerVolume) }
-    }
-
-    static var showOnMap: ShowOnMap
-    {
-        get { return ShowOnMap(rawValue: intForKey(ShowOnMapKey))! }
-        set { super.setValue(newValue.rawValue, key: ShowOnMapKey) }
-    }
-
+    
     static var placenameLevel: PlacenameLevel
     {
         get { return PlacenameLevel(rawValue: intForKey(PlacenameLevelKey))! }
@@ -74,4 +64,23 @@ class Preferences : BasePreferences
             return .Minimal
         }
     }
+
+    static var showOnMap: ShowOnMap
+    {
+        get { return ShowOnMap(rawValue: intForKey(ShowOnMapKey))! }
+        set { super.setValue(newValue.rawValue, key: ShowOnMapKey) }
+    }
+    
+    static var thumbnailZoom: Float
+    {
+        get { return floatForKey(ThumbnailZoomKey) }
+        set { super.setValue(newValue, key: ThumbnailZoomKey) }
+    }
+    
+    static var videoPlayerVolume: Float
+    {
+        get { return floatForKey(VideoPlayerVolume) }
+        set { setValue(newValue, key: VideoPlayerVolume) }
+    }
+    
 }
