@@ -77,7 +77,7 @@ class SingleViewWindowController: NSWindowController
         if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
             if let mediaData = userInfo["MediaData"] {
                 if selectByUrl(mediaData.url, display: true) == nil {
-                    Logger.log("Unable to find \(mediaData.url)")
+                    Logger.warn("Unable to find \(mediaData.url)")
                 }
                 self.showWindow(nil)
             }
@@ -211,7 +211,7 @@ class SingleViewWindowController: NSWindowController
         imageViewer.hidden = true
 
         if media != nil {
-            Logger.log("Unhandled file: '\(media!.name)'")
+            Logger.warn("Unhandled file: '\(media!.name)'")
         }
     }
 

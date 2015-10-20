@@ -88,7 +88,7 @@ class FileInformationController : NSViewController
         case 3:
             return detail?.value == nil ? "" : (detail?.value)!
         default:
-            Logger.log("Unhandled file information tag: \(objectValueForTableColumn!.dataCell.tag())")
+            Logger.error("Unhandled file information tag: \(objectValueForTableColumn!.dataCell.tag())")
             return ""
         }
     }

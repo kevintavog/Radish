@@ -22,10 +22,12 @@ class AppDelegate: NSObject, NSApplicationDelegate
     // MARK: Application hooks
     func applicationDidFinishLaunching(aNotification: NSNotification)
     {
+        Logger.configure()
+
         Preferences.setMissingDefaults()
 
         OpenMapLookupProvider.BaseLocationLookup = Preferences.baseLocationLookup
-        Logger.log("Placename lookups via \(OpenMapLookupProvider.BaseLocationLookup)")
+        Logger.info("Placename lookups via \(OpenMapLookupProvider.BaseLocationLookup)")
 
         singleViewWindowController.initialize(mediaProvider)
         thumbnailViewWindowController.initialize(mediaProvider)
@@ -49,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
     func application(application: NSApplication, willPresentError error: NSError) -> NSError
     {
-        Logger.log("WillPresentError: \(error)")
+        Logger.error("willPresentError: \(error)")
         return error
     }
 

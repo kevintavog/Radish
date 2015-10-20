@@ -20,6 +20,10 @@
 		444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; };
 		444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; settings = {ASSET_TAGS = (); }; };
+		447CA6731BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */; };
+		447CA6741BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		447CA67F1BD5CF8300CA174C /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */; };
+		447CA6801BD5CF8300CA174C /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4499DE891BACE11800BB8D36 /* RangicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44734C451BA782C000C6675C /* RangicCore.framework */; };
 		4499DE8A1BACE2C000BB8D36 /* RangicCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44734C451BA782C000C6675C /* RangicCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
@@ -47,7 +51,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				447CA6741BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Embed Frameworks */,
 				4499DE8A1BACE2C000BB8D36 /* RangicCore.framework in Embed Frameworks */,
+				447CA6801BD5CF8300CA174C /* CocoaLumberjack.framework in Embed Frameworks */,
 				44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */,
 				444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */,
 			);
@@ -71,6 +77,8 @@
 		444322621B994A6D009043F4 /* RadishImageBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserView.swift; path = Controllers/RadishImageBrowserView.swift; sourceTree = "<group>"; };
 		444FBF911B9FD78D00A32991 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = Carthage/Build/Mac/Async.framework; sourceTree = "<group>"; };
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
+		447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/Mac/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
+		447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/Mac/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleViewWindowController.swift; path = Controllers/SingleViewWindowController.swift; sourceTree = "<group>"; };
 		44B540AE1B9E412A006BC28A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SingleViewWindowController-MenuHandling.swift"; path = "Controllers/SingleViewWindowController-MenuHandling.swift"; sourceTree = "<group>"; };
@@ -88,6 +96,8 @@
 				442232721B968DB2009123F0 /* Quartz.framework in Frameworks */,
 				44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */,
 				444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */,
+				447CA67F1BD5CF8300CA174C /* CocoaLumberjack.framework in Frameworks */,
+				447CA6731BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +119,8 @@
 				44F4200E1BA72CC800ADBB85 /* RangicCore.xcodeproj */,
 				444FBF911B9FD78D00A32991 /* Async.framework */,
 				44B540AE1B9E412A006BC28A /* Alamofire.framework */,
+				447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */,
+				447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */,
 				4442A01E1B926784007251E6 /* Products */,
 				0ADB30DD40705169F7CE942E /* Frameworks */,
 			);

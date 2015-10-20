@@ -110,7 +110,7 @@ extension SingleViewWindowController
                 self.performSelectorOnMainThread(selector, withObject: theEvent.window, waitUntilDone: true)
                 return
             } else {
-//                Logger.log("Unable to find match for \(keySequence)")
+//                Logger.debug("Unable to find match for \(keySequence)")
             }
         }
 
@@ -176,7 +176,7 @@ extension SingleViewWindowController
     @IBAction func setFileDateFromExifDate(sender: AnyObject)
     {
         let filename = currentMediaData!.url.path!
-        Logger.log("setFileDateFromExifDate: \(filename)")
+        Logger.info("setFileDateFromExifDate: \(filename)")
 
         let result = mediaProvider?.setFileDatesToExifDates([currentMediaData!])
         if !result!.allSucceeded {
@@ -191,7 +191,7 @@ extension SingleViewWindowController
     @IBAction func autoRotate(sender: AnyObject)
     {
         let filename = currentMediaData!.url.path!
-        Logger.log("autoRotate: \(filename)")
+        Logger.info("autoRotate: \(filename)")
 
         let jheadInvoker = JheadInvoker.autoRotate([filename])
         if jheadInvoker.processInvoker.exitCode != 0 {
@@ -206,7 +206,7 @@ extension SingleViewWindowController
     @IBAction func moveToTrash(sender: AnyObject)
     {
         let url = currentMediaData!.url
-        Logger.log("moveToTrash: \((url?.path!)!)")
+        Logger.info("moveToTrash: \((url?.path!)!)")
 
         let folder = url?.URLByDeletingLastPathComponent?.path
         let filename = (url?.lastPathComponent!)!
@@ -231,7 +231,7 @@ extension SingleViewWindowController
 
     @IBAction func showOnMap(sender: AnyObject)
     {
-        Logger.log("showOnMap '\((currentMediaData?.locationString())!)'")
+        Logger.info("showOnMap '\((currentMediaData?.locationString())!)'")
         if let location = currentMediaData?.location {
 
             var url = ""
