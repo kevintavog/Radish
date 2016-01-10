@@ -42,6 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
         if filename != nil {
             Logger.info("openFile post init: \(filename)")
+            singleViewWindowController.window?.makeKeyAndOrderFront(self)
             singleViewWindowController.openFolderOrFile(filename!)
         }
     }
