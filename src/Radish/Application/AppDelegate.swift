@@ -41,18 +41,20 @@ class AppDelegate: NSObject, NSApplicationDelegate
         hasInitialized = true
 
         if filename != nil {
+            Logger.info("openFile post init: \(filename)")
             singleViewWindowController.openFolderOrFile(filename!)
         }
     }
 
-    func application(sender: NSApplication, openFile filename: String) -> Bool
+    func application(sender: NSApplication, openFile: String) -> Bool
     {
         if !hasInitialized {
-            self.filename = filename
+            self.filename = openFile
             return true
         }
 
-        return singleViewWindowController.openFolderOrFile(filename)
+        Logger.info("openFile: \(openFile)")
+        return singleViewWindowController.openFolderOrFile(openFile)
     }
 
     func application(application: NSApplication, willPresentError error: NSError) -> NSError
