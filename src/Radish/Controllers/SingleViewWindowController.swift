@@ -360,6 +360,7 @@ class SingleViewWindowController: NSWindowController
                 currentMediaData = mediaFile
                 if display {
                     displayFileByIndex(currentFileIndex)
+                    displayCurrentFile()
                 }
                 return currentFileIndex
             }
