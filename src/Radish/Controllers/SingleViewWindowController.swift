@@ -36,18 +36,18 @@ class SingleViewWindowController: NSWindowController
 
 
     let keyMappings: [KeySequence: Selector] = [
-        KeySequence(modifierFlags: NSEventModifierFlags.FunctionKeyMask, chars: "\u{F729}"): "moveToFirstItem:",
-        KeySequence(modifierFlags: NSEventModifierFlags.FunctionKeyMask, chars: "\u{F72B}"): "moveToLastItem:",
+        KeySequence(modifierFlags: NSEventModifierFlags.FunctionKeyMask, chars: "\u{F729}"): #selector(SingleViewWindowController.moveToFirstItem(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.FunctionKeyMask, chars: "\u{F72B}"): #selector(SingleViewWindowController.moveToLastItem(_:)),
 
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "1"): "moveToTenPercent:",
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "2"): "moveToTwentyPercent:",
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "3"): "moveToThirtyPercent:",
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "4"): "moveToFortyPercent:",
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "5"): "moveToFiftyPercent:",
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "6"): "moveToSixtyPercent:",
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "7"): "moveToSeventyPercent:",
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "8"): "moveToEightyPercent:",
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "9"): "moveToNinetyPercent:",
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "1"): #selector(SingleViewWindowController.moveToTenPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "2"): #selector(SingleViewWindowController.moveToTwentyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "3"): #selector(SingleViewWindowController.moveToThirtyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "4"): #selector(SingleViewWindowController.moveToFortyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "5"): #selector(SingleViewWindowController.moveToFiftyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "6"): #selector(SingleViewWindowController.moveToSixtyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "7"): #selector(SingleViewWindowController.moveToSeventyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "8"): #selector(SingleViewWindowController.moveToEightyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "9"): #selector(SingleViewWindowController.moveToNinetyPercent(_:)),
     ]
 
 
@@ -66,8 +66,8 @@ class SingleViewWindowController: NSWindowController
 
         updateStatusView()
 
-        Notifications.addObserver(self, selector: "viewMediaData:", name: Notifications.SingleView.MediaData, object: nil)
-        Notifications.addObserver(self, selector: "mediaProviderUpdated:", name: Notifications.MediaProvider.UpdatedNotification, object: nil)
+        Notifications.addObserver(self, selector: #selector(SingleViewWindowController.viewMediaData(_:)), name: Notifications.SingleView.MediaData, object: nil)
+        Notifications.addObserver(self, selector: #selector(SingleViewWindowController.mediaProviderUpdated(_:)), name: Notifications.MediaProvider.UpdatedNotification, object: nil)
     }
 
 

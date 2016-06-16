@@ -34,7 +34,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
         imageBrowser.setZoomValue(Preferences.thumbnailZoom)
         imageBrowser.setIntercellSpacing(NSSize(width: 16, height: 16))
 
-        Notifications.addObserver(self, selector: "mediaUpdated:", name: Notifications.MediaProvider.UpdatedNotification, object: self.mediaProvider)
+        Notifications.addObserver(self, selector: #selector(ThumbnailViewWindowController.mediaUpdated(_:)), name: Notifications.MediaProvider.UpdatedNotification, object: self.mediaProvider)
     }
 
     // MARK: Actions
