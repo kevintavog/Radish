@@ -356,11 +356,12 @@ class SingleViewWindowController: NSWindowController
     {
         for (index, mediaFile) in mediaProvider!.mediaFiles.enumerate() {
             if mediaFile.url == url {
-                currentFileIndex = index
-                currentMediaData = mediaFile
                 if display {
-                    displayFileByIndex(currentFileIndex)
-                    displayCurrentFile()
+                    currentFileIndex = -1
+                    displayFileByIndex(index)
+                } else {
+                    currentFileIndex = index
+                    currentMediaData = mediaFile
                 }
                 return currentFileIndex
             }
