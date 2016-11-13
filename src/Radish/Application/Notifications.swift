@@ -6,14 +6,14 @@ import Foundation
 
 import RangicCore
 
-public class Notifications : CoreNotifications
+open class Notifications : CoreNotifications
 {
-    public class SingleView
+    open class SingleView
     {
         static let MediaData = "SingleView.MediaData"
     }
 
-    public class Selection
+    open class Selection
     {
         static let MediaData = "Selection.MediaData"
     }

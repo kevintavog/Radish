@@ -13,7 +13,7 @@ import Async
 
 enum MenuItemTag: Int
 {
-    case AlwaysEnable = 1, RequiresFile = 2
+    case alwaysEnable = 1, requiresFile = 2
 }
 
 class SingleViewWindowController: NSWindowController
@@ -32,36 +32,36 @@ class SingleViewWindowController: NSWindowController
     var mediaProvider: MediaProvider?
     var currentFileIndex = 0
     var currentMediaData: MediaData?
-    private var dateFormatter: NSDateFormatter? = nil
+    fileprivate var dateFormatter: DateFormatter? = nil
 
 
     let keyMappings: [KeySequence: Selector] = [
-        KeySequence(modifierFlags: NSEventModifierFlags.FunctionKeyMask, chars: "\u{F729}"): #selector(SingleViewWindowController.moveToFirstItem(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.FunctionKeyMask, chars: "\u{F72B}"): #selector(SingleViewWindowController.moveToLastItem(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.function, chars: "\u{F729}"): #selector(SingleViewWindowController.moveToFirstItem(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.function, chars: "\u{F72B}"): #selector(SingleViewWindowController.moveToLastItem(_:)),
 
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "1"): #selector(SingleViewWindowController.moveToTenPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "2"): #selector(SingleViewWindowController.moveToTwentyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "3"): #selector(SingleViewWindowController.moveToThirtyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "4"): #selector(SingleViewWindowController.moveToFortyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "5"): #selector(SingleViewWindowController.moveToFiftyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "6"): #selector(SingleViewWindowController.moveToSixtyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "7"): #selector(SingleViewWindowController.moveToSeventyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "8"): #selector(SingleViewWindowController.moveToEightyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.CommandKeyMask, chars: "9"): #selector(SingleViewWindowController.moveToNinetyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "1"): #selector(SingleViewWindowController.moveToTenPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "2"): #selector(SingleViewWindowController.moveToTwentyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "3"): #selector(SingleViewWindowController.moveToThirtyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "4"): #selector(SingleViewWindowController.moveToFortyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "5"): #selector(SingleViewWindowController.moveToFiftyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "6"): #selector(SingleViewWindowController.moveToSixtyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "7"): #selector(SingleViewWindowController.moveToSeventyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "8"): #selector(SingleViewWindowController.moveToEightyPercent(_:)),
+        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "9"): #selector(SingleViewWindowController.moveToNinetyPercent(_:)),
     ]
 
 
     // MARK: Initialize
-    func initialize(mediaProvider: MediaProvider)
+    func initialize(_ mediaProvider: MediaProvider)
     {
         self.mediaProvider = mediaProvider
 
-        window?.backgroundColor = NSColor.darkGrayColor()
+        window?.backgroundColor = NSColor.darkGray
 
-        videoPlayer.hidden = true
-        imageViewer.hidden = true
+        videoPlayer.isHidden = true
+        imageViewer.isHidden = true
 
-        dateFormatter = NSDateFormatter()
+        dateFormatter = DateFormatter()
         dateFormatter!.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
         updateStatusView()
@@ -72,7 +72,7 @@ class SingleViewWindowController: NSWindowController
 
 
     // MARK: Notification handlers
-    func viewMediaData(notification: NSNotification)
+    func viewMediaData(_ notification: Notification)
     {
         if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
             if let mediaData = userInfo["MediaData"] {
@@ -84,7 +84,7 @@ class SingleViewWindowController: NSWindowController
         }
     }
 
-    func mediaProviderUpdated(notification: NSNotification)
+    func mediaProviderUpdated(_ notification: Notification)
     {
         // The media files have been updated (added to, removed from or an instance updated).
         // This may cause our current selection to change - or the currently displayed metadata to change
@@ -123,7 +123,7 @@ class SingleViewWindowController: NSWindowController
 
 
     // MARK: Display files
-    func displayFileByIndex(index: Int)
+    func displayFileByIndex(_ index: Int)
     {
         if (mediaProvider!.mediaFiles.count > 0) {
             let originalIndex = currentFileIndex
@@ -153,9 +153,9 @@ class SingleViewWindowController: NSWindowController
         }
 
         switch currentMediaData!.type! {
-        case .Image:
+        case .image:
             displayImage(currentMediaData!)
-        case .Video:
+        case .video:
             displayVideo(currentMediaData!)
         default:
             displayUnsupportedFileType(currentMediaData)
@@ -165,20 +165,20 @@ class SingleViewWindowController: NSWindowController
         Notifications.postNotification(Notifications.Selection.MediaData, object: self, userInfo: userInfo)
     }
 
-    func displayImage(media:MediaData)
+    func displayImage(_ media:MediaData)
     {
         stopVideoPlayer()
 
         imageViewer.image = nil
-        if (imageViewer.hidden) {
-            imageViewer.hidden = false
-            videoPlayer.hidden = true
+        if (imageViewer.isHidden) {
+            imageViewer.isHidden = false
+            videoPlayer.isHidden = true
         }
 
         Async.background {
-            let imageSource = CGImageSourceCreateWithURL(media.url, nil)
+            let imageSource = CGImageSourceCreateWithURL(media.url as CFURL, nil)
             let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
-            let nsImage = NSImage(CGImage: image!, size: NSSize(width: CGImageGetWidth(image), height: CGImageGetHeight(image)))
+            let nsImage = NSImage(cgImage: image!, size: NSSize(width: (image?.width)!, height: (image?.height)!))
 
             Async.main {
                 self.imageViewer.image = nsImage;
@@ -186,29 +186,29 @@ class SingleViewWindowController: NSWindowController
         }
     }
 
-    func displayVideo(media:MediaData)
+    func displayVideo(_ media:MediaData)
     {
         stopVideoPlayer()
 
-        videoPlayer.player = AVPlayer(URL: media.url)
+        videoPlayer.player = AVPlayer(url: media.url)
         videoPlayer.player?.volume = Preferences.videoPlayerVolume
 
-        if (videoPlayer.hidden) {
-            videoPlayer.hidden = false
-            imageViewer.hidden = true
+        if (videoPlayer.isHidden) {
+            videoPlayer.isHidden = false
+            imageViewer.isHidden = true
             imageViewer.image = nil
         }
 
-        videoPlayer.player?.addObserver(self, forKeyPath: "volume", options: .New, context: nil)
+        videoPlayer.player?.addObserver(self, forKeyPath: "volume", options: .new, context: nil)
 
         videoPlayer.player?.play()
     }
 
-    func displayUnsupportedFileType(media:MediaData!)
+    func displayUnsupportedFileType(_ media:MediaData!)
     {
         videoPlayer.player?.pause()
-        videoPlayer.hidden = true
-        imageViewer.hidden = true
+        videoPlayer.isHidden = true
+        imageViewer.isHidden = true
 
         if media != nil {
             Logger.warn("Unhandled file: '\(media!.name)'")
@@ -225,16 +225,16 @@ class SingleViewWindowController: NSWindowController
         }
     }
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
     {
         switch keyPath! {
         case "volume":
-            if let volume = change![NSKeyValueChangeNewKey] as? Float {
+            if let volume = change![NSKeyValueChangeKey.newKey] as? Float {
                 Preferences.videoPlayerVolume = volume
             }
 
         default:
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 
@@ -257,23 +257,23 @@ class SingleViewWindowController: NSWindowController
         else {
             let media = currentMediaData!
             statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider!.mediaFiles.count)"
-            statusFilename.stringValue = "\(media.name)"
+            statusFilename.stringValue = "\(media.name!)"
             statusLocation.stringValue = media.locationString()
             statusKeywords.stringValue = media.keywordsString()
 
-            let timestamp = "\(dateFormatter!.stringFromDate(media.timestamp!))"
+            let timestamp = "\(dateFormatter!.string(from: media.timestamp!))"
             if media.doFileAndExifTimestampsMatch() {
                 statusTimestamp.stringValue = timestamp
             }
             else {
                 let fullRange = NSRange(location: 0, length: timestamp.characters.count)
                 let attributeString = NSMutableAttributedString(string: timestamp)
-                attributeString.addAttribute(NSForegroundColorAttributeName, value: NSColor.yellowColor(), range: fullRange)
-                attributeString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: fullRange)
+                attributeString.addAttribute(NSForegroundColorAttributeName, value: NSColor.yellow, range: fullRange)
+                attributeString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: fullRange)
                 statusTimestamp.attributedStringValue = attributeString
             }
 
-            window?.title = "Radish - \(media.name)"
+            window?.title = "Radish - \(media.name!)"
 
             if media.location != nil {
                 Async.background {
@@ -289,10 +289,10 @@ class SingleViewWindowController: NSWindowController
     }
 
     // MARK: add/open folder helpers
-    func openFolderOrFile(filename: String) -> Bool
+    func openFolderOrFile(_ filename: String) -> Bool
     {
         var isFolder:ObjCBool = false
-        let fileExists = NSFileManager.defaultManager().fileExistsAtPath(filename, isDirectory:&isFolder)
+        let fileExists = FileManager.default.fileExists(atPath: filename, isDirectory:&isFolder)
         if !fileExists {
             return false
         }
@@ -301,60 +301,60 @@ class SingleViewWindowController: NSWindowController
         currentFileIndex = 0;
         mediaProvider!.clear()
 
-        let url = [NSURL(fileURLWithPath: filename)]
+        let url = [URL(fileURLWithPath: filename)]
         addFolders(url, selected: url[0])
         return true
     }
 
-    func selectFoldersToAdd() -> (urls: [NSURL]!, selected: NSURL!)
+    func selectFoldersToAdd() -> (urls: [URL]?, selected: URL?)
     {
         let dialog = NSOpenPanel()
 
         dialog.allowedFileTypes = SupportedMediaTypes.all()
         dialog.canChooseDirectories = true
         dialog.allowsMultipleSelection = true
-        if 1 != dialog.runModal() || dialog.URLs.count < 1 {
+        if 1 != dialog.runModal() || dialog.urls.count < 1 {
             return (nil, nil)
         }
 
 
-        let localFile = dialog.URLs[0]
+        let localFile = dialog.urls[0]
         var isFolder:ObjCBool = false
-        let fileExists = NSFileManager.defaultManager().fileExistsAtPath(localFile.path!, isDirectory:&isFolder)
+        let fileExists = FileManager.default.fileExists(atPath: localFile.path, isDirectory:&isFolder)
         if !fileExists {
             return (nil, nil)
         }
 
-        return (dialog.URLs, localFile)
+        return (dialog.urls, localFile)
     }
 
-    func addFolders(urls: [NSURL], selected: NSURL!)
+    func addFolders(_ urls: [URL], selected: URL!)
     {
         for folderUrl in urls {
             var isFolder: ObjCBool = false
-            let fileExists = NSFileManager.defaultManager().fileExistsAtPath(folderUrl.path!, isDirectory:&isFolder)
+            let fileExists = FileManager.default.fileExists(atPath: folderUrl.path, isDirectory:&isFolder)
             if !fileExists {
                 continue
             }
 
             var url = folderUrl
-            if !isFolder {
-                url = folderUrl.URLByDeletingLastPathComponent!
+            if !isFolder.boolValue {
+                url = folderUrl.deletingLastPathComponent()
             }
 
-            mediaProvider!.addFolder(url.path!)
+            mediaProvider!.addFolder(url.path)
         }
 
         if selected != nil {
-            selectByUrl(selected, display: true)
+            let _ = selectByUrl(selected, display: true)
         }
 
-        NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(urls[0])
+        NSDocumentController.shared().noteNewRecentDocumentURL(urls[0])
     }
 
-    func selectByUrl(url: NSURL, display: Bool) -> Int?
+    func selectByUrl(_ url: URL, display: Bool) -> Int?
     {
-        for (index, mediaFile) in mediaProvider!.mediaFiles.enumerate() {
+        for (index, mediaFile) in mediaProvider!.mediaFiles.enumerated() {
             if mediaFile.url == url {
                 if display {
                     currentFileIndex = -1

@@ -12,13 +12,13 @@ class FileInformationController : NSViewController
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var panel: NSPanel!
 
-    private var currentMediaData: MediaData?
+    fileprivate var currentMediaData: MediaData?
 
 
     // MARK: Initialize
     func initialize()
     {
-        tableView.backgroundColor = NSColor.clearColor()
+        tableView.backgroundColor = NSColor.clear
         Notifications.addObserver(self, selector: #selector(FileInformationController.fileSelected(_:)), name: Notifications.Selection.MediaData, object: nil)
         Notifications.addObserver(self, selector: #selector(FileInformationController.detailsUpdated(_:)), name: CoreNotifications.MediaProvider.DetailsAvailable, object: nil)
     }
@@ -27,7 +27,7 @@ class FileInformationController : NSViewController
     // MARK: actions
     func toggleVisibility()
     {
-        if panel.visible {
+        if panel.isVisible {
             panel.orderOut(self)
         }
         else {
@@ -38,24 +38,22 @@ class FileInformationController : NSViewController
 
 
     // MARK: Notification handlers
-    func fileSelected(notification: NSNotification)
+    func fileSelected(_ notification: Notification)
     {
         if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
             if let mediaData = userInfo["MediaData"] {
                 currentMediaData = mediaData
-                if panel.visible {
+                if panel.isVisible {
                     updateView()
                 }
             }
         }
     }
 
-    func detailsUpdated(notification: NSNotification)
+    func detailsUpdated(_ notification: Notification)
     {
-        if let notObject = notification.object {
-            if notObject === currentMediaData {
-                tableView.reloadData()
-            }
+        if let _ = notification.object as? MediaData {
+            tableView.reloadData()
         }
     }
 
@@ -72,15 +70,15 @@ class FileInformationController : NSViewController
     }
 
     // MARK: table view data
-    func numberOfRowsInTableView(tv: NSTableView) -> Int
+    func numberOfRowsInTableView(_ tv: NSTableView) -> Int
     {
         return currentMediaData == nil ? 0 : (currentMediaData?.details.count)!
     }
 
-    func tableView(tv: NSTableView, objectValueForTableColumn: NSTableColumn?, row: Int) -> String
+    func tableView(_ tv: NSTableView, objectValueForTableColumn: NSTableColumn?, row: Int) -> String
     {
         let detail = currentMediaData?.details[row]
-        switch objectValueForTableColumn!.dataCell.tag() {
+        switch (objectValueForTableColumn!.dataCell as AnyObject).tag {
         case 1:
             return detail?.category == nil ? "" : (detail?.category)!
         case 2:
@@ -88,21 +86,21 @@ class FileInformationController : NSViewController
         case 3:
             return detail?.value == nil ? "" : (detail?.value)!
         default:
-            Logger.error("Unhandled file information tag: \(objectValueForTableColumn!.dataCell.tag())")
+            Logger.error("Unhandled file information tag: \((objectValueForTableColumn!.dataCell as AnyObject).tag)")
             return ""
         }
     }
 
-    func tableView(tableView: NSTableView, isGroupRow row: Int) -> Bool
+    func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool
     {
         return currentMediaData?.details[row].category != nil
     }
 
-    func tableView(tableView: NSTableView, willDisplayCell cell: AnyObject, forTableColumn tableColumn: NSTableColumn?, row: Int)
+    func tableView(_ tableView: NSTableView, willDisplayCell cell: AnyObject, forTableColumn tableColumn: NSTableColumn?, row: Int)
     {
         let textCell = cell as? NSTextFieldCell
         if textCell != nil {
-            textCell!.textColor = NSColor.whiteColor()
+            textCell!.textColor = NSColor.white
             textCell!.drawsBackground = false
 
             // Force a redraw, otherwise the color for column 1 doesn't update properly

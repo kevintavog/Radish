@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		442232721B968DB2009123F0 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 442232711B968DB2009123F0 /* Quartz.framework */; };
-		442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */; settings = {ASSET_TAGS = (); }; };
-		443402B91BB63EC80001D1A3 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443402B71BB63EC80001D1A3 /* Preferences.xib */; settings = {ASSET_TAGS = (); }; };
-		443402BC1BB63FFB0001D1A3 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */; settings = {ASSET_TAGS = (); }; };
-		443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D90891B9CD55F0022A268 /* Notifications.swift */; settings = {ASSET_TAGS = (); }; };
+		442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */; };
+		443402B91BB63EC80001D1A3 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443402B71BB63EC80001D1A3 /* Preferences.xib */; };
+		443402BC1BB63FFB0001D1A3 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */; };
+		443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D90891B9CD55F0022A268 /* Notifications.swift */; };
 		4442A0211B926784007251E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442A0201B926784007251E6 /* AppDelegate.swift */; };
 		4442A0231B926784007251E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0221B926784007251E6 /* Assets.xcassets */; };
 		4442A0261B926784007251E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0241B926784007251E6 /* MainMenu.xib */; };
-		444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */; settings = {ASSET_TAGS = (); }; };
-		444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322621B994A6D009043F4 /* RadishImageBrowserView.swift */; settings = {ASSET_TAGS = (); }; };
+		444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */; };
+		444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322621B994A6D009043F4 /* RadishImageBrowserView.swift */; };
 		444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; };
 		444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; settings = {ASSET_TAGS = (); }; };
+		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; };
 		447CA6731BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */; };
 		447CA6741BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		447CA67F1BD5CF8300CA174C /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */; };
@@ -27,11 +27,13 @@
 		4499DE891BACE11800BB8D36 /* RangicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44734C451BA782C000C6675C /* RangicCore.framework */; };
 		4499DE8A1BACE2C000BB8D36 /* RangicCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44734C451BA782C000C6675C /* RangicCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
+		44B2B82F1DD7EB2600B1A42A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2B82E1DD7EB2600B1A42A /* SwiftyJSON.framework */; };
+		44B2B8301DD7EB2600B1A42A /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2B82E1DD7EB2600B1A42A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; };
 		44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		44C0A6461BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */; settings = {ASSET_TAGS = (); }; };
-		44C0A6491BD3F88800205175 /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0A6481BD3F88800205175 /* KeySequence.swift */; settings = {ASSET_TAGS = (); }; };
-		44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FF5FD21B97D69F00DC4947 /* Preferences.swift */; settings = {ASSET_TAGS = (); }; };
+		44C0A6461BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */; };
+		44C0A6491BD3F88800205175 /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0A6481BD3F88800205175 /* KeySequence.swift */; };
+		44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FF5FD21B97D69F00DC4947 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,7 @@
 			files = (
 				447CA6741BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Embed Frameworks */,
 				4499DE8A1BACE2C000BB8D36 /* RangicCore.framework in Embed Frameworks */,
+				44B2B8301DD7EB2600B1A42A /* SwiftyJSON.framework in Embed Frameworks */,
 				447CA6801BD5CF8300CA174C /* CocoaLumberjack.framework in Embed Frameworks */,
 				44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */,
 				444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */,
@@ -80,6 +83,7 @@
 		447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/Mac/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/Mac/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleViewWindowController.swift; path = Controllers/SingleViewWindowController.swift; sourceTree = "<group>"; };
+		44B2B82E1DD7EB2600B1A42A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
 		44B540AE1B9E412A006BC28A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SingleViewWindowController-MenuHandling.swift"; path = "Controllers/SingleViewWindowController-MenuHandling.swift"; sourceTree = "<group>"; };
 		44C0A6481BD3F88800205175 /* KeySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeySequence.swift; path = Controllers/KeySequence.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 				442232721B968DB2009123F0 /* Quartz.framework in Frameworks */,
 				44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */,
 				444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */,
+				44B2B82F1DD7EB2600B1A42A /* SwiftyJSON.framework in Frameworks */,
 				447CA67F1BD5CF8300CA174C /* CocoaLumberjack.framework in Frameworks */,
 				447CA6731BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Frameworks */,
 			);
@@ -121,6 +126,7 @@
 				44B540AE1B9E412A006BC28A /* Alamofire.framework */,
 				447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */,
 				447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */,
+				44B2B82E1DD7EB2600B1A42A /* SwiftyJSON.framework */,
 				4442A01E1B926784007251E6 /* Products */,
 				0ADB30DD40705169F7CE942E /* Frameworks */,
 			);
@@ -216,11 +222,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = rangic.com;
 				TargetAttributes = {
 					4442A01C1B926784007251E6 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -325,8 +332,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -348,7 +357,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -369,8 +378,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -386,9 +397,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -408,6 +420,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -425,6 +438,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

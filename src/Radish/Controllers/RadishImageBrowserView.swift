@@ -10,22 +10,22 @@ protocol RadishImageBrowserViewDelegate: class
     func viewSelectedFile()
 }
 
-public class RadishImageBrowserView : IKImageBrowserView
+open class RadishImageBrowserView : IKImageBrowserView
 {
     weak var viewFileDelegate:RadishImageBrowserViewDelegate?
 
 
-    public override func newCellForRepresentedItem(item: AnyObject!) -> IKImageBrowserCell!
+    open override func newCell(forRepresentedItem item: Any!) -> IKImageBrowserCell!
     {
         return RadishImageBrowserCell()
     }
 
-    public override func performKeyEquivalent(theEvent: NSEvent) -> Bool {
+    open override func performKeyEquivalent(with theEvent: NSEvent) -> Bool {
 
         // Return (no modifiers) means open the currently selected item in the single view
         if (theEvent.keyCode == 36 || theEvent.keyCode == 76) &&
-            ((theEvent.modifierFlags.rawValue & NSEventModifierFlags.DeviceIndependentModifierFlagsMask.rawValue) == 0) {
-            if !super.performKeyEquivalent(theEvent) {
+            ((theEvent.modifierFlags.rawValue & NSEventModifierFlags.deviceIndependentFlagsMask.rawValue) == 0) {
+            if !super.performKeyEquivalent(with: theEvent) {
 
                 if selectionIndexes().count == 1 {
                     viewFileDelegate?.viewSelectedFile()
@@ -33,7 +33,7 @@ public class RadishImageBrowserView : IKImageBrowserView
                 }
             }
         }
-        return super.performKeyEquivalent(theEvent)
+        return super.performKeyEquivalent(with: theEvent)
     }
 
 }

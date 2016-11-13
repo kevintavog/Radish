@@ -16,17 +16,17 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
 
     let mediaProvider = MediaProvider()
-    private var hasInitialized = false
-    private var filename:String?
+    fileprivate var hasInitialized = false
+    fileprivate var filename:String?
 
 
     // MARK: Application hooks
-    func applicationDidFinishLaunching(aNotification: NSNotification)
+    func applicationDidFinishLaunching(_ aNotification: Notification)
     {
         #if DEBUG
-            defaultDebugLevel = DDLogLevel.Verbose
+            defaultDebugLevel = DDLogLevel.verbose
             #else
-            defaultDebugLevel = DDLogLevel.Info
+            defaultDebugLevel = DDLogLevel.info
         #endif
         Logger.configure()
 
@@ -43,11 +43,11 @@ class AppDelegate: NSObject, NSApplicationDelegate
         if filename != nil {
             Logger.info("openFile post init: \(filename)")
             singleViewWindowController.window?.makeKeyAndOrderFront(self)
-            singleViewWindowController.openFolderOrFile(filename!)
+            let _ = singleViewWindowController.openFolderOrFile(filename!)
         }
     }
 
-    func application(sender: NSApplication, openFile: String) -> Bool
+    func application(_ sender: NSApplication, openFile: String) -> Bool
     {
         if !hasInitialized {
             self.filename = openFile
@@ -58,31 +58,31 @@ class AppDelegate: NSObject, NSApplicationDelegate
         return singleViewWindowController.openFolderOrFile(openFile)
     }
 
-    func application(application: NSApplication, willPresentError error: NSError) -> NSError
+    func application(_ application: NSApplication, willPresentError error: Error) -> Error
     {
         Logger.error("willPresentError: \(error)")
         return error
     }
 
     // MARK: IBActions
-    @IBAction func viewThumbnails(sender: AnyObject)
+    @IBAction func viewThumbnails(_ sender: AnyObject)
     {
         thumbnailViewWindowController.showWindow(sender)
     }
 
-    @IBAction func viewImage(sender: AnyObject)
+    @IBAction func viewImage(_ sender: AnyObject)
     {
         singleViewWindowController.showWindow(sender)
     }
 
-    @IBAction func toggleFileInformation(sender: AnyObject)
+    @IBAction func toggleFileInformation(_ sender: AnyObject)
     {
         fileInformationController.toggleVisibility()
     }
 
-    @IBAction func preferences(sender: AnyObject)
+    @IBAction func preferences(_ sender: AnyObject)
     {
         let preferencesController = PreferencesWindowController(windowNibName: "Preferences")
-        NSApplication.sharedApplication().runModalForWindow(preferencesController.window!)
+        NSApplication.shared().runModal(for: preferencesController.window!)
     }
 }

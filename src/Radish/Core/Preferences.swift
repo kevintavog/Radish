@@ -7,21 +7,21 @@ import RangicCore
 
 class Preferences : BasePreferences
 {
-    static private let BaseLocationLookupKey = "BaseLocationLookup"
-    static private let PageSizeKey = "PageSize"
-    static private let PlacenameLevelKey = "PlacenameLevel"
-    static private let ShowOnMapKey = "ShowOnMap"
-    static private let ThumbnailZoomKey = "ThumbnailZoom"
-    static private let VideoPlayerVolume = "VideoPlayerVolume"
+    static fileprivate let BaseLocationLookupKey = "BaseLocationLookup"
+    static fileprivate let PageSizeKey = "PageSize"
+    static fileprivate let PlacenameLevelKey = "PlacenameLevel"
+    static fileprivate let ShowOnMapKey = "ShowOnMap"
+    static fileprivate let ThumbnailZoomKey = "ThumbnailZoom"
+    static fileprivate let VideoPlayerVolume = "VideoPlayerVolume"
 
     enum ShowOnMap: Int
     {
-        case Bing = 1, OpenStreetMap = 2, Google = 3
+        case bing = 1, openStreetMap = 2, google = 3
     }
 
     enum PlacenameLevel: Int
     {
-        case Short = 1, Medium = 2, Long = 3
+        case short = 1, medium = 2, long = 3
     }
 
 
@@ -29,8 +29,8 @@ class Preferences : BasePreferences
     {
         setDefaultValue("http://open.mapquestapi.com", key: BaseLocationLookupKey)
         setDefaultValue(10, key: PageSizeKey)
-        setDefaultValue(PlacenameLevel.Medium.rawValue, key: PlacenameLevelKey)
-        setDefaultValue(ShowOnMap.OpenStreetMap.rawValue, key: ShowOnMapKey)
+        setDefaultValue(PlacenameLevel.medium.rawValue, key: PlacenameLevelKey)
+        setDefaultValue(ShowOnMap.openStreetMap.rawValue, key: ShowOnMapKey)
         setDefaultValue(Float(0.43), key: ThumbnailZoomKey)
         setDefaultValue(Float(0.5), key: VideoPlayerVolume)
     }
@@ -56,12 +56,12 @@ class Preferences : BasePreferences
     static var placenameFilter: PlaceNameFilter
     {
         switch placenameLevel {
-        case .Short:
-            return .Standard
-        case .Medium:
-            return .Detailed
-        case .Long:
-            return .Minimal
+        case .short:
+            return .standard
+        case .medium:
+            return .detailed
+        case .long:
+            return .minimal
         }
     }
 

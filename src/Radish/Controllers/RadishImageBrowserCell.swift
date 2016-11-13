@@ -3,28 +3,29 @@
 //
 
 import Quartz
+import RangicCore
 
-public class RadishImageBrowserCell : IKImageBrowserCell
+open class RadishImageBrowserCell : IKImageBrowserCell
 {
-    static private var lineHeight: CGFloat?
-    static private let textAttrs = [NSForegroundColorAttributeName : NSColor.whiteColor(), NSFontAttributeName : NSFont.labelFontOfSize(14)]
-    static private let badDateAttrs = [
-        NSForegroundColorAttributeName : NSColor.yellowColor(),
-        NSFontAttributeName : NSFont.labelFontOfSize(14),
-        NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
-    ]
+    static fileprivate var lineHeight: CGFloat?
+    static fileprivate let textAttrs = [NSForegroundColorAttributeName : NSColor.white, NSFontAttributeName : NSFont.labelFont(ofSize: 14)]
+    static fileprivate let badDateAttrs = [
+        NSForegroundColorAttributeName : NSColor.yellow,
+        NSFontAttributeName : NSFont.labelFont(ofSize: 14),
+        NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue
+    ] as [String : Any]
 
 
     // MARK: layer for type
-    public override func layerForType(type: String!) -> CALayer!
+    open override func layer(forType type: String!) -> CALayer!
     {
-        switch (type)
+        switch (type!)
         {
         case IKImageBrowserCellBackgroundLayer:
             if cellState() != IKImageStateReady { return nil }
 
             let layer = CALayer()
-            layer.frame = CGRectMake(0, 0, frame().width, frame().height)
+            layer.frame = CGRect(x: 0, y: 0, width: frame().width, height: frame().height)
 
             let photoBackgroundLayer = CALayer()
             photoBackgroundLayer.frame = layer.frame
@@ -32,9 +33,9 @@ public class RadishImageBrowserCell : IKImageBrowserCell
             let strokeComponents: [CGFloat] = [0.2, 0.2, 0.2, 0.5]
             let colorSpace = CGColorSpaceCreateDeviceRGB()
 
-            photoBackgroundLayer.backgroundColor = NSColor.darkGrayColor().CGColor
+            photoBackgroundLayer.backgroundColor = NSColor.darkGray.cgColor
 
-            let borderColor = CGColorCreate(colorSpace, strokeComponents)
+            let borderColor = CGColor(colorSpace: colorSpace, components: strokeComponents)
             photoBackgroundLayer.borderColor = borderColor
 
             photoBackgroundLayer.borderWidth = 1
@@ -48,27 +49,50 @@ public class RadishImageBrowserCell : IKImageBrowserCell
 
         case IKImageBrowserCellForegroundLayer:
             if cellState() != IKImageStateReady { return nil }
+            let lineHeight = 20
+            let lineOffset = 2
+            let item = representedItem() as! ThumbnailViewItem
 
-            let layer = CALayer()
-            layer.frame = CGRectMake(0, 0, frame().width, frame().height)
-            layer.delegate = self
-            layer.setNeedsDisplay()
+            let outerLayer = CALayer()
+            outerLayer.frame = CGRect(x: 0, y: 0, width: frame().width, height: frame().height)
+            outerLayer.contentsScale = (self.imageBrowserView().window?.backingScaleFactor)!
+            
+            let nameLayer = CATextLayer()
+            nameLayer.frame = CGRect(x: 4, y: lineOffset, width: Int(frame().width), height: lineHeight)
+            nameLayer.fontSize = 14
+            nameLayer.contentsScale = (self.imageBrowserView().window?.backingScaleFactor)!
 
-            return layer;
+            let dateLayer = CATextLayer()
+            dateLayer.frame = CGRect(x: 4, y: lineOffset + lineHeight, width: Int(frame().width), height: lineHeight)
+            dateLayer.fontSize = 15
+            dateLayer.contentsScale = (self.imageBrowserView().window?.backingScaleFactor)!
+            if !item.mediaData.doFileAndExifTimestampsMatch() {
+                dateLayer.foregroundColor = NSColor.yellow.cgColor
+            }
+
+
+            nameLayer.string = item.mediaData.name
+            dateLayer.string = item.mediaData.formattedTime()
+
+            outerLayer.addSublayer(nameLayer)
+            outerLayer.addSublayer(dateLayer)
+            outerLayer.setNeedsDisplay()
+
+            return outerLayer;
 
 
         case IKImageBrowserCellSelectionLayer:
             let layer = CALayer()
-            layer.frame = CGRectMake(0, 0, frame().width, frame().height)
+            layer.frame = CGRect(x: 0, y: 0, width: frame().width, height: frame().height)
 
             let fillComponents: [CGFloat] = [0.9, 0.9, 0.9, 0.3]
             let strokeComponents: [CGFloat] = [0.9, 0.9, 0.9, 0.8]
 
             let colorSpace = CGColorSpaceCreateDeviceRGB()
-            var color = CGColorCreate(colorSpace, fillComponents)
+            var color = CGColor(colorSpace: colorSpace, components: fillComponents)
             layer.backgroundColor = color
 
-            color = CGColorCreate(colorSpace, strokeComponents)
+            color = CGColor(colorSpace: colorSpace, components: strokeComponents)
             layer.borderColor = color
 
             layer.borderWidth = 1.0
@@ -78,51 +102,13 @@ public class RadishImageBrowserCell : IKImageBrowserCell
 
 
         default:
-            return super.layerForType(type)
+            return super.layer(forType: type)
         }
     }
 
-
-    // MARK: drawLayer
-    override public func drawLayer(layer: CALayer, inContext ctx: CGContext)
-    {
-        NSGraphicsContext.saveGraphicsState()
-
-        let gc = NSGraphicsContext(CGContext:ctx, flipped:false)
-        NSGraphicsContext.setCurrentContext(gc)
-
-
-        let item = representedItem() as! ThumbnailViewItem
-
-        let nameRect = drawString(item.mediaData.name, x: 4, y: 2, attributes: RadishImageBrowserCell.textAttrs)
-        if item.mediaData.doFileAndExifTimestampsMatch() {
-            drawString(item.mediaData.formattedTime(), x: 4, y: nameRect.height, attributes: RadishImageBrowserCell.textAttrs)
-        }
-        else {
-            drawString(item.mediaData.formattedTime(), x: 4, y: nameRect.height, attributes: RadishImageBrowserCell.badDateAttrs)
-        }
-
-        NSGraphicsContext.restoreGraphicsState()
-    }
-
-    private func drawString(str: String, x: CGFloat, y: CGFloat, attributes: [String:AnyObject]) -> NSRect
-    {
-        let attrStr = NSMutableAttributedString(string: str, attributes: attributes)
-        let bounds = CTLineGetBoundsWithOptions(CTLineCreateWithAttributedString(attrStr), CTLineBoundsOptions.UseHangingPunctuation)
-
-        var updatedX = x
-        if x < 0 {
-            updatedX = bounds.width + x
-        }
-
-        let rect = NSRect(x: updatedX, y: y, width: bounds.width, height: bounds.height - bounds.origin.y)
-        attrStr.drawInRect(rect)
-
-        return rect
-    }
 
     // MARK: Frame sizes
-    public override func imageFrame() -> NSRect
+    open override func imageFrame() -> NSRect
     {
         let superImageFrame = super.imageFrame()
         if superImageFrame.size.height == 0 || superImageFrame.size.width == 0 { return NSZeroRect }
@@ -164,13 +150,13 @@ public class RadishImageBrowserCell : IKImageBrowserCell
         return imageRect
     }
 
-    public override func imageContainerFrame() -> NSRect
+    open override func imageContainerFrame() -> NSRect
     {
         let superRect = super.frame()
         return NSRect(x: superRect.origin.x, y: superRect.origin.y + 15, width: superRect.width, height: superRect.height - 15)
     }
 
-    public override func titleFrame() -> NSRect
+    open override func titleFrame() -> NSRect
     {
         let titleRect = super.titleFrame()
         let containerRect = frame()
@@ -185,17 +171,17 @@ public class RadishImageBrowserCell : IKImageBrowserCell
         return rect
     }
 
-    public override func selectionFrame() -> NSRect
+    open override func selectionFrame() -> NSRect
     {
         return NSInsetRect(super.frame(), -3, -3)
     }
 
     // MARK: line height helper
-    static private func getLineHeight() -> CGFloat
+    static fileprivate func getLineHeight() -> CGFloat
     {
         if lineHeight == nil {
             let attrStr = NSMutableAttributedString(string: "Mj", attributes: textAttrs)
-            lineHeight = CTLineGetBoundsWithOptions(CTLineCreateWithAttributedString(attrStr), CTLineBoundsOptions.UseHangingPunctuation).height
+            lineHeight = CTLineGetBoundsWithOptions(CTLineCreateWithAttributedString(attrStr), CTLineBoundsOptions.useHangingPunctuation).height
         }
         return lineHeight!
     }

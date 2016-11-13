@@ -18,14 +18,14 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
 
 
     // MARK: Initialize
-    func initialize(mediaProvider: MediaProvider)
+    func initialize(_ mediaProvider: MediaProvider)
     {
         self.mediaProvider = mediaProvider
 
-        imageBrowser.setValue(NSColor.darkGrayColor(), forKey: IKImageBrowserBackgroundColorKey)
+        imageBrowser.setValue(NSColor.darkGray, forKey: IKImageBrowserBackgroundColorKey)
 
-        let newAttrs = imageBrowser.valueForKey(IKImageBrowserCellsTitleAttributesKey)?.mutableCopy()
-        newAttrs?.setValue(NSColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        let newAttrs = NSMutableDictionary(dictionary: imageBrowser.value(forKey: IKImageBrowserCellsTitleAttributesKey) as! [String:Any])
+        newAttrs.setValue(NSColor.white, forKeyPath: NSForegroundColorAttributeName)
         imageBrowser?.setValue(newAttrs, forKey: IKImageBrowserCellsTitleAttributesKey)
 
         imageBrowser.viewFileDelegate = self
@@ -38,13 +38,13 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     }
 
     // MARK: Actions
-    @IBAction func updateThumbnailSize(sender: AnyObject)
+    @IBAction func updateThumbnailSize(_ sender: AnyObject)
     {
         Preferences.thumbnailZoom = sizeSlider.floatValue
         imageBrowser.setZoomValue(sizeSlider.floatValue)
     }
 
-    override func imageBrowser(browser: IKImageBrowserView!, cellWasDoubleClickedAtIndex index: Int)
+    override func imageBrowser(_ browser: IKImageBrowserView!, cellWasDoubleClickedAt index: Int)
     {
         viewFileAtIndex(index)
     }
@@ -52,13 +52,13 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     func viewSelectedFile()
     {
         if imageBrowser.selectionIndexes().count == 1 {
-            viewFileAtIndex(imageBrowser.selectionIndexes().firstIndex)
+            viewFileAtIndex(imageBrowser.selectionIndexes().first!)
         }
     }
 
-    func viewFileAtIndex(index: Int)
+    func viewFileAtIndex(_ index: Int)
     {
-        if index < mediaProvider?.mediaFiles.count {
+        if index < (mediaProvider?.mediaFiles.count)! {
             let mediaItem = mediaProvider?.mediaFiles[index]
             let userInfo: [String: MediaData] = ["MediaData": mediaItem!]
             Notifications.postNotification(Notifications.SingleView.MediaData, object: self, userInfo:userInfo)
@@ -66,7 +66,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     }
 
     // MARK: Notification handlers
-    func mediaUpdated(notification: NSNotification)
+    func mediaUpdated(_ notification: Notification)
     {
         thumbnailItems = [ThumbnailViewItem]()
         for m in mediaProvider!.mediaFiles {
@@ -76,21 +76,21 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     }
 
     // MARK: ImageBrowser data provider
-    override func numberOfItemsInImageBrowser(browser: IKImageBrowserView!) -> Int
+    override func numberOfItems(inImageBrowser browser: IKImageBrowserView!) -> Int
     {
         return thumbnailItems.count
     }
 
-    override func imageBrowser(browser: IKImageBrowserView!, itemAtIndex index: Int) -> AnyObject!
+    override func imageBrowser(_ browser: IKImageBrowserView!, itemAt index: Int) -> Any!
     {
         return thumbnailItems[index]
     }
 
     // MARK: ImageBrowser Delegate
-    override func imageBrowserSelectionDidChange(browser: IKImageBrowserView!)
+    override func imageBrowserSelectionDidChange(_ browser: IKImageBrowserView!)
     {
         if imageBrowser.selectionIndexes().count == 1 {
-            let media = mediaProvider?.mediaFiles[imageBrowser.selectionIndexes().firstIndex]
+            let media = mediaProvider?.mediaFiles[imageBrowser.selectionIndexes().first!]
             let userInfo: [String: MediaData] = ["MediaData": media!]
             Notifications.postNotification(Notifications.Selection.MediaData, object: self, userInfo: userInfo)
         }
@@ -98,35 +98,35 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     }
 }
 
-public class ThumbnailViewItem : NSObject
+open class ThumbnailViewItem : NSObject
 {
-    public let mediaData: MediaData
+    open let mediaData: MediaData
 
 
     init(mediaData: MediaData) {
         self.mediaData = mediaData
     }
 
-    public override func imageUID() -> String! {
+    open override func imageUID() -> String! {
         return mediaData.url.path
     }
 
-    public override func imageRepresentationType() -> String! {
+    open override func imageRepresentationType() -> String! {
         switch mediaData.type! {
-        case .Image:
+        case .image:
             return IKImageBrowserNSURLRepresentationType
-        case .Video:
+        case .video:
             return IKImageBrowserQTMoviePathRepresentationType
         default:
             return IKImageBrowserNSURLRepresentationType
         }
     }
 
-    public override func imageRepresentation() -> AnyObject! {
+    open override func imageRepresentation() -> Any! {
         switch mediaData.type! {
-        case .Image:
+        case .image:
             return mediaData.url
-        case .Video:
+        case .video:
             return mediaData.url
         default:
             return mediaData.url
