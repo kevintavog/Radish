@@ -421,15 +421,21 @@ CA
                                     <action selector="toggleFileInformation:" target="Voe-Tx-rLC" id="LHK-ul-dr2"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Map" tag="2" keyEquivalent="l" id="DAy-k6-El7">
+                                <connections>
+                                    <action selector="toggleMap:" target="Voe-Tx-rLC" id="CQR-44-YBT"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Thumbnails" keyEquivalent="t" id="Qll-au-h7h">
                                 <connections>
                                     <action selector="viewThumbnails:" target="Voe-Tx-rLC" id="YKW-KZ-HUM"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mvZ-ng-RCb"/>
-                            <menuItem title="Map" state="on" tag="2" keyEquivalent="l" id="DAy-k6-El7">
+                            <menuItem title="Show map in browser" tag="2" keyEquivalent="l" id="HwP-RL-OtT">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="toggleMap:" target="Voe-Tx-rLC" id="CQR-44-YBT"/>
+                                    <action selector="showOnMap:" target="-1" id="IK5-Fk-IU1"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Wkw-HY-Lef"/>
@@ -486,7 +492,7 @@ CA
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-11" y="447"/>
+            <point key="canvasLocation" x="-476" y="1271"/>
         </menu>
         <window title="Radish" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="Radish Single View" animationBehavior="default" id="QvC-M9-y7g" userLabel="SingleFile View">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
