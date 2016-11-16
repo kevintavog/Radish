@@ -52,8 +52,10 @@ class FileInformationController : NSViewController
 
     func detailsUpdated(_ notification: Notification)
     {
-        if let _ = notification.object as? MediaData {
-            tableView.reloadData()
+        if panel.isVisible {
+            if let _ = notification.object as? MediaData {
+                tableView.reloadData()
+            }
         }
     }
 

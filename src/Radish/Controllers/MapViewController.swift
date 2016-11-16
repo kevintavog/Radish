@@ -4,6 +4,7 @@
 import AppKit
 import WebKit
 
+import Async
 import RangicCore
 
 
@@ -53,25 +54,29 @@ class MapViewController: NSWindowController
     
     func detailsUpdated(_ notification: Notification)
     {
-        if let _ = notification.object as? MediaData {
-            updateView()
+        if panel.isVisible {
+            if let _ = notification.object as? MediaData {
+                updateView()
+            }
         }
     }
 
     func updateView()
     {
-        let name = currentMediaData?.name
-        let location = currentMediaData?.location
-
-        if location == nil {
-            if name == nil {
-                panel.title = "Map View"
+        Async.main {
+            let name = self.currentMediaData?.name
+            let location = self.currentMediaData?.location
+            
+            if location == nil {
+                if name == nil {
+                    self.panel.title = "Map View"
+                } else {
+                    self.panel.title = "Map View - No location for \(name!)"
+                }
             } else {
-                panel.title = "Map View - No location for \(name!)"
+                self.panel.title = "Map View - \(name!)"
+                let _ = self.invokeMapScript("setMarker([\(location!.latitude), \(location!.longitude)])")
             }
-        } else {
-            panel.title = "Map View - \(name!)"
-            let _ = invokeMapScript("setMarker([\(location!.latitude), \(location!.longitude)])")
         }
     }
 

@@ -176,9 +176,14 @@ class SingleViewWindowController: NSWindowController
         }
 
         Async.background {
-            let imageSource = CGImageSourceCreateWithURL(media.url as CFURL, nil)
-            let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
-            let nsImage = NSImage(cgImage: image!, size: NSSize(width: (image?.width)!, height: (image?.height)!))
+            var nsImage: NSImage
+            if let rotation = media.rotation, rotation == 1 {
+                nsImage = NSImage(byReferencing: media.url)
+            } else {
+                let imageSource = CGImageSourceCreateWithURL(media.url as CFURL, nil)
+                let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
+                nsImage = NSImage(cgImage: image!, size: NSSize(width: (image?.width)!, height: (image?.height)!))
+            }
 
             Async.main {
                 self.imageViewer.image = nsImage;
