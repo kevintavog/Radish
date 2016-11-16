@@ -24,6 +24,9 @@
 		447CA6741BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		447CA67F1BD5CF8300CA174C /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */; };
 		447CA6801BD5CF8300CA174C /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		44936FD81DDCFC750011DAE1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44936FD71DDCFC750011DAE1 /* WebKit.framework */; };
+		44936FDD1DDCFE0E0011DAE1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44936FDC1DDCFE0E0011DAE1 /* MapViewController.swift */; };
+		44936FE11DDD028C0011DAE1 /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = 44936FE01DDD028C0011DAE1 /* map.html */; };
 		4499DE891BACE11800BB8D36 /* RangicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44734C451BA782C000C6675C /* RangicCore.framework */; };
 		4499DE8A1BACE2C000BB8D36 /* RangicCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44734C451BA782C000C6675C /* RangicCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44A52E8D1B92688D00399384 /* SingleViewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */; };
@@ -82,6 +85,9 @@
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
 		447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/Mac/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/Mac/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		44936FD71DDCFC750011DAE1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		44936FDC1DDCFE0E0011DAE1 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Controllers/MapViewController.swift; sourceTree = "<group>"; };
+		44936FE01DDD028C0011DAE1 /* map.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = map.html; path = Resources/map.html; sourceTree = "<group>"; };
 		44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleViewWindowController.swift; path = Controllers/SingleViewWindowController.swift; sourceTree = "<group>"; };
 		44B2B82E1DD7EB2600B1A42A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
 		44B540AE1B9E412A006BC28A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
@@ -96,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44936FD81DDCFC750011DAE1 /* WebKit.framework in Frameworks */,
 				4499DE891BACE11800BB8D36 /* RangicCore.framework in Frameworks */,
 				442232721B968DB2009123F0 /* Quartz.framework in Frameworks */,
 				44B540AF1B9E412A006BC28A /* Alamofire.framework in Frameworks */,
@@ -112,6 +119,7 @@
 		0ADB30DD40705169F7CE942E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44936FD71DDCFC750011DAE1 /* WebKit.framework */,
 				442232711B968DB2009123F0 /* Quartz.framework */,
 			);
 			name = Frameworks;
@@ -159,6 +167,7 @@
 			children = (
 				44620BE41B9D00760024F403 /* FileInformationController.swift */,
 				44C0A6481BD3F88800205175 /* KeySequence.swift */,
+				44936FDC1DDCFE0E0011DAE1 /* MapViewController.swift */,
 				443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */,
 				444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */,
 				444322621B994A6D009043F4 /* RadishImageBrowserView.swift */,
@@ -172,6 +181,7 @@
 		445500821BA3856A007543D8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44936FE01DDD028C0011DAE1 /* map.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -271,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4442A0231B926784007251E6 /* Assets.xcassets in Resources */,
+				44936FE11DDD028C0011DAE1 /* map.html in Resources */,
 				443402B91BB63EC80001D1A3 /* Preferences.xib in Resources */,
 				4442A0261B926784007251E6 /* MainMenu.xib in Resources */,
 			);
@@ -290,6 +301,7 @@
 				444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */,
 				44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */,
 				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
+				44936FDD1DDCFE0E0011DAE1 /* MapViewController.swift in Sources */,
 				443402BC1BB63FFB0001D1A3 /* PreferencesWindowController.swift in Sources */,
 				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
 				44C0A6461BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift in Sources */,

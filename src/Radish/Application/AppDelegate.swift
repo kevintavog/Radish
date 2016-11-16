@@ -11,6 +11,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
 {
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var fileInformationController: FileInformationController!
+    @IBOutlet weak var mapController: MapViewController!
     @IBOutlet weak var singleViewWindowController: SingleViewWindowController!
     @IBOutlet weak var thumbnailViewWindowController: ThumbnailViewWindowController!
 
@@ -38,6 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
         singleViewWindowController.initialize(mediaProvider)
         thumbnailViewWindowController.initialize(mediaProvider)
         fileInformationController.initialize()
+        mapController.initialize()
         hasInitialized = true
 
         if filename != nil {
@@ -80,6 +82,11 @@ class AppDelegate: NSObject, NSApplicationDelegate
         fileInformationController.toggleVisibility()
     }
 
+    @IBAction func toggleMap(_ sender: AnyObject)
+    {
+        mapController.toggleVisibility()
+    }
+    
     @IBAction func preferences(_ sender: AnyObject)
     {
         let preferencesController = PreferencesWindowController(windowNibName: "Preferences")

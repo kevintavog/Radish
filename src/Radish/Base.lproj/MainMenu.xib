@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.AVKitIBPlugin" version="9531"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
-        <plugIn identifier="com.apple.imagekit.ibplugin" version="9531"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="11542"/>
+        <plugIn identifier="com.apple.imagekit.ibplugin" version="11542"/>
         <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -17,6 +20,7 @@
         <customObject id="Voe-Tx-rLC" userLabel="AppDelegate" customClass="AppDelegate" customModule="Radish" customModuleProvider="target">
             <connections>
                 <outlet property="fileInformationController" destination="5d8-H3-ibH" id="6Em-PT-Kfs"/>
+                <outlet property="mapController" destination="7Ma-0g-Htr" id="SCl-f5-QkZ"/>
                 <outlet property="singleViewWindowController" destination="lzO-hK-yhB" id="tQT-6R-aEA"/>
                 <outlet property="thumbnailViewWindowController" destination="dfr-kY-uXo" id="7bK-vF-quZ"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -45,6 +49,12 @@
             <connections>
                 <outlet property="panel" destination="Dr0-CK-BYn" id="ILF-ns-USL"/>
                 <outlet property="tableView" destination="ttM-yo-p95" id="VXQ-Z7-56B"/>
+            </connections>
+        </customObject>
+        <customObject id="7Ma-0g-Htr" customClass="MapViewController" customModule="Radish" customModuleProvider="target">
+            <connections>
+                <outlet property="mapView" destination="9jS-xp-JWW" id="PNM-X6-Gjv"/>
+                <outlet property="panel" destination="5Ku-d5-GN5" id="SCK-LP-hBA"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -128,7 +138,6 @@
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Search" tag="1" keyEquivalent="f" id="LdE-VM-AqQ"/>
                             <menuItem isSeparatorItem="YES" id="Kk0-7c-Q8P"/>
-                            <menuItem isSeparatorItem="YES" id="gqz-bj-OhC"/>
                             <menuItem title="Reveal in Finder" tag="2" id="eqj-aJ-5BS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -418,9 +427,9 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mvZ-ng-RCb"/>
-                            <menuItem title="Show on a map" tag="2" keyEquivalent="l" id="DAy-k6-El7">
+                            <menuItem title="Map" state="on" tag="2" keyEquivalent="l" id="DAy-k6-El7">
                                 <connections>
-                                    <action selector="showOnMap:" target="-1" id="VhT-mo-bxm"/>
+                                    <action selector="toggleMap:" target="Voe-Tx-rLC" id="CQR-44-YBT"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Wkw-HY-Lef"/>
@@ -477,6 +486,7 @@ CA
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="-11" y="447"/>
         </menu>
         <window title="Radish" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="Radish Single View" animationBehavior="default" id="QvC-M9-y7g" userLabel="SingleFile View">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -554,7 +564,6 @@ CA
                                         </textField>
                                     </subviews>
                                 </view>
-                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="0.60999999999999999" colorSpace="calibratedRGB"/>
                             </box>
                         </subviews>
@@ -589,7 +598,7 @@ CA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="paw-dB-jgw">
                             <rect key="frame" x="1" y="1" width="664" height="554"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.49487167596817017" id="u4j-KG-YLU" customClass="RadishImageBrowserView" customModule="Radish" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="664" height="554"/>
@@ -630,7 +639,7 @@ CA
                         <rect key="frame" x="5" y="8" width="802" height="475"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="GJc-Pt-HQX">
-                            <rect key="frame" x="0.0" y="17" width="802" height="458"/>
+                            <rect key="frame" x="0.0" y="0.0" width="802" height="475"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="FileInformationTable" headerView="9Q3-Jp-b7s" id="ttM-yo-p95">
@@ -704,6 +713,26 @@ CA
                 </subviews>
             </view>
             <point key="canvasLocation" x="-100.5" y="1764"/>
+        </window>
+        <window title="Map View" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="MapView" animationBehavior="default" id="5Ku-d5-GN5" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES" HUD="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="113" y="157" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <view key="contentView" id="bv8-Og-HGw">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <webView misplaced="YES" id="9jS-xp-JWW">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12" plugInsEnabled="NO" javaEnabled="NO">
+                            <nil key="identifier"/>
+                        </webPreferences>
+                    </webView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-296" y="2240"/>
         </window>
     </objects>
 </document>
