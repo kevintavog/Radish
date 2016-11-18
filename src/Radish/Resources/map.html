@@ -26,6 +26,13 @@
 
         marker = null
 
+        function clearMarker()
+        {
+            if (marker != null) {
+                marker.remove();
+                marker = null;
+            }
+        }
 
 		function setMarker(location)
 		{
@@ -33,7 +40,7 @@
             if (marker == null) {
                 marker = L.marker(location).addTo(map);
             } else {
-                marker.setLatLng(location)
+                marker.setLatLng(location);
             }
 		}
 	</script>

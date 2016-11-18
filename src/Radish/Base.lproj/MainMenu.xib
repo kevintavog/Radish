@@ -411,11 +411,6 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Image" keyEquivalent="p" id="1UK-8n-QPP">
-                                <connections>
-                                    <action selector="viewImage:" target="Voe-Tx-rLC" id="BhN-ml-krH"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Information" keyEquivalent="i" id="7IW-ak-yZy">
                                 <connections>
                                     <action selector="toggleFileInformation:" target="Voe-Tx-rLC" id="LHK-ul-dr2"/>
@@ -604,7 +599,7 @@ CA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="paw-dB-jgw">
                             <rect key="frame" x="1" y="1" width="664" height="554"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.49487167596817017" id="u4j-KG-YLU" customClass="RadishImageBrowserView" customModule="Radish" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="664" height="554"/>

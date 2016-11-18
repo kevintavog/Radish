@@ -68,6 +68,7 @@ class MapViewController: NSWindowController
             let location = self.currentMediaData?.location
             
             if location == nil {
+                let _ = self.invokeMapScript("clearMarker()")
                 if name == nil {
                     self.panel.title = "Map View"
                 } else {

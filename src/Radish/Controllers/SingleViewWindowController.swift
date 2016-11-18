@@ -177,7 +177,7 @@ class SingleViewWindowController: NSWindowController
 
         Async.background {
             var nsImage: NSImage
-            if let rotation = media.rotation, rotation == 1 {
+            if let rotation = media.rotation, rotation == ImageOrientation.topLeft.rawValue {
                 nsImage = NSImage(byReferencing: media.url)
             } else {
                 let imageSource = CGImageSourceCreateWithURL(media.url as CFURL, nil)
