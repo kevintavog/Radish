@@ -179,6 +179,8 @@ class SingleViewWindowController: NSWindowController
             var nsImage: NSImage
             if let rotation = media.rotation, rotation == ImageOrientation.topLeft.rawValue {
                 nsImage = NSImage(byReferencing: media.url)
+                let imageRep = nsImage.representations[0]
+                nsImage.size = NSSize(width: imageRep.pixelsWide, height: imageRep.pixelsHigh)
             } else {
                 let imageSource = CGImageSourceCreateWithURL(media.url as CFURL, nil)
                 let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
