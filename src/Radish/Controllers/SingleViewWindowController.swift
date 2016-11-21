@@ -56,7 +56,7 @@ class SingleViewWindowController: NSWindowController
     {
         self.mediaProvider = mediaProvider
 
-        window?.backgroundColor = NSColor.darkGray
+        window?.backgroundColor = NSColor.black
 
         videoPlayer.isHidden = true
         imageViewer.isHidden = true
@@ -215,8 +215,30 @@ class SingleViewWindowController: NSWindowController
             imageViewer.image = nil
         }
 
-        videoPlayer.player?.addObserver(self, forKeyPath: "volume", options: .new, context: nil)
+        let frameWidth = Int(videoPlayer.window!.frame.width)
+        let frameHeight = Int(videoPlayer.window!.frame.height)
+        var useFullFrame = true
 
+        if media.mediaSize != nil {
+            let maxWidth = media.mediaSize!.width * 2
+            let maxHeight = media.mediaSize!.height * 2
+
+            if (maxWidth < frameWidth || maxHeight < frameHeight) {
+                videoPlayer.setFrameSize(NSSize(width: maxWidth, height: maxHeight))
+                
+                let x = (frameWidth - maxWidth) / 2
+                let y = (frameHeight - maxHeight) / 2
+                videoPlayer.setFrameOrigin(NSPoint(x: x, y: y))
+                useFullFrame = false
+            }
+        }
+        
+        if (useFullFrame ){
+            videoPlayer.setFrameSize(videoPlayer.window!.frame.size)
+            videoPlayer.setFrameOrigin(NSPoint(x: 0, y: 0))
+        }
+
+        videoPlayer.player?.addObserver(self, forKeyPath: "volume", options: .new, context: nil)
         videoPlayer.player?.play()
     }
 
