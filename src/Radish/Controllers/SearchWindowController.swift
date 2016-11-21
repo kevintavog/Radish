@@ -23,6 +23,7 @@ class SearchWindowController : NSWindowController
         statusImage.isHidden = true
         statusLabel.stringValue = ""
         workingIndicator.isHidden = true
+        searchText.stringValue = Preferences.lastSearchText
 
         if Preferences.findAPhotoHost.characters.count > 0 {
             window?.makeFirstResponder(searchText)
@@ -45,6 +46,7 @@ class SearchWindowController : NSWindowController
         statusLabel.stringValue = ""
         workingIndicator.startAnimation(sender)
         workingIndicator.isHidden = false
+        Preferences.lastSearchText = searchText.stringValue
 
         // Run search (clear status text, start working indicator)
         // When it completes (end working indicator)

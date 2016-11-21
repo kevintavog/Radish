@@ -170,11 +170,19 @@ extension SingleViewWindowController
     
     @IBAction func revealInFinder(_ sender: AnyObject)
     {
+        if !onlyIfLocalFile(currentMediaData!.url, message: "Only local files can be revealed in the finder.", information: "\(currentMediaData!.url!)") {
+            return
+        }
+        
         NSWorkspace.shared().selectFile(currentMediaData!.url!.path, inFileViewerRootedAtPath: "")
     }
 
     @IBAction func setFileDateFromExifDate(_ sender: AnyObject)
     {
+        if !onlyIfLocalFile(currentMediaData!.url, message: "Only local files can change dates.", information: "\(currentMediaData!.url!)") {
+            return
+        }
+        
         let filename = currentMediaData!.url.path
         Logger.info("setFileDateFromExifDate: \(filename)")
 
@@ -190,6 +198,10 @@ extension SingleViewWindowController
 
     @IBAction func autoRotate(_ sender: AnyObject)
     {
+        if !onlyIfLocalFile(currentMediaData!.url, message: "Only local files can be rotated.", information: "\(currentMediaData!.url!)") {
+            return
+        }
+
         let filename = currentMediaData!.url.path
         Logger.info("autoRotate: \(filename)")
 
@@ -206,6 +218,9 @@ extension SingleViewWindowController
     @IBAction func moveToTrash(_ sender: AnyObject)
     {
         let url = currentMediaData!.url
+        if !onlyIfLocalFile(url, message: "Only local files can be moved to the trash.", information: "\(url!)") {
+            return
+        }
         Logger.info("moveToTrash: \((url?.path)!)")
 
         let filename = (url?.lastPathComponent)!
@@ -242,8 +257,24 @@ extension SingleViewWindowController
             if url.characters.count > 0 {
                 NSWorkspace.shared().open(URL(string: url)!)
             }
-            
         }
     }
-    
+
+    func onlyIfLocalFile(_ url: URL?, message: String, information: String?) -> Bool
+    {
+        if !(url?.isFileURL)! {
+            let alert = NSAlert()
+            alert.messageText = message
+            if information != nil {
+                alert.informativeText = information!
+            }
+            alert.alertStyle = NSAlertStyle.warning
+            alert.addButton(withTitle: "Close")
+            alert.runModal()
+            return false
+        }
+
+        return true
+    }
+
 }

@@ -9,6 +9,7 @@ class Preferences : BasePreferences
 {
     static fileprivate let BaseLocationLookupKey = "BaseLocationLookup"
     static fileprivate let FindAPhotoHost = "FindAPhotoHost"
+    static fileprivate let LastSearchText = "LastSearchText"
     static fileprivate let PageSizeKey = "PageSize"
     static fileprivate let PlacenameLevelKey = "PlacenameLevel"
     static fileprivate let ShowOnMapKey = "ShowOnMap"
@@ -36,7 +37,8 @@ class Preferences : BasePreferences
         setDefaultValue(Float(0.5), key: VideoPlayerVolume)
 
         setDefaultValue("http://localhost:5000", key: FindAPhotoHost)
-}
+        setDefaultValue("", key: LastSearchText)
+    }
 
     static var baseLocationLookup: String
     {
@@ -48,6 +50,12 @@ class Preferences : BasePreferences
     {
         get { return stringForKey(FindAPhotoHost) }
         set { super.setValue(newValue, key: FindAPhotoHost) }
+    }
+    
+    static var lastSearchText: String
+    {
+        get { return stringForKey(LastSearchText) }
+        set { super.setValue(newValue, key: LastSearchText) }
     }
     
     static var pageSize: Int
