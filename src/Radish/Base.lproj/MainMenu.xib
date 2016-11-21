@@ -136,7 +136,11 @@
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
-                            <menuItem title="Search" tag="1" keyEquivalent="f" id="LdE-VM-AqQ"/>
+                            <menuItem title="Search" tag="1" keyEquivalent="f" id="LdE-VM-AqQ">
+                                <connections>
+                                    <action selector="search:" target="Voe-Tx-rLC" id="O4g-Xe-x7b"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="Kk0-7c-Q8P"/>
                             <menuItem title="Reveal in Finder" tag="2" id="eqj-aJ-5BS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -503,7 +507,7 @@ CA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="rcO-0P-UU9"/>
                     </imageView>
-                    <avPlayerView controlsStyle="floating" id="bx4-Q1-BBc">
+                    <avPlayerView hidden="YES" controlsStyle="floating" id="bx4-Q1-BBc">
                         <rect key="frame" x="0.0" y="0.0" width="956" height="578"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </avPlayerView>

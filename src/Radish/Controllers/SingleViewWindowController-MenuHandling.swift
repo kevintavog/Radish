@@ -17,14 +17,14 @@ extension SingleViewWindowController
         case .alwaysEnable:
             return true
         case .requiresFile:
-            return (mediaProvider?.mediaFiles.count)! > 0
+            return (mediaProvider?.mediaCount)! > 0
         }
     }
 
     func tryToMoveTo(_ calculate: (_ index: Int, _ maxIndex: Int) -> Int)
     {
         if let provider = mediaProvider {
-            let count = provider.mediaFiles.count
+            let count = provider.mediaCount
             if  count > 0 {
                 displayFileByIndex(calculate(currentFileIndex, count - 1))
             }
@@ -131,7 +131,7 @@ extension SingleViewWindowController
 
     @IBAction func addFolder(_ sender: AnyObject)
     {
-        if (mediaProvider?.mediaFiles.count)! < 1 {
+        if (mediaProvider?.mediaCount)! < 1 {
             openFolder(sender)
             return
         }
@@ -165,7 +165,7 @@ extension SingleViewWindowController
 
     @IBAction func lastFile(_ sender: AnyObject)
     {
-        displayFileByIndex(mediaProvider!.mediaFiles.count - 1)
+        displayFileByIndex(mediaProvider!.mediaCount - 1)
     }
     
     @IBAction func revealInFinder(_ sender: AnyObject)
@@ -218,7 +218,6 @@ extension SingleViewWindowController
                 alert.runModal()
             }
             else {
-                Logger.warn("Should the trash sound still be played?")
                 NSSound(contentsOfFile: self.trashSoundPath, byReference: false)?.play()
             }
         }

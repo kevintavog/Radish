@@ -36,6 +36,8 @@
 		44B540B01B9E412A006BC28A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 44B540AE1B9E412A006BC28A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44C0A6461BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */; };
 		44C0A6491BD3F88800205175 /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0A6481BD3F88800205175 /* KeySequence.swift */; };
+		44E2BE011DE2584100DF2776 /* Search.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E2BDFF1DE2584100DF2776 /* Search.xib */; };
+		44E2BE031DE25AC700DF2776 /* SearchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2BE021DE25AC700DF2776 /* SearchWindowController.swift */; };
 		44FF5FD31B97D69F00DC4947 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FF5FD21B97D69F00DC4947 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +95,8 @@
 		44B540AE1B9E412A006BC28A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SingleViewWindowController-MenuHandling.swift"; path = "Controllers/SingleViewWindowController-MenuHandling.swift"; sourceTree = "<group>"; };
 		44C0A6481BD3F88800205175 /* KeySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeySequence.swift; path = Controllers/KeySequence.swift; sourceTree = "<group>"; };
+		44E2BE001DE2584100DF2776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Search.xib; sourceTree = "<group>"; };
+		44E2BE021DE25AC700DF2776 /* SearchWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchWindowController.swift; path = Controllers/SearchWindowController.swift; sourceTree = "<group>"; };
 		44F4200E1BA72CC800ADBB85 /* RangicCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RangicCore.xcodeproj; path = ../../RangicCore/source/RangicCore.xcodeproj; sourceTree = SOURCE_ROOT; };
 		44FF5FD21B97D69F00DC4947 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Core/Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,9 +159,10 @@
 				444E1A141B9942D1002AED02 /* Controllers */,
 				445500821BA3856A007543D8 /* Resources */,
 				4442A0221B926784007251E6 /* Assets.xcassets */,
-				4442A0241B926784007251E6 /* MainMenu.xib */,
 				4442A0271B926784007251E6 /* Info.plist */,
+				4442A0241B926784007251E6 /* MainMenu.xib */,
 				443402B71BB63EC80001D1A3 /* Preferences.xib */,
+				44E2BDFF1DE2584100DF2776 /* Search.xib */,
 			);
 			path = Radish;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 				443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */,
 				444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */,
 				444322621B994A6D009043F4 /* RadishImageBrowserView.swift */,
+				44E2BE021DE25AC700DF2776 /* SearchWindowController.swift */,
 				44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */,
 				44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */,
 				442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */,
@@ -283,6 +289,7 @@
 				4442A0231B926784007251E6 /* Assets.xcassets in Resources */,
 				44936FE11DDD028C0011DAE1 /* map.html in Resources */,
 				443402B91BB63EC80001D1A3 /* Preferences.xib in Resources */,
+				44E2BE011DE2584100DF2776 /* Search.xib in Resources */,
 				4442A0261B926784007251E6 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +306,7 @@
 				442232741B968F13009123F0 /* ThumbnailViewWindowController.swift in Sources */,
 				44C0A6491BD3F88800205175 /* KeySequence.swift in Sources */,
 				444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */,
+				44E2BE031DE25AC700DF2776 /* SearchWindowController.swift in Sources */,
 				44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */,
 				444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */,
 				44936FDD1DDCFE0E0011DAE1 /* MapViewController.swift in Sources */,
@@ -326,6 +334,14 @@
 				4442A0251B926784007251E6 /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		44E2BDFF1DE2584100DF2776 /* Search.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44E2BE001DE2584100DF2776 /* Base */,
+			);
+			name = Search.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

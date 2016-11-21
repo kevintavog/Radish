@@ -8,6 +8,7 @@ import RangicCore
 class Preferences : BasePreferences
 {
     static fileprivate let BaseLocationLookupKey = "BaseLocationLookup"
+    static fileprivate let FindAPhotoHost = "FindAPhotoHost"
     static fileprivate let PageSizeKey = "PageSize"
     static fileprivate let PlacenameLevelKey = "PlacenameLevel"
     static fileprivate let ShowOnMapKey = "ShowOnMap"
@@ -33,12 +34,20 @@ class Preferences : BasePreferences
         setDefaultValue(ShowOnMap.openStreetMap.rawValue, key: ShowOnMapKey)
         setDefaultValue(Float(0.43), key: ThumbnailZoomKey)
         setDefaultValue(Float(0.5), key: VideoPlayerVolume)
-    }
+
+        setDefaultValue("http://localhost:5000", key: FindAPhotoHost)
+}
 
     static var baseLocationLookup: String
     {
         get { return stringForKey(BaseLocationLookupKey) }
         set { super.setValue(newValue, key: BaseLocationLookupKey) }
+    }
+    
+    static var findAPhotoHost: String
+    {
+        get { return stringForKey(FindAPhotoHost) }
+        set { super.setValue(newValue, key: FindAPhotoHost) }
     }
     
     static var pageSize: Int

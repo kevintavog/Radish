@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
         hasInitialized = true
 
         if filename != nil {
-            Logger.info("openFile post init: \(filename)")
+            Logger.info("openFile post init: \(filename!)")
             singleViewWindowController.window?.makeKeyAndOrderFront(self)
             let _ = singleViewWindowController.openFolderOrFile(filename!)
         }
@@ -91,5 +91,15 @@ class AppDelegate: NSObject, NSApplicationDelegate
     {
         let preferencesController = PreferencesWindowController(windowNibName: "Preferences")
         NSApplication.shared().runModal(for: preferencesController.window!)
+    }
+
+    @IBAction func search(_ sender: AnyObject)
+    {
+        let searchController = SearchWindowController(windowNibName: "Search")
+        NSApplication.shared().runModal(for: searchController.window!)
+
+        if searchController.viewSearchResults {
+            singleViewWindowController.showSearchResults(searchController.searchText.stringValue)
+        }
     }
 }

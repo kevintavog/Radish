@@ -58,8 +58,8 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
 
     func viewFileAtIndex(_ index: Int)
     {
-        if index < (mediaProvider?.mediaFiles.count)! {
-            let mediaItem = mediaProvider?.mediaFiles[index]
+        if index < (mediaProvider?.mediaCount)! {
+            let mediaItem = mediaProvider?.getMedia(index)
             let userInfo: [String: MediaData] = ["MediaData": mediaItem!]
             Notifications.postNotification(Notifications.SingleView.MediaData, object: self, userInfo:userInfo)
         }
@@ -69,8 +69,8 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     func mediaUpdated(_ notification: Notification)
     {
         thumbnailItems = [ThumbnailViewItem]()
-        for m in mediaProvider!.mediaFiles {
-            thumbnailItems.append(ThumbnailViewItem(mediaData: m))
+        for (_, m) in mediaProvider!.enumerated() {
+            thumbnailItems.append(ThumbnailViewItem(m))
         }
         imageBrowser.reloadData()
     }
@@ -90,7 +90,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     override func imageBrowserSelectionDidChange(_ browser: IKImageBrowserView!)
     {
         if imageBrowser.selectionIndexes().count == 1 {
-            let media = mediaProvider?.mediaFiles[imageBrowser.selectionIndexes().first!]
+            let media = mediaProvider?.getMedia(imageBrowser.selectionIndexes().first!)
             let userInfo: [String: MediaData] = ["MediaData": media!]
             Notifications.postNotification(Notifications.Selection.MediaData, object: self, userInfo: userInfo)
         }
@@ -100,10 +100,10 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
 
 open class ThumbnailViewItem : NSObject
 {
-    open let mediaData: MediaData
+    open let mediaData:MediaData
 
 
-    init(mediaData: MediaData) {
+    init(_ mediaData: MediaData) {
         self.mediaData = mediaData
     }
 
@@ -123,13 +123,6 @@ open class ThumbnailViewItem : NSObject
     }
 
     open override func imageRepresentation() -> Any! {
-        switch mediaData.type! {
-        case .image:
-            return mediaData.url
-        case .video:
-            return mediaData.url
-        default:
-            return mediaData.url
-        }
+        return mediaData.url
     }
 }

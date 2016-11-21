@@ -34,7 +34,7 @@ class SingleViewWindowController: NSWindowController
     var currentMediaData: MediaData?
     fileprivate var dateFormatter: DateFormatter? = nil
 
-
+    
     let keyMappings: [KeySequence: Selector] = [
         KeySequence(modifierFlags: NSEventModifierFlags.function, chars: "\u{F729}"): #selector(SingleViewWindowController.moveToFirstItem(_:)),
         KeySequence(modifierFlags: NSEventModifierFlags.function, chars: "\u{F72B}"): #selector(SingleViewWindowController.moveToLastItem(_:)),
@@ -88,33 +88,33 @@ class SingleViewWindowController: NSWindowController
     {
         // The media files have been updated (added to, removed from or an instance updated).
         // This may cause our current selection to change - or the currently displayed metadata to change
-        if mediaProvider!.mediaFiles.count == 0 {
+        if mediaProvider!.mediaCount == 0 {
             displayUnsupportedFileType(nil)
         }
         else {
             let oldIndex = currentFileIndex
 
-            if currentFileIndex >= mediaProvider!.mediaFiles.count {
-                currentFileIndex = mediaProvider!.mediaFiles.count - 1;
+            if currentFileIndex >= mediaProvider!.mediaCount {
+                currentFileIndex = mediaProvider!.mediaCount - 1;
             }
 
-            // Try to select the same file that was previously selected - if lotsa files are added to the list,
+            // Try to select the same file that was previously selected - if lots of files are added to the list,
             // keep the same selection
             if currentMediaData != nil {
-                let mediaData = mediaProvider!.mediaFiles[currentFileIndex]
+                let mediaData = mediaProvider!.getMedia(currentFileIndex)!
                 if mediaData.url != currentMediaData!.url {
                     // Scan the list for it
                     if let index = mediaProvider?.getFileIndex(currentMediaData!.url) {
                         currentFileIndex = index
                     }
                     else {
-                        currentFileIndex = min(oldIndex, mediaProvider!.mediaFiles.count - 1)
-                        currentMediaData = mediaProvider!.mediaFiles[currentFileIndex]
+                        currentFileIndex = min(oldIndex, mediaProvider!.mediaCount - 1)
+                        currentMediaData = mediaProvider!.getMedia(currentFileIndex)
                     }
                 }
             }
             else {
-                currentMediaData = mediaProvider!.mediaFiles[currentFileIndex]
+                currentMediaData = mediaProvider!.getMedia(currentFileIndex)
             }
 
             displayCurrentFile()
@@ -125,17 +125,24 @@ class SingleViewWindowController: NSWindowController
     // MARK: Display files
     func displayFileByIndex(_ index: Int)
     {
-        if (mediaProvider!.mediaFiles.count > 0) {
+        if (mediaProvider!.mediaCount > 0) {
             let originalIndex = currentFileIndex
             currentFileIndex = index
-            if (currentFileIndex < 0) { currentFileIndex = mediaProvider!.mediaFiles.count - 1; }
-            if (currentFileIndex >= mediaProvider!.mediaFiles.count) { currentFileIndex = 0; }
+            if (currentFileIndex < 0) { currentFileIndex = mediaProvider!.mediaCount - 1; }
+            if (currentFileIndex >= mediaProvider!.mediaCount) { currentFileIndex = 0; }
 
             if currentFileIndex == originalIndex {
                 return
             }
 
-            currentMediaData = mediaProvider!.mediaFiles[currentFileIndex]
+            mediaProvider!.itemAtIndex(index: currentFileIndex, completion: { (media: MediaData?) -> () in
+                Async.main {
+                    self.currentMediaData = media
+                    self.displayCurrentFile()
+                }
+            });
+
+            return
         }
         else {
             currentMediaData = nil
@@ -179,8 +186,10 @@ class SingleViewWindowController: NSWindowController
             var nsImage: NSImage
             if let rotation = media.rotation, rotation == ImageOrientation.topLeft.rawValue {
                 nsImage = NSImage(byReferencing: media.url)
-                let imageRep = nsImage.representations[0]
-                nsImage.size = NSSize(width: imageRep.pixelsWide, height: imageRep.pixelsHigh)
+                if (nsImage.representations.count > 0) {
+                    let imageRep = nsImage.representations[0]
+                    nsImage.size = NSSize(width: imageRep.pixelsWide, height: imageRep.pixelsHigh)
+                }
             } else {
                 let imageSource = CGImageSourceCreateWithURL(media.url as CFURL, nil)
                 let image = CGImageSourceCreateImageAtIndex(imageSource!, 0, nil)
@@ -251,8 +260,8 @@ class SingleViewWindowController: NSWindowController
     {
         if (currentMediaData == nil
             || currentFileIndex < 0
-            || currentFileIndex >= mediaProvider!.mediaFiles.count
-            || mediaProvider!.mediaFiles.count == 0) {
+            || currentFileIndex >= mediaProvider!.mediaCount
+            || mediaProvider!.mediaCount == 0) {
 
             statusFilename.stringValue = ""
             statusTimestamp.stringValue = ""
@@ -263,7 +272,7 @@ class SingleViewWindowController: NSWindowController
         }
         else {
             let media = currentMediaData!
-            statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider!.mediaFiles.count)"
+            statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider!.mediaCount)"
             statusFilename.stringValue = "\(media.name!)"
             statusLocation.stringValue = media.locationString()
             statusKeywords.stringValue = media.keywordsString()
@@ -361,20 +370,30 @@ class SingleViewWindowController: NSWindowController
 
     func selectByUrl(_ url: URL, display: Bool) -> Int?
     {
-        for (index, mediaFile) in mediaProvider!.mediaFiles.enumerated() {
-            if mediaFile.url == url {
-                if display {
-                    currentFileIndex = -1
-                    displayFileByIndex(index)
-                } else {
-                    currentFileIndex = index
-                    currentMediaData = mediaFile
-                }
-                return currentFileIndex
+        if let index = mediaProvider!.getFileIndex(url) {
+            let media = mediaProvider!.getMedia(index)
+
+            if display {
+                currentFileIndex = -1
+                displayFileByIndex(index)
+            } else {
+                currentFileIndex = index
+                currentMediaData = media
             }
+            return currentFileIndex
         }
 
         return nil
     }
+
+    func showSearchResults(_ searchText: String) {
+        currentMediaData = nil
+        currentFileIndex = 0;
+        let rep = FindAPhotoMediaRepository()
+        mediaProvider!.setRepository(rep)
+
+        rep.newSearch(host: Preferences.findAPhotoHost, searchText: searchText)
+    }
+
 }
 
