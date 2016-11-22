@@ -125,6 +125,7 @@ extension SingleViewWindowController
         currentMediaData = nil
         currentFileIndex = 0;
         mediaProvider!.clear()
+        mediaProvider!.setRepository(FileMediaRepository())
 
         addFolders(folders.urls!, selected: folders.selected)
     }

@@ -67,7 +67,7 @@ class SingleViewWindowController: NSWindowController
         updateStatusView()
 
         Notifications.addObserver(self, selector: #selector(SingleViewWindowController.viewMediaData(_:)), name: Notifications.SingleView.MediaData, object: nil)
-        Notifications.addObserver(self, selector: #selector(SingleViewWindowController.mediaProviderUpdated(_:)), name: Notifications.MediaProvider.UpdatedNotification, object: nil)
+        Notifications.addObserver(self, selector: #selector(SingleViewWindowController.mediaProviderUpdated(_:)), name: MediaProvider.Notifications.UpdatedNotification, object: nil)
     }
 
 
@@ -338,6 +338,7 @@ class SingleViewWindowController: NSWindowController
         currentMediaData = nil
         currentFileIndex = 0;
         mediaProvider!.clear()
+        mediaProvider!.setRepository(FileMediaRepository())
 
         let url = [URL(fileURLWithPath: filename)]
         addFolders(url, selected: url[0])

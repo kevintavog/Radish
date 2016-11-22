@@ -22,7 +22,7 @@ class MapViewController: NSWindowController
         mapView.mainFrame.load(URLRequest(url: URL(fileURLWithPath: Bundle.main.path(forResource: "map", ofType: "html")!)))
 
         Notifications.addObserver(self, selector: #selector(MapViewController.fileSelected(_:)), name: Notifications.Selection.MediaData, object: nil)
-        Notifications.addObserver(self, selector: #selector(MapViewController.detailsUpdated(_:)), name: CoreNotifications.MediaProvider.DetailsAvailable, object: nil)
+        Notifications.addObserver(self, selector: #selector(MapViewController.detailsUpdated(_:)), name: MediaProvider.Notifications.DetailsAvailable, object: nil)
     }
     
     

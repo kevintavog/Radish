@@ -34,7 +34,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
         imageBrowser.setZoomValue(Preferences.thumbnailZoom)
         imageBrowser.setIntercellSpacing(NSSize(width: 16, height: 16))
 
-        Notifications.addObserver(self, selector: #selector(ThumbnailViewWindowController.mediaUpdated(_:)), name: Notifications.MediaProvider.UpdatedNotification, object: self.mediaProvider)
+        Notifications.addObserver(self, selector: #selector(ThumbnailViewWindowController.mediaUpdated(_:)), name: MediaProvider.Notifications.UpdatedNotification, object: nil)
     }
 
     // MARK: Actions
@@ -69,8 +69,11 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     func mediaUpdated(_ notification: Notification)
     {
         thumbnailItems = [ThumbnailViewItem]()
-        for (_, m) in mediaProvider!.enumerated() {
+
+        var index = 0
+        while index < mediaProvider!.mediaCount, let m = mediaProvider!.getMedia(index) {
             thumbnailItems.append(ThumbnailViewItem(m))
+            index += 1
         }
         imageBrowser.reloadData()
     }
@@ -78,12 +81,15 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     // MARK: ImageBrowser data provider
     override func numberOfItems(inImageBrowser browser: IKImageBrowserView!) -> Int
     {
-        return thumbnailItems.count
+        return mediaProvider!.mediaCount
     }
 
     override func imageBrowser(_ browser: IKImageBrowserView!, itemAt index: Int) -> Any!
     {
-        return thumbnailItems[index]
+        if index < thumbnailItems.count {
+            return thumbnailItems[index]
+        }
+        return nil
     }
 
     // MARK: ImageBrowser Delegate
@@ -123,6 +129,6 @@ open class ThumbnailViewItem : NSObject
     }
 
     open override func imageRepresentation() -> Any! {
-        return mediaData.url
+        return mediaData.thumbUrl
     }
 }
