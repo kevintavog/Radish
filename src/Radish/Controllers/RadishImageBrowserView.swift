@@ -35,5 +35,4 @@ open class RadishImageBrowserView : IKImageBrowserView
         }
         return super.performKeyEquivalent(with: theEvent)
     }
-
 }
