@@ -25,7 +25,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
         imageBrowser.setValue(NSColor.darkGray, forKey: IKImageBrowserBackgroundColorKey)
 
         let newAttrs = NSMutableDictionary(dictionary: imageBrowser.value(forKey: IKImageBrowserCellsTitleAttributesKey) as! [String:Any])
-        newAttrs.setValue(NSColor.white, forKeyPath: NSForegroundColorAttributeName)
+        newAttrs.setValue(NSColor.white, forKeyPath: NSAttributedStringKey.foregroundColor.rawValue)
         imageBrowser?.setValue(newAttrs, forKey: IKImageBrowserCellsTitleAttributesKey)
 
         imageBrowser.viewFileDelegate = self
@@ -66,7 +66,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
     }
 
     // MARK: Notification handlers
-    func mediaUpdated(_ notification: Notification)
+    @objc func mediaUpdated(_ notification: Notification)
     {
         thumbnailItems = [ThumbnailViewItem]()
 

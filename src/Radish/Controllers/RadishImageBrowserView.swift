@@ -24,7 +24,7 @@ open class RadishImageBrowserView : IKImageBrowserView
 
         // Return (no modifiers) means open the currently selected item in the single view
         if (theEvent.keyCode == 36 || theEvent.keyCode == 76) &&
-            ((theEvent.modifierFlags.rawValue & NSEventModifierFlags.deviceIndependentFlagsMask.rawValue) == 0) {
+            ((theEvent.modifierFlags.rawValue & NSEvent.ModifierFlags.deviceIndependentFlagsMask.rawValue) == 0) {
             if !super.performKeyEquivalent(with: theEvent) {
 
                 if selectionIndexes().count == 1 {

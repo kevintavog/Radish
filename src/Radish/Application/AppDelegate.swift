@@ -89,14 +89,14 @@ class AppDelegate: NSObject, NSApplicationDelegate
     
     @IBAction func preferences(_ sender: AnyObject)
     {
-        let preferencesController = PreferencesWindowController(windowNibName: "Preferences")
-        NSApplication.shared().runModal(for: preferencesController.window!)
+        let preferencesController = PreferencesWindowController(windowNibName: NSNib.Name(rawValue: "Preferences"))
+        NSApplication.shared.runModal(for: preferencesController.window!)
     }
 
     @IBAction func search(_ sender: AnyObject)
     {
-        let searchController = SearchWindowController(windowNibName: "Search")
-        NSApplication.shared().runModal(for: searchController.window!)
+        let searchController = SearchWindowController(windowNibName: NSNib.Name(rawValue: "Search"))
+        NSApplication.shared.runModal(for: searchController.window!)
 
         if searchController.viewSearchResults {
             singleViewWindowController.showSearchResults(searchController.searchText.stringValue)

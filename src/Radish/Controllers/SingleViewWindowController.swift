@@ -36,18 +36,18 @@ class SingleViewWindowController: NSWindowController
 
     
     let keyMappings: [KeySequence: Selector] = [
-        KeySequence(modifierFlags: NSEventModifierFlags.function, chars: "\u{F729}"): #selector(SingleViewWindowController.moveToFirstItem(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.function, chars: "\u{F72B}"): #selector(SingleViewWindowController.moveToLastItem(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.function, chars: "\u{F729}"): #selector(SingleViewWindowController.moveToFirstItem(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.function, chars: "\u{F72B}"): #selector(SingleViewWindowController.moveToLastItem(_:)),
 
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "1"): #selector(SingleViewWindowController.moveToTenPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "2"): #selector(SingleViewWindowController.moveToTwentyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "3"): #selector(SingleViewWindowController.moveToThirtyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "4"): #selector(SingleViewWindowController.moveToFortyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "5"): #selector(SingleViewWindowController.moveToFiftyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "6"): #selector(SingleViewWindowController.moveToSixtyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "7"): #selector(SingleViewWindowController.moveToSeventyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "8"): #selector(SingleViewWindowController.moveToEightyPercent(_:)),
-        KeySequence(modifierFlags: NSEventModifierFlags.command, chars: "9"): #selector(SingleViewWindowController.moveToNinetyPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "1"): #selector(SingleViewWindowController.moveToTenPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "2"): #selector(SingleViewWindowController.moveToTwentyPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "3"): #selector(SingleViewWindowController.moveToThirtyPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "4"): #selector(SingleViewWindowController.moveToFortyPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "5"): #selector(SingleViewWindowController.moveToFiftyPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "6"): #selector(SingleViewWindowController.moveToSixtyPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "7"): #selector(SingleViewWindowController.moveToSeventyPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "8"): #selector(SingleViewWindowController.moveToEightyPercent(_:)),
+        KeySequence(modifierFlags: NSEvent.ModifierFlags.command, chars: "9"): #selector(SingleViewWindowController.moveToNinetyPercent(_:)),
     ]
 
 
@@ -72,7 +72,7 @@ class SingleViewWindowController: NSWindowController
 
 
     // MARK: Notification handlers
-    func viewMediaData(_ notification: Notification)
+    @objc func viewMediaData(_ notification: Notification)
     {
         if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
             if let mediaData = userInfo["MediaData"] {
@@ -84,7 +84,7 @@ class SingleViewWindowController: NSWindowController
         }
     }
 
-    func mediaProviderUpdated(_ notification: Notification)
+    @objc func mediaProviderUpdated(_ notification: Notification)
     {
         // The media files have been updated (added to, removed from or an instance updated).
         // This may cause our current selection to change - or the currently displayed metadata to change
@@ -304,10 +304,10 @@ class SingleViewWindowController: NSWindowController
                 statusTimestamp.stringValue = timestamp
             }
             else {
-                let fullRange = NSRange(location: 0, length: timestamp.characters.count)
+                let fullRange = NSRange(location: 0, length: timestamp.count)
                 let attributeString = NSMutableAttributedString(string: timestamp)
-                attributeString.addAttribute(NSForegroundColorAttributeName, value: NSColor.yellow, range: fullRange)
-                attributeString.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.styleSingle.rawValue, range: fullRange)
+                attributeString.addAttribute(NSAttributedStringKey.foregroundColor, value: NSColor.yellow, range: fullRange)
+                attributeString.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: fullRange)
                 statusTimestamp.attributedStringValue = attributeString
             }
 
@@ -316,7 +316,7 @@ class SingleViewWindowController: NSWindowController
             if media.location != nil {
                 Async.background {
                     let placename = media.location.placenameAsString(Preferences.placenameFilter)
-                    if placename.characters.count > 0 {
+                    if placename.count > 0 {
                         Async.main {
                             self.statusLocation.stringValue = placename
                         }
@@ -352,7 +352,7 @@ class SingleViewWindowController: NSWindowController
         dialog.allowedFileTypes = SupportedMediaTypes.all()
         dialog.canChooseDirectories = true
         dialog.allowsMultipleSelection = true
-        if 1 != dialog.runModal() || dialog.urls.count < 1 {
+        if 1 != dialog.runModal().rawValue || dialog.urls.count < 1 {
             return (nil, nil)
         }
 
@@ -388,7 +388,7 @@ class SingleViewWindowController: NSWindowController
             let _ = selectByUrl(selected, display: true)
         }
 
-        NSDocumentController.shared().noteNewRecentDocumentURL(urls[0])
+        NSDocumentController.shared.noteNewRecentDocumentURL(urls[0])
     }
 
     func selectByUrl(_ url: URL, display: Bool) -> Int?

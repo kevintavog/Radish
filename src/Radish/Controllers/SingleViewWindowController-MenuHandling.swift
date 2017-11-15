@@ -31,80 +31,95 @@ extension SingleViewWindowController
         }
     }
 
+    @objc
     override func pageUp(_ sender: Any?)
     {
         tryToMoveTo({ index, maxIndex in max(0, index - Preferences.pageSize) })
     }
 
+    @objc
     override func pageDown(_ sender: Any?)
     {
         tryToMoveTo({ index, maxIndex in min(maxIndex, index + Preferences.pageSize) })
     }
 
+    @objc
     func moveToFirstItem(_ sender: AnyObject?)
     {
         tryToMoveTo({ index, maxIndex in 0 })
     }
 
+    @objc
     func moveToLastItem(_ sender: AnyObject?)
     {
         tryToMoveTo({ index, maxIndex in maxIndex })
     }
     
+    @objc
     func moveToPercent(_ percent: Int)
     {
         tryToMoveTo({ index, maxIndex in (maxIndex * percent) / 100 })
     }
 
+    @objc
     func moveToTenPercent(_ sender: AnyObject?)
     {
         moveToPercent(10)
     }
 
+    @objc
     func moveToTwentyPercent(_ sender: AnyObject?)
     {
         moveToPercent(20)
     }
 
+    @objc
     func moveToThirtyPercent(_ sender: AnyObject?)
     {
         moveToPercent(30)
     }
 
+    @objc
     func moveToFortyPercent(_ sender: AnyObject?)
     {
         moveToPercent(40)
     }
 
+    @objc
     func moveToFiftyPercent(_ sender: AnyObject?)
     {
         moveToPercent(50)
     }
 
+    @objc
     func moveToSixtyPercent(_ sender: AnyObject?)
     {
         moveToPercent(60)
     }
 
+    @objc
     func moveToSeventyPercent(_ sender: AnyObject?)
     {
         moveToPercent(70)
     }
 
+    @objc
     func moveToEightyPercent(_ sender: AnyObject?)
     {
         moveToPercent(80)
     }
 
+    @objc
     func moveToNinetyPercent(_ sender: AnyObject?)
     {
         moveToPercent(90)
     }
 
+    @objc
     override func keyDown(with theEvent: NSEvent)
     {
         if let chars = theEvent.charactersIgnoringModifiers {
-            let modFlags = NSEventModifierFlags(rawValue: theEvent.modifierFlags.rawValue & NSEventModifierFlags.deviceIndependentFlagsMask.rawValue)
+            let modFlags = NSEvent.ModifierFlags(rawValue: theEvent.modifierFlags.rawValue & NSEvent.ModifierFlags.deviceIndependentFlagsMask.rawValue)
             let keySequence = KeySequence(modifierFlags: modFlags, chars: chars)
             if let selector = keyMappings[keySequence] {
                 self.performSelector(onMainThread: selector, with: theEvent.window, waitUntilDone: true)
@@ -175,7 +190,7 @@ extension SingleViewWindowController
             return
         }
         
-        NSWorkspace.shared().selectFile(currentMediaData!.url!.path, inFileViewerRootedAtPath: "")
+        NSWorkspace.shared.selectFile(currentMediaData!.url!.path, inFileViewerRootedAtPath: "")
     }
 
     @IBAction func setFileDateFromExifDate(_ sender: AnyObject)
@@ -191,7 +206,7 @@ extension SingleViewWindowController
         if !result!.allSucceeded {
             let alert = NSAlert()
             alert.messageText = "Set file date of '\(filename)' failed: \(result!.errorMessage)."
-            alert.alertStyle = NSAlertStyle.warning
+            alert.alertStyle = NSAlert.Style.warning
             alert.addButton(withTitle: "Close")
             alert.runModal()
         }
@@ -210,7 +225,7 @@ extension SingleViewWindowController
         if jheadInvoker.processInvoker.exitCode != 0 {
             let alert = NSAlert()
             alert.messageText = "Auto rotate of '\(filename)' failed: \(jheadInvoker.processInvoker.error)."
-            alert.alertStyle = NSAlertStyle.warning
+            alert.alertStyle = NSAlert.Style.warning
             alert.addButton(withTitle: "Close")
             alert.runModal()
         }
@@ -225,11 +240,11 @@ extension SingleViewWindowController
         Logger.info("moveToTrash: \((url?.path)!)")
 
         let filename = (url?.lastPathComponent)!
-        NSWorkspace.shared().recycle([url!]) { newUrls, error in
+        NSWorkspace.shared.recycle([url!]) { newUrls, error in
             if error != nil {
                 let alert = NSAlert()
                 alert.messageText = "Failed moving '\(filename)' to trash."
-                alert.alertStyle = NSAlertStyle.warning
+                alert.alertStyle = NSAlert.Style.warning
                 alert.addButton(withTitle: "Close")
                 alert.runModal()
             }
@@ -255,8 +270,8 @@ extension SingleViewWindowController
                 url = "http://www.openstreetmap.org/?&mlat=\(location.latitude)&mlon=\(location.longitude)#map=18/\(location.latitude)/\(location.longitude)"
             }
 
-            if url.characters.count > 0 {
-                NSWorkspace.shared().open(URL(string: url)!)
+            if url.count > 0 {
+                NSWorkspace.shared.open(URL(string: url)!)
             }
         }
     }
@@ -269,7 +284,7 @@ extension SingleViewWindowController
             if information != nil {
                 alert.informativeText = information!
             }
-            alert.alertStyle = NSAlertStyle.warning
+            alert.alertStyle = NSAlert.Style.warning
             alert.addButton(withTitle: "Close")
             alert.runModal()
             return false

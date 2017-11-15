@@ -6,10 +6,10 @@ import AppKit
 
 class KeySequence : Hashable, CustomStringConvertible
 {
-    let modifierFlags: NSEventModifierFlags
+    let modifierFlags: NSEvent.ModifierFlags
     let chars: String
 
-    init(modifierFlags: NSEventModifierFlags, chars: String)
+    init(modifierFlags: NSEvent.ModifierFlags, chars: String)
     {
         self.modifierFlags = modifierFlags
         self.chars = chars;

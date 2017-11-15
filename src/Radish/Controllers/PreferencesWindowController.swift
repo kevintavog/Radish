@@ -41,7 +41,7 @@ class PreferencesWindowController : NSWindowController
         Preferences.showOnMap = Preferences.ShowOnMap(rawValue: showOnMapMatrix.selectedRow + 1)!
         Preferences.placenameLevel = Preferences.PlacenameLevel(rawValue: placenameLevelMatrix.selectedRow + 1)!
 
-        NSApplication.shared().stopModal()
+        NSApplication.shared.stopModal()
     }
     
     @IBAction func testOpenStreetMapHost(_ sender: AnyObject)
@@ -63,7 +63,7 @@ class PreferencesWindowController : NSWindowController
 
                 let succeeded = response.keys.contains("DisplayName")
                 let imageName = succeeded ? "SucceededCheck" : "FailedCheck"
-                self.testOsmResultImage.image = NSImage(named: imageName)
+                self.testOsmResultImage.image = NSImage(named: NSImage.Name(rawValue: imageName))
 
                 if !succeeded {
                     Logger.info("Response: \(response)")

@@ -40,7 +40,7 @@ class MapViewController: NSWindowController
     
     
     // MARK: Notification handlers
-    func fileSelected(_ notification: Notification)
+    @objc func fileSelected(_ notification: Notification)
     {
         if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
             if let mediaData = userInfo["MediaData"] {
@@ -52,7 +52,7 @@ class MapViewController: NSWindowController
         }
     }
     
-    func detailsUpdated(_ notification: Notification)
+    @objc func detailsUpdated(_ notification: Notification)
     {
         if panel.isVisible {
             if let _ = notification.object as? MediaData {
