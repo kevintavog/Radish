@@ -276,6 +276,13 @@ extension SingleViewWindowController
         }
     }
 
+    @IBAction func copyLatLon(_ sender: Any) {
+        if let location = currentMediaData?.location {
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.writeObjects(["\(location.latitude),\(location.longitude)" as NSString])
+        }
+    }
+
     func onlyIfLocalFile(_ url: URL?, message: String, information: String?) -> Bool
     {
         if !(url?.isFileURL)! {

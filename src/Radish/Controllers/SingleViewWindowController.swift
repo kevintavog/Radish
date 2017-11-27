@@ -27,7 +27,6 @@ class SingleViewWindowController: NSWindowController
     @IBOutlet weak var statusFilename: NSTextField!
 
 
-
     let trashSoundPath = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif"
     var mediaProvider: MediaProvider?
     var currentFileIndex = 0
@@ -296,7 +295,6 @@ class SingleViewWindowController: NSWindowController
             let media = currentMediaData!
             statusIndex.stringValue = "\(currentFileIndex + 1) of \(mediaProvider!.mediaCount)"
             statusFilename.stringValue = "\(media.name!)"
-            statusLocation.stringValue = media.locationString()
             statusKeywords.stringValue = media.keywordsString()
 
             let timestamp = "\(dateFormatter!.string(from: media.timestamp!))"
@@ -314,14 +312,25 @@ class SingleViewWindowController: NSWindowController
             window?.title = "Radish - \(media.name!)"
 
             if media.location != nil {
-                Async.background {
-                    let placename = media.location.placenameAsString(Preferences.placenameFilter)
-                    if placename.count > 0 {
-                        Async.main {
-                            self.statusLocation.stringValue = placename
+                if media.location.hasPlacename() {
+                    statusLocation.stringValue = media.location.placenameAsString(Preferences.placenameFilter)
+                } else {
+                    statusLocation.stringValue = ""
+                    Async.background {
+                        let placename = media.location.placenameAsString(Preferences.placenameFilter)
+                        if placename.count > 0 {
+                            Async.main {
+                                self.statusLocation.stringValue = placename
+                            }
+                        } else {
+                            Async.main {
+                                self.statusLocation.stringValue = media.locationString()
+                            }
                         }
                     }
                 }
+            } else {
+                statusLocation.stringValue = ""
             }
         }
     }

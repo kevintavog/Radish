@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.AVKitIBPlugin" version="11542"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="11542"/>
-        <plugIn identifier="com.apple.imagekit.ibplugin" version="11542"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="13529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="13529"/>
+        <plugIn identifier="com.apple.imagekit.ibplugin" version="13529"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -190,6 +190,11 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Edit" id="W48-6f-4Dl">
                         <items>
+                            <menuItem title="Copy lat / lon" tag="2" keyEquivalent="C" id="NxP-yu-bXX">
+                                <connections>
+                                    <action selector="copyLatLon:" target="lzO-hK-yhB" id="SKy-wc-XGc"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Undo" keyEquivalent="z" id="dRJ-4n-Yzg">
                                 <connections>
                                     <action selector="undo:" target="-1" id="M6e-cu-g7V"/>
@@ -603,7 +608,7 @@ CA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="paw-dB-jgw">
                             <rect key="frame" x="1" y="1" width="664" height="554"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <ikImageBrowserView autoresizesSubviews="NO" zoomValue="0.49487167596817017" id="u4j-KG-YLU" customClass="RadishImageBrowserView" customModule="Radish" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="664" height="554"/>
@@ -645,7 +650,7 @@ CA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="GJc-Pt-HQX">
                             <rect key="frame" x="0.0" y="0.0" width="802" height="475"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="FileInformationTable" headerView="9Q3-Jp-b7s" id="ttM-yo-p95">
                                     <rect key="frame" x="0.0" y="0.0" width="802" height="458"/>

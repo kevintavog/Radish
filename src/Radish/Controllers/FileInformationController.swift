@@ -5,6 +5,7 @@
 import AppKit
 
 import RangicCore
+import Async
 
 
 class FileInformationController : NSViewController
@@ -40,11 +41,13 @@ class FileInformationController : NSViewController
     // MARK: Notification handlers
     @objc func fileSelected(_ notification: Notification)
     {
-        if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
-            if let mediaData = userInfo["MediaData"] {
-                currentMediaData = mediaData
-                if panel.isVisible {
-                    updateView()
+        Async.main {
+            if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
+                if let mediaData = userInfo["MediaData"] {
+                    self.currentMediaData = mediaData
+                    if self.panel.isVisible {
+                        self.updateView()
+                    }
                 }
             }
         }
@@ -52,9 +55,11 @@ class FileInformationController : NSViewController
 
     @objc func detailsUpdated(_ notification: Notification)
     {
-        if panel.isVisible {
-            if let _ = notification.object as? MediaData {
-                tableView.reloadData()
+        Async.main {
+            if self.panel.isVisible {
+                if let _ = notification.object as? MediaData {
+                    self.tableView.reloadData()
+                }
             }
         }
     }

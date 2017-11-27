@@ -33,8 +33,8 @@ class AppDelegate: NSObject, NSApplicationDelegate
 
         Preferences.setMissingDefaults()
 
-        OpenMapLookupProvider.BaseLocationLookup = Preferences.baseLocationLookup
-        Logger.info("Placename lookups via \(OpenMapLookupProvider.BaseLocationLookup)")
+        ReverseNameLookupProvider.set(host: Preferences.baseLocationLookup)
+        Logger.info("Placename lookups via \(Preferences.baseLocationLookup)")
 
         singleViewWindowController.initialize(mediaProvider)
         thumbnailViewWindowController.initialize(mediaProvider)

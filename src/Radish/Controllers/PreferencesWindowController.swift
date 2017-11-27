@@ -35,6 +35,7 @@ class PreferencesWindowController : NSWindowController
         placenameLevelMatrix.selectCell(atRow: Preferences.placenameLevel.rawValue - 1, column: 0)
     }
 
+    @objc
     func windowWillClose(_ notification: Notification)
     {
         updateBaseLocationLookup()
@@ -55,29 +56,24 @@ class PreferencesWindowController : NSWindowController
         Logger.info("Test host: \(Preferences.baseLocationLookup)")
 
         Async.background {
-            let response = OpenMapLookupProvider().lookup(51.484509, longitude: 0.002570)
+            ReverseNameLookupProvider.set(host: Preferences.baseLocationLookup)
+            let response = ReverseNameLookupProvider().lookup(latitude: 51.484509, longitude: 0.002570)
 
             Async.main {
                 self.testOsmWorkingIndicator.isHidden = true
                 self.testOsmWorkingIndicator.stopAnimation(sender)
 
-                let succeeded = response.keys.contains("DisplayName")
+                let succeeded = response.description.count > 0
                 let imageName = succeeded ? "SucceededCheck" : "FailedCheck"
                 self.testOsmResultImage.image = NSImage(named: NSImage.Name(rawValue: imageName))
 
                 if !succeeded {
                     Logger.info("Response: \(response)")
-                    let code = response["apiStatusCode"]
-                    let message = response["apiMessage"]
+                    let code = "You need to give back an error code..." // response["apiStatusCode"]
+                    let message = "You gotta provide a message" // response["apiMessage"]
                     var error = ""
-                    if code != nil {
-                        error = "code: \(code!); "
-                    }
-                    if message != nil {
-                        error += "\(message!)"
-                    } else {
-                        error += "unknown error"
-                    }
+                    error = "code: \(code); "
+                    error += "\(message)"
                     self.testOsmErrorMessage.stringValue = error
                 }
             }
@@ -93,7 +89,7 @@ class PreferencesWindowController : NSWindowController
     func updateBaseLocationLookup()
     {
         Preferences.baseLocationLookup = openStreetMapHost!.stringValue
-        OpenMapLookupProvider.BaseLocationLookup = Preferences.baseLocationLookup
-        Logger.info("Placename lookups are now via \(OpenMapLookupProvider.BaseLocationLookup)")
+        ReverseNameLookupProvider.set(host: Preferences.baseLocationLookup)
+        Logger.info("Placename lookups are now via \(Preferences.baseLocationLookup)")
     }
 }

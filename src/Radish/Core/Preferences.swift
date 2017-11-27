@@ -29,7 +29,7 @@ class Preferences : BasePreferences
 
     static func setMissingDefaults()
     {
-        setDefaultValue("http://open.mapquestapi.com", key: BaseLocationLookupKey)
+        setDefaultValue("http://localhost:8888", key: BaseLocationLookupKey)
         setDefaultValue(10, key: PageSizeKey)
         setDefaultValue(PlacenameLevel.medium.rawValue, key: PlacenameLevelKey)
         setDefaultValue(ShowOnMap.openStreetMap.rawValue, key: ShowOnMapKey)
