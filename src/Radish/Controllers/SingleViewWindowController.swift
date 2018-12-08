@@ -232,7 +232,7 @@ class SingleViewWindowController: NSWindowController
             }
         }
         
-        if (useFullFrame ){
+        if (useFullFrame) {
             videoPlayer.setFrameSize(videoPlayer.window!.frame.size)
             videoPlayer.setFrameOrigin(NSPoint(x: 0, y: 0))
         }
