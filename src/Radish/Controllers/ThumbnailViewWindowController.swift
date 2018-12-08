@@ -106,7 +106,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
 
 open class ThumbnailViewItem : NSObject
 {
-    open let mediaData:MediaData
+    public let mediaData:MediaData
 
 
     init(_ mediaData: MediaData) {

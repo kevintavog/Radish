@@ -76,7 +76,7 @@ class SingleViewWindowController: NSWindowController
         if let userInfo = notification.userInfo as? Dictionary<String,MediaData> {
             if let mediaData = userInfo["MediaData"] {
                 if selectByUrl(mediaData.url, display: true) == nil {
-                    Logger.warn("Unable to find \(mediaData.url)")
+                    Logger.warn("Unable to find \(String(describing: mediaData.url))")
                 }
                 self.showWindow(nil)
             }
@@ -234,7 +234,7 @@ class SingleViewWindowController: NSWindowController
         
         if (useFullFrame) {
             videoPlayer.setFrameSize(videoPlayer.window!.frame.size)
-            videoPlayer.setFrameOrigin(NSPoint(x: 0, y: 0))
+            videoPlayer.setFrameOrigin(NSPoint(x: 0, y: statusFilename.superview?.frame.height ?? 2 * statusFilename.frame.height))
         }
 
         videoPlayer.player?.addObserver(self, forKeyPath: "volume", options: .new, context: nil)
@@ -248,7 +248,7 @@ class SingleViewWindowController: NSWindowController
         imageViewer.isHidden = true
 
         if media != nil {
-            Logger.warn("Unhandled file: '\(media!.name)'")
+            Logger.warn("Unhandled file: '\(String(describing: media!.name))'")
         }
     }
 
