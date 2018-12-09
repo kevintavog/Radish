@@ -18,6 +18,7 @@ enum MenuItemTag: Int
 
 class SingleViewWindowController: NSWindowController
 {
+    @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var videoPlayer: AVPlayerView!
     @IBOutlet weak var imageViewer: NSImageView!
     @IBOutlet weak var statusTimestamp: NSTextField!
@@ -25,7 +26,8 @@ class SingleViewWindowController: NSWindowController
     @IBOutlet weak var statusIndex: NSTextField!
     @IBOutlet weak var statusLocation: NSTextField!
     @IBOutlet weak var statusFilename: NSTextField!
-
+    
+    var zoomView: ZoomView?
 
     let trashSoundPath = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif"
     var mediaProvider: MediaProvider?
@@ -33,7 +35,6 @@ class SingleViewWindowController: NSWindowController
     var currentMediaData: MediaData?
     fileprivate var dateFormatter: DateFormatter? = nil
 
-    
     let keyMappings: [KeySequence: Selector] = [
         KeySequence(modifierFlags: NSEvent.ModifierFlags.function, chars: "\u{F729}"): #selector(SingleViewWindowController.moveToFirstItem(_:)),
         KeySequence(modifierFlags: NSEvent.ModifierFlags.function, chars: "\u{F72B}"): #selector(SingleViewWindowController.moveToLastItem(_:)),
@@ -57,8 +58,9 @@ class SingleViewWindowController: NSWindowController
 
         window?.backgroundColor = NSColor.black
 
+        zoomView = ZoomView(imageViewer)
         videoPlayer.isHidden = true
-        imageViewer.isHidden = true
+        scrollView.isHidden = true
 
         dateFormatter = DateFormatter()
         dateFormatter!.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -176,8 +178,8 @@ class SingleViewWindowController: NSWindowController
         stopVideoPlayer()
 
         imageViewer.image = nil
-        if (imageViewer.isHidden) {
-            imageViewer.isHidden = false
+        if (scrollView.isHidden) {
+            scrollView.isHidden = false
             videoPlayer.isHidden = true
         }
 
@@ -210,7 +212,7 @@ class SingleViewWindowController: NSWindowController
 
         if (videoPlayer.isHidden) {
             videoPlayer.isHidden = false
-            imageViewer.isHidden = true
+            scrollView.isHidden = true
             imageViewer.image = nil
         }
 
@@ -245,7 +247,7 @@ class SingleViewWindowController: NSWindowController
     {
         videoPlayer.player?.pause()
         videoPlayer.isHidden = true
-        imageViewer.isHidden = true
+        scrollView.isHidden = true
 
         if media != nil {
             Logger.warn("Unhandled file: '\(String(describing: media!.name))'")

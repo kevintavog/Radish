@@ -283,6 +283,22 @@ extension SingleViewWindowController
         }
     }
 
+    @IBAction func zoomIn(_ sender: Any) {
+        zoomView?.zoomIn()
+    }
+    
+    @IBAction func zoomOut(_ sender: Any) {
+        zoomView?.zoomOut()
+    }
+
+    @IBAction func zoomToActualSize(_ sender: Any) {
+        zoomView?.zoomToActualSize(imageSize: imageViewer.image!.size)
+    }
+
+    @IBAction func zoomToFit(_ sender: Any) {
+        zoomView?.zoomToFit()
+    }
+
     func onlyIfLocalFile(_ url: URL?, message: String, information: String?) -> Bool
     {
         if !(url?.isFileURL)! {

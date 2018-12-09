@@ -28,6 +28,7 @@
         <customObject id="lzO-hK-yhB" customClass="SingleViewWindowController" customModule="Radish" customModuleProvider="target">
             <connections>
                 <outlet property="imageViewer" destination="FIX-ws-dDL" id="C0T-1s-0aG"/>
+                <outlet property="scrollView" destination="f8l-WP-d8h" id="pVl-qz-Mxt"/>
                 <outlet property="statusFilename" destination="FQl-1Y-nUv" id="f2C-yl-rGE"/>
                 <outlet property="statusIndex" destination="7HI-al-da7" id="O5N-rI-O48"/>
                 <outlet property="statusKeywords" destination="VS3-gN-7pA" id="ery-Jv-xlG"/>
@@ -435,6 +436,29 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mvZ-ng-RCb"/>
+                            <menuItem title="Zoom in" tag="2" keyEquivalent="=" id="dTY-c3-rBq">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="zoomIn:" target="lzO-hK-yhB" id="CXI-HD-ZVi"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom to actual size" tag="2" keyEquivalent="=" id="WL4-Dk-z5q">
+                                <connections>
+                                    <action selector="zoomToActualSize:" target="lzO-hK-yhB" id="DRt-jb-ERV"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom out" tag="2" keyEquivalent="-" id="LTI-Ji-KOC">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="zoomOut:" target="lzO-hK-yhB" id="wT6-Qx-WSb"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom to fit" tag="2" keyEquivalent="-" id="oSR-Jf-30H">
+                                <connections>
+                                    <action selector="zoomToFit:" target="lzO-hK-yhB" id="4rX-Yt-ygo"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="jJU-AC-I1H"/>
                             <menuItem title="Show map in browser" tag="2" keyEquivalent="l" id="HwP-RL-OtT">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
@@ -506,15 +530,32 @@ CA
                 <rect key="frame" x="0.0" y="0.0" width="956" height="578"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FIX-ws-dDL">
-                        <rect key="frame" x="0.0" y="0.0" width="956" height="578"/>
+                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" id="f8l-WP-d8h">
+                        <rect key="frame" x="0.0" y="0.0" width="958" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="rcO-0P-UU9"/>
-                    </imageView>
-                    <avPlayerView hidden="YES" controlsStyle="floating" id="bx4-Q1-BBc">
-                        <rect key="frame" x="0.0" y="0.0" width="956" height="578"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </avPlayerView>
+                        <clipView key="contentView" id="Bw5-tP-Kpx">
+                            <rect key="frame" x="0.0" y="0.0" width="958" height="580"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FIX-ws-dDL">
+                                    <rect key="frame" x="0.0" y="0.0" width="958" height="580"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="rcO-0P-UU9"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </clipView>
+                        <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="4Vf-we-aef">
+                            <rect key="frame" x="0.0" y="564" width="958" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Gs8-Ba-0Hi">
+                            <rect key="frame" x="942" y="0.0" width="16" height="580"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
                     <customView id="d5O-pn-yaM">
                         <rect key="frame" x="0.0" y="0.0" width="956" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -577,6 +618,10 @@ CA
                             </box>
                         </subviews>
                     </customView>
+                    <avPlayerView hidden="YES" controlsStyle="floating" id="bx4-Q1-BBc">
+                        <rect key="frame" x="0.0" y="0.0" width="956" height="578"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </avPlayerView>
                 </subviews>
             </view>
             <connections>

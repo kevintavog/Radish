@@ -17,6 +17,7 @@
 		4442A0261B926784007251E6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442A0241B926784007251E6 /* MainMenu.xib */; };
 		444322611B9947C9009043F4 /* RadishImageBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */; };
 		444322631B994A6D009043F4 /* RadishImageBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444322621B994A6D009043F4 /* RadishImageBrowserView.swift */; };
+		4446376C21BC65BE00822ADC /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446376B21BC65BE00822ADC /* ZoomView.swift */; };
 		444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; };
 		444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; };
@@ -83,6 +84,7 @@
 		4442A0271B926784007251E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserCell.swift; path = Controllers/RadishImageBrowserCell.swift; sourceTree = "<group>"; };
 		444322621B994A6D009043F4 /* RadishImageBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserView.swift; path = Controllers/RadishImageBrowserView.swift; sourceTree = "<group>"; };
+		4446376B21BC65BE00822ADC /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZoomView.swift; path = Controllers/ZoomView.swift; sourceTree = "<group>"; };
 		444FBF911B9FD78D00A32991 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = Carthage/Build/Mac/Async.framework; sourceTree = "<group>"; };
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
 		447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/Mac/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				44A52E8C1B92688D00399384 /* SingleViewWindowController.swift */,
 				44C0A6451BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift */,
 				442232731B968F13009123F0 /* ThumbnailViewWindowController.swift */,
+				4446376B21BC65BE00822ADC /* ZoomView.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
 				44C0A6461BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
+				4446376C21BC65BE00822ADC /* ZoomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
