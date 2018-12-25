@@ -26,7 +26,7 @@ class SingleViewWindowController: NSWindowController
     @IBOutlet weak var statusIndex: NSTextField!
     @IBOutlet weak var statusLocation: NSTextField!
     @IBOutlet weak var statusFilename: NSTextField!
-    
+
     var zoomView: ZoomView?
 
     let trashSoundPath = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif"

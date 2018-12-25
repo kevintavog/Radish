@@ -276,6 +276,14 @@ extension SingleViewWindowController
         }
     }
 
+    @IBAction func showOpenStreetMapFeatures(_ sender: Any) {
+        Logger.info("showOpenStreetMapFeatures '\((currentMediaData?.locationString())!)'")
+        if let location = currentMediaData?.location {
+            let url = "https://www.openstreetmap.org/query?lat=\(location.latitude)&lon=\(location.longitude)&mlat=\(location.latitude)&mlon=\(location.longitude)"
+            NSWorkspace.shared.open(URL(string: url)!)
+        }
+    }
+
     @IBAction func copyLatLon(_ sender: Any) {
         if let location = currentMediaData?.location {
             NSPasteboard.general.clearContents()
