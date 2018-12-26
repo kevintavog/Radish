@@ -11,6 +11,18 @@ import RangicCore
 // Menu handlers for SingleViewWindowController
 extension SingleViewWindowController
 {
+    @IBAction func onShowPlacenameDetails(_ sender: Any) {
+        var val = false
+        if menuShowPlacenameDetails.state == NSControl.StateValue.off {
+            menuShowPlacenameDetails.state = NSControl.StateValue.on
+            val = true
+        } else {
+            menuShowPlacenameDetails.state = NSControl.StateValue.off
+            val = false
+        }
+        Notifications.postNotification(Notifications.SingleView.ShowPlacenameDetails, object: self, userInfo: ["ShowPlacenameDetails": val])
+    }
+
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool
     {
         switch MenuItemTag(rawValue: menuItem.tag)! {

@@ -20,6 +20,7 @@
 		4446376C21BC65BE00822ADC /* ZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446376B21BC65BE00822ADC /* ZoomView.swift */; };
 		444FBF921B9FD78D00A32991 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; };
 		444FBF931B9FD78D00A32991 /* Async.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 444FBF911B9FD78D00A32991 /* Async.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4460668521D4210000EF1C9D /* PlacenameDetailsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4460668421D4210000EF1C9D /* PlacenameDetailsProvider.swift */; };
 		44620BE51B9D00760024F403 /* FileInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44620BE41B9D00760024F403 /* FileInformationController.swift */; };
 		447CA6731BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */; };
 		447CA6741BD5CC6700CA174C /* CocoaLumberjackSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -86,6 +87,7 @@
 		444322621B994A6D009043F4 /* RadishImageBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadishImageBrowserView.swift; path = Controllers/RadishImageBrowserView.swift; sourceTree = "<group>"; };
 		4446376B21BC65BE00822ADC /* ZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ZoomView.swift; path = Controllers/ZoomView.swift; sourceTree = "<group>"; };
 		444FBF911B9FD78D00A32991 /* Async.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Async.framework; path = Carthage/Build/Mac/Async.framework; sourceTree = "<group>"; };
+		4460668421D4210000EF1C9D /* PlacenameDetailsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacenameDetailsProvider.swift; sourceTree = "<group>"; };
 		44620BE41B9D00760024F403 /* FileInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformationController.swift; path = Controllers/FileInformationController.swift; sourceTree = "<group>"; };
 		447CA6721BD5CC6700CA174C /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/Mac/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		447CA67E1BD5CF8300CA174C /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/Mac/CocoaLumberjack.framework; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				44620BE41B9D00760024F403 /* FileInformationController.swift */,
 				44C0A6481BD3F88800205175 /* KeySequence.swift */,
 				44936FDC1DDCFE0E0011DAE1 /* MapViewController.swift */,
+				4460668421D4210000EF1C9D /* PlacenameDetailsProvider.swift */,
 				443402BB1BB63FFB0001D1A3 /* PreferencesWindowController.swift */,
 				444322601B9947C9009043F4 /* RadishImageBrowserCell.swift */,
 				444322621B994A6D009043F4 /* RadishImageBrowserView.swift */,
@@ -316,6 +319,7 @@
 				443402BC1BB63FFB0001D1A3 /* PreferencesWindowController.swift in Sources */,
 				443D908A1B9CD55F0022A268 /* Notifications.swift in Sources */,
 				44C0A6461BD3EBC700205175 /* SingleViewWindowController-MenuHandling.swift in Sources */,
+				4460668521D4210000EF1C9D /* PlacenameDetailsProvider.swift in Sources */,
 				4442A0211B926784007251E6 /* AppDelegate.swift in Sources */,
 				4446376C21BC65BE00822ADC /* ZoomView.swift in Sources */,
 			);

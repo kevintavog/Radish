@@ -28,10 +28,13 @@ class FileInformationController : NSViewController
     @IBOutlet weak var tabsView: NSTabView!
     @IBOutlet weak var panel: NSPanel!
 
-    // EXIF, Placename, Properties, Composite, XMP, IPTC
+    // EXIF, IPTC, XMP, Composite, Placename
     fileprivate var currentMediaData: MediaData?
     fileprivate var tabStart = [Int](repeating: -1, count: FileInformationController.numTabs + 1)
     fileprivate var tabCount = [Int](repeating: -1, count: FileInformationController.numTabs + 1)
+
+    fileprivate var showPlacenameDetails = false
+    fileprivate var placenameDetails = [PlacenameDetail]()
 
 
     // MARK: Initialize
@@ -45,6 +48,7 @@ class FileInformationController : NSViewController
 
         Notifications.addObserver(self, selector: #selector(FileInformationController.fileSelected(_:)), name: Notifications.Selection.MediaData, object: nil)
         Notifications.addObserver(self, selector: #selector(FileInformationController.detailsUpdated(_:)), name: MediaProvider.Notifications.DetailsAvailable, object: nil)
+        Notifications.addObserver(self, selector: #selector(FileInformationController.showPlacenameDetailsNotification(_:)), name: Notifications.SingleView.ShowPlacenameDetails, object: nil)
     }
 
 
@@ -82,6 +86,18 @@ class FileInformationController : NSViewController
             }
         }
     }
+    
+    @objc func showPlacenameDetailsNotification(_ notification: Notification)
+    {
+        if let userInfo = notification.userInfo as? Dictionary<String,Bool> {
+            if let val = userInfo["ShowPlacenameDetails"] {
+                self.showPlacenameDetails = val
+                Async.main {
+                    self.updateView()
+                }
+            }
+        }
+    }
 
     func updateView()
     {
@@ -97,6 +113,7 @@ class FileInformationController : NSViewController
                 self.tabStart[index] = -1
                 self.tabCount[index] = 0
             }
+            placenameDetails = []
 
             var safeToIgnore = false
             var tabId = TabIdentifier.none
@@ -134,6 +151,21 @@ class FileInformationController : NSViewController
             self.xmpTableView.reloadData()
             self.compositeTableView.reloadData()
             self.placenameTableView.reloadData()
+            
+            if self.tabCount[TabIdentifier.placename.rawValue] > 0 && self.showPlacenameDetails {
+                Async.background {
+                    self.placenameDetails.append(
+                        contentsOf: PlacenameDetailsProvider().lookup(
+                            latitude: self.currentMediaData!.location!.latitude,
+                            longitude: self.currentMediaData!.location!.longitude))
+                    
+                    if self.placenameDetails.count > 0 {
+                        Async.main {
+                            self.placenameTableView.reloadData()
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -154,6 +186,10 @@ class FileInformationController : NSViewController
                 Logger.error("Unexpected tabId: \(tabId)")
                 return 0
             }
+
+            if tabId == TabIdentifier.placename.rawValue {
+                return self.tabCount[tabId] + self.placenameDetails.count
+            }
             
             return self.tabCount[tabId]
         }
@@ -169,6 +205,19 @@ class FileInformationController : NSViewController
             return ""
         }
 
+        if tabId == TabIdentifier.placename.rawValue && row >= tabCount[tabId] {
+            let detailIndex = row - tabCount[tabId]
+            switch (objectValueForTableColumn!.dataCell as AnyObject).tag {
+            case 1:
+                return placenameDetails[detailIndex].name
+            case 2:
+                return placenameDetails[detailIndex].value
+            default:
+                Logger.error("Unhandled information column tag: \(String(describing: (objectValueForTableColumn!.dataCell as AnyObject).tag))")
+                return ""
+            }
+        }
+
         let detail = currentMediaData?.details[self.tabStart[tabId] + row]
         switch (objectValueForTableColumn!.dataCell as AnyObject).tag {
         case 1:
@@ -179,12 +228,6 @@ class FileInformationController : NSViewController
             Logger.error("Unhandled information column tag: \(String(describing: (objectValueForTableColumn!.dataCell as AnyObject).tag))")
             return ""
         }
-    }
-
-    @objc
-    func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool
-    {
-        return currentMediaData?.details[row].category != nil
     }
 
     @objc

@@ -28,6 +28,7 @@
         <customObject id="lzO-hK-yhB" customClass="SingleViewWindowController" customModule="Radish" customModuleProvider="target">
             <connections>
                 <outlet property="imageViewer" destination="FIX-ws-dDL" id="C0T-1s-0aG"/>
+                <outlet property="menuShowPlacenameDetails" destination="h9V-ZI-Im7" id="7Ih-Vl-ixd"/>
                 <outlet property="scrollView" destination="f8l-WP-d8h" id="pVl-qz-Mxt"/>
                 <outlet property="statusFilename" destination="FQl-1Y-nUv" id="f2C-yl-rGE"/>
                 <outlet property="statusIndex" destination="7HI-al-da7" id="O5N-rI-O48"/>
@@ -441,6 +442,12 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mvZ-ng-RCb"/>
+                            <menuItem title="Show placename details" tag="1" keyEquivalent="P" id="h9V-ZI-Im7">
+                                <connections>
+                                    <action selector="onShowPlacenameDetails:" target="lzO-hK-yhB" id="ciy-z6-jcD"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="c3V-xR-Vig"/>
                             <menuItem title="Zoom in" tag="2" keyEquivalent="=" id="dTY-c3-rBq">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

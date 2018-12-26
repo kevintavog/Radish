@@ -26,6 +26,8 @@ class SingleViewWindowController: NSWindowController
     @IBOutlet weak var statusIndex: NSTextField!
     @IBOutlet weak var statusLocation: NSTextField!
     @IBOutlet weak var statusFilename: NSTextField!
+    @IBOutlet weak var menuShowPlacenameDetails: NSMenuItem!
+
 
     var zoomView: ZoomView?
 
@@ -35,6 +37,7 @@ class SingleViewWindowController: NSWindowController
     var currentMediaData: MediaData?
     fileprivate var dateFormatter: DateFormatter? = nil
 
+    
     let keyMappings: [KeySequence: Selector] = [
         KeySequence(modifierFlags: NSEvent.ModifierFlags.function, chars: "\u{F729}"): #selector(SingleViewWindowController.moveToFirstItem(_:)),
         KeySequence(modifierFlags: NSEvent.ModifierFlags.function, chars: "\u{F72B}"): #selector(SingleViewWindowController.moveToLastItem(_:)),
