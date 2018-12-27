@@ -16,15 +16,17 @@ class FileInformationController : NSViewController
             iptc = 2,
             xmp = 3,
             composite = 4,
-            placename = 5
+            placename = 5,
+            wikipedia = 6
     }
-    static let numTabs = 5
+    static let numTabs = 6
     
     @IBOutlet weak var exifTableView: NSTableView!
     @IBOutlet weak var iptcTableView: NSTableView!
     @IBOutlet weak var xmpTableView: NSTableView!
     @IBOutlet weak var compositeTableView: NSTableView!
     @IBOutlet weak var placenameTableView: NSTableView!
+    @IBOutlet weak var wikipediaTableView: NSTableView!
     @IBOutlet weak var tabsView: NSTabView!
     @IBOutlet weak var panel: NSPanel!
 
@@ -36,6 +38,9 @@ class FileInformationController : NSViewController
     fileprivate var showPlacenameDetails = false
     fileprivate var placenameDetails = [PlacenameDetail]()
 
+    fileprivate var lastWikipediaLocation = ""
+    fileprivate var wikipediaDetails = [WikipediaDetail]()
+
 
     // MARK: Initialize
     func initialize()
@@ -45,13 +50,24 @@ class FileInformationController : NSViewController
         xmpTableView.backgroundColor = NSColor.clear
         compositeTableView.backgroundColor = NSColor.clear
         placenameTableView.backgroundColor = NSColor.clear
+        wikipediaTableView.backgroundColor = NSColor.clear
 
         Notifications.addObserver(self, selector: #selector(FileInformationController.fileSelected(_:)), name: Notifications.Selection.MediaData, object: nil)
         Notifications.addObserver(self, selector: #selector(FileInformationController.detailsUpdated(_:)), name: MediaProvider.Notifications.DetailsAvailable, object: nil)
         Notifications.addObserver(self, selector: #selector(FileInformationController.showPlacenameDetailsNotification(_:)), name: Notifications.SingleView.ShowPlacenameDetails, object: nil)
+
+        wikipediaTableView.target = self
+        wikipediaTableView.doubleAction = #selector(FileInformationController.doubleClickWikipedia(_ :))
     }
 
-
+    @objc
+    func doubleClickWikipedia(_ sender: Any) {
+        let row = wikipediaTableView.selectedRow
+        if row >= 0 && row < wikipediaDetails.count {
+            NSWorkspace.shared.open(URL(string: "https://en.wikipedia.org/?curid=\(wikipediaDetails[row].pageId)")!)
+        }
+    }
+    
     // MARK: actions
     func toggleVisibility()
     {
@@ -115,9 +131,29 @@ class FileInformationController : NSViewController
             }
             placenameDetails = []
 
+            var loadWikipedia = false
+            var locationString = ""
+            if let md = currentMediaData, let loc = md.location {
+                locationString = "\(loc.latitude),\(loc.longitude)"
+            }
+            if self.lastWikipediaLocation != locationString {
+                self.lastWikipediaLocation = locationString
+                loadWikipedia = true
+                wikipediaDetails = []
+                self.wikipediaTableView.reloadData()
+            }
+
             var safeToIgnore = false
             var tabId = TabIdentifier.none
             if currentMediaData != nil {
+                Async.background {
+                    if loadWikipedia {
+                        self.retrieveWikipediaDetails()
+                        Async.main {
+                            self.wikipediaTableView.reloadData()
+                        }
+                    }
+                }
                 for (index, md) in currentMediaData!.details.enumerated() {
                     if md.category != nil {
                         switch md.category! {
@@ -169,6 +205,12 @@ class FileInformationController : NSViewController
         }
     }
 
+    func retrieveWikipediaDetails() {
+        self.wikipediaDetails.append(contentsOf: WikipediaProvider().lookup(
+            latitude: self.currentMediaData!.location!.latitude,
+            longitude: self.currentMediaData!.location!.longitude))
+    }
+    
     // MARK: tab view
     @objc
     func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?)
@@ -190,6 +232,10 @@ class FileInformationController : NSViewController
             if tabId == TabIdentifier.placename.rawValue {
                 return self.tabCount[tabId] + self.placenameDetails.count
             }
+
+            if tabId == TabIdentifier.wikipedia.rawValue {
+                return self.wikipediaDetails.count
+            }
             
             return self.tabCount[tabId]
         }
@@ -204,7 +250,7 @@ class FileInformationController : NSViewController
             Logger.error("Unexpected tabId: \(tabId)")
             return ""
         }
-
+        
         if tabId == TabIdentifier.placename.rawValue && row >= tabCount[tabId] {
             let detailIndex = row - tabCount[tabId]
             switch (objectValueForTableColumn!.dataCell as AnyObject).tag {
@@ -212,6 +258,20 @@ class FileInformationController : NSViewController
                 return placenameDetails[detailIndex].name
             case 2:
                 return placenameDetails[detailIndex].value
+            default:
+                Logger.error("Unhandled information column tag: \(String(describing: (objectValueForTableColumn!.dataCell as AnyObject).tag))")
+                return ""
+            }
+        }
+        
+        if tabId == TabIdentifier.wikipedia.rawValue {
+            switch (objectValueForTableColumn!.dataCell as AnyObject).tag {
+            case 1:
+                return wikipediaDetails[row].title
+            case 2:
+                return String(wikipediaDetails[row].distance)
+            case 3:
+                return wikipediaDetails[row].type
             default:
                 Logger.error("Unhandled information column tag: \(String(describing: (objectValueForTableColumn!.dataCell as AnyObject).tag))")
                 return ""
