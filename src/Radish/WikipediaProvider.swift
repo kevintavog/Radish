@@ -5,15 +5,21 @@ import SwiftyJSON
 
 open class WikipediaDetail
 {
+    public let id: String
     public let title: String
     public let pageId: Int
+    public let latitude: Double
+    public let longitude: Double
     public let distance: Int
     public let type: String
     
-    init(title: String, pageId: Int, distance: Int, type: String)
+    init(id: String, title: String, pageId: Int, latitude: Double, longitude: Double, distance: Int, type: String)
     {
+        self.id = id
         self.title = title
         self.pageId = pageId
+        self.latitude = latitude
+        self.longitude = longitude
         self.distance = distance
         self.type = type
     }
@@ -64,8 +70,19 @@ open class WikipediaProvider {
             let json = try JSON(data: resultData!)
             if let resultsJson = json["query"]["geosearch"].array {
                 for itemJson in resultsJson {
-                    if let title = itemJson["title"].string, let pageId = itemJson["pageid"].int, let distance = itemJson["dist"].double {
-                        details.append(WikipediaDetail(title: title, pageId: pageId, distance: Int(distance), type: itemJson["type"].string ?? ""))
+                    if let title = itemJson["title"].string, let pageId = itemJson["pageid"].int,
+                        let lat = itemJson["lat"].double, let lon = itemJson["lon"].double,
+                        let distance = itemJson["dist"].double {
+                        
+                        let index = details.count + 1
+                        details.append(WikipediaDetail(
+                            id: String(index),
+                            title: title,
+                            pageId: pageId,
+                            latitude: lat,
+                            longitude: lon,
+                            distance: Int(distance),
+                            type: itemJson["type"].string ?? ""))
                     }
                 }
             }

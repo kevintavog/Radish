@@ -11,6 +11,18 @@ import RangicCore
 // Menu handlers for SingleViewWindowController
 extension SingleViewWindowController
 {
+    @IBAction func onShowWikipediaOnMap(_ sender: Any) {
+        var val = false
+        if menuShowWikipediaOnMap.state == NSControl.StateValue.off {
+            menuShowWikipediaOnMap.state = NSControl.StateValue.on
+            val = true
+        } else {
+            menuShowWikipediaOnMap.state = NSControl.StateValue.off
+            val = false
+        }
+        Notifications.postNotification(Notifications.SingleView.ShowWikipediaOnMap, object: self, userInfo: ["ShowWikipediaOnMap": val])
+    }
+
     @IBAction func onShowPlacenameDetails(_ sender: Any) {
         var val = false
         if menuShowPlacenameDetails.state == NSControl.StateValue.off {

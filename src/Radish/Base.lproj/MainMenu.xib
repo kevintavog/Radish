@@ -29,6 +29,7 @@
             <connections>
                 <outlet property="imageViewer" destination="FIX-ws-dDL" id="C0T-1s-0aG"/>
                 <outlet property="menuShowPlacenameDetails" destination="h9V-ZI-Im7" id="7Ih-Vl-ixd"/>
+                <outlet property="menuShowWikipediaOnMap" destination="cvl-ri-rp7" id="9sp-LL-L1d"/>
                 <outlet property="scrollView" destination="f8l-WP-d8h" id="pVl-qz-Mxt"/>
                 <outlet property="statusFilename" destination="FQl-1Y-nUv" id="f2C-yl-rGE"/>
                 <outlet property="statusIndex" destination="7HI-al-da7" id="O5N-rI-O48"/>
@@ -443,9 +444,16 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mvZ-ng-RCb"/>
-                            <menuItem title="Show placename details" tag="1" keyEquivalent="P" id="h9V-ZI-Im7">
+                            <menuItem title="Show placename details" tag="1" keyEquivalent="p" id="h9V-ZI-Im7">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="onShowPlacenameDetails:" target="lzO-hK-yhB" id="ciy-z6-jcD"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show Wikipedia on map" tag="1" keyEquivalent="w" id="cvl-ri-rp7">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="onShowWikipediaOnMap:" target="lzO-hK-yhB" id="JZr-5t-Gw7"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="c3V-xR-Vig"/>
@@ -793,7 +801,7 @@ CA
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="N6C-FT-7wW">
                                                 <rect key="frame" x="0.0" y="0.0" width="807" height="436"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="InformationTableIptc" headerView="L6j-wh-n4y" id="6Xd-P7-gm1">
                                                         <rect key="frame" x="0.0" y="0.0" width="807" height="411"/>
@@ -863,7 +871,7 @@ CA
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="kH7-O6-nZo">
                                                 <rect key="frame" x="0.0" y="0.0" width="807" height="436"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="InformationTableXmp" headerView="3Zo-6U-XKA" id="U6d-af-WJs">
                                                         <rect key="frame" x="0.0" y="0.0" width="807" height="411"/>
@@ -933,7 +941,7 @@ CA
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="nxz-iC-07T">
                                                 <rect key="frame" x="0.0" y="0.0" width="807" height="436"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="InformationTableComposite" headerView="ysf-pD-Dub" id="UcH-k3-fVN">
                                                         <rect key="frame" x="0.0" y="0.0" width="807" height="411"/>
@@ -1003,7 +1011,7 @@ CA
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hnU-d6-WiQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="807" height="436"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="InformationTablePlacename" headerView="m3k-K6-a6R" id="s50-VY-UMs">
                                                         <rect key="frame" x="0.0" y="0.0" width="807" height="411"/>
@@ -1073,7 +1081,7 @@ CA
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Sv7-aA-eeQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="807" height="436"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="InformationTableWikipedia" headerView="IIh-JP-Ipa" id="5Hn-FG-LCf">
                                                         <rect key="frame" x="0.0" y="0.0" width="807" height="411"/>

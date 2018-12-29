@@ -27,14 +27,15 @@ class SingleViewWindowController: NSWindowController
     @IBOutlet weak var statusLocation: NSTextField!
     @IBOutlet weak var statusFilename: NSTextField!
     @IBOutlet weak var menuShowPlacenameDetails: NSMenuItem!
-
-
+    @IBOutlet weak var menuShowWikipediaOnMap: NSMenuItem!
+    
     var zoomView: ZoomView?
 
     let trashSoundPath = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/dock/drag to trash.aif"
     var mediaProvider: MediaProvider?
     var currentFileIndex = 0
     var currentMediaData: MediaData?
+    var ignoreMediaProviderUpdateOnce = false
     fileprivate var dateFormatter: DateFormatter? = nil
 
     
@@ -90,6 +91,10 @@ class SingleViewWindowController: NSWindowController
 
     @objc func mediaProviderUpdated(_ notification: Notification)
     {
+        if ignoreMediaProviderUpdateOnce {
+            ignoreMediaProviderUpdateOnce = false
+            return
+        }
         // The media files have been updated (added to, removed from or an instance updated).
         // This may cause our current selection to change - or the currently displayed metadata to change
         if mediaProvider!.mediaCount == 0 {
@@ -350,7 +355,7 @@ class SingleViewWindowController: NSWindowController
         }
 
         currentMediaData = nil
-        currentFileIndex = 0;
+        currentFileIndex = 0
         mediaProvider!.clear()
         mediaProvider!.setRepository(FileMediaRepository())
 
@@ -395,9 +400,13 @@ class SingleViewWindowController: NSWindowController
                 url = folderUrl.deletingLastPathComponent()
             }
 
+            if selected != nil && !selected!.hasDirectoryPath {
+                ignoreMediaProviderUpdateOnce = true
+            }
             mediaProvider!.addFolder(url.path)
         }
 
+        ignoreMediaProviderUpdateOnce = false
         if selected != nil {
             let _ = selectByUrl(selected, display: true)
         }

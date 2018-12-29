@@ -23,8 +23,10 @@ class MapViewController: NSWindowController
 
         Notifications.addObserver(self, selector: #selector(MapViewController.fileSelected(_:)), name: Notifications.Selection.MediaData, object: nil)
         Notifications.addObserver(self, selector: #selector(MapViewController.detailsUpdated(_:)), name: MediaProvider.Notifications.DetailsAvailable, object: nil)
+
+        Notifications.addObserver(self, selector: #selector(MapViewController.clearedWikipediaDetails(_:)), name: Notifications.FileInformationController.ClearedWikipediaDetails, object: nil)
+        Notifications.addObserver(self, selector: #selector(MapViewController.setWikipediaDetails(_:)), name: Notifications.FileInformationController.SetWikipediaDetails, object: nil)
     }
-    
     
     // MARK: actions
     func toggleVisibility()
@@ -66,7 +68,7 @@ class MapViewController: NSWindowController
         Async.main {
             let name = self.currentMediaData?.name
             let location = self.currentMediaData?.location
-            
+
             if location == nil {
                 let _ = self.invokeMapScript("clearMarker()")
                 if name == nil {
@@ -81,9 +83,26 @@ class MapViewController: NSWindowController
         }
     }
 
+    @objc
+    func clearedWikipediaDetails(_ notification: Notification) {
+        let _ = self.invokeMapScript("clearWikipediaMarks()")
+    }
+
+    @objc
+    func setWikipediaDetails(_ notification: Notification) {
+        if let userInfo = notification.userInfo as? Dictionary<String,[WikipediaDetail]> {
+            if let details = userInfo["details"] {
+                for d in details {
+                    let _ = self.invokeMapScript(
+                        "addWikipediaMark([\(d.latitude), \(d.longitude)], '\(d.id)', '\(d.title)', \(d.distance))")
+                }
+            }
+        }
+    }
+
     func invokeMapScript(_ script: String) -> AnyObject?
     {
-        //        Logger.info("Script: \(script)")
+//        Logger.info("Script: \(script)")
         return mapView.windowScriptObject.evaluateWebScript(script) as AnyObject?
     }
 

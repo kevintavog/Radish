@@ -39,6 +39,7 @@ class FileInformationController : NSViewController
     fileprivate var placenameDetails = [PlacenameDetail]()
 
     fileprivate var lastWikipediaLocation = ""
+    fileprivate var showWikipediaOnMap = false
     fileprivate var wikipediaDetails = [WikipediaDetail]()
 
 
@@ -55,6 +56,7 @@ class FileInformationController : NSViewController
         Notifications.addObserver(self, selector: #selector(FileInformationController.fileSelected(_:)), name: Notifications.Selection.MediaData, object: nil)
         Notifications.addObserver(self, selector: #selector(FileInformationController.detailsUpdated(_:)), name: MediaProvider.Notifications.DetailsAvailable, object: nil)
         Notifications.addObserver(self, selector: #selector(FileInformationController.showPlacenameDetailsNotification(_:)), name: Notifications.SingleView.ShowPlacenameDetails, object: nil)
+        Notifications.addObserver(self, selector: #selector(FileInformationController.showWikipediaOnMapNotification(_:)), name: Notifications.SingleView.ShowWikipediaOnMap, object: nil)
 
         wikipediaTableView.target = self
         wikipediaTableView.doubleAction = #selector(FileInformationController.doubleClickWikipedia(_ :))
@@ -115,8 +117,26 @@ class FileInformationController : NSViewController
         }
     }
 
+    @objc func showWikipediaOnMapNotification(_ notification: Notification)
+    {
+        if let userInfo = notification.userInfo as? Dictionary<String,Bool> {
+            if let val = userInfo["ShowWikipediaOnMap"] {
+                self.showWikipediaOnMap = val
+                Async.main {
+                    if self.showWikipediaOnMap {
+                        Notifications.postNotification(Notifications.FileInformationController.SetWikipediaDetails, object: self, userInfo: ["details": self.wikipediaDetails])
+                    } else {
+                        Notifications.postNotification(Notifications.FileInformationController.ClearedWikipediaDetails, object: self, userInfo: nil)
+                    }
+                }
+            }
+        }
+    }
+
     func updateView()
     {
+        self.updateWikipedia()
+        
         if self.panel.isVisible {
             if let name = currentMediaData?.name {
                 panel.title = "Information - \(name)"
@@ -131,29 +151,9 @@ class FileInformationController : NSViewController
             }
             placenameDetails = []
 
-            var loadWikipedia = false
-            var locationString = ""
-            if let md = currentMediaData, let loc = md.location {
-                locationString = "\(loc.latitude),\(loc.longitude)"
-            }
-            if self.lastWikipediaLocation != locationString {
-                self.lastWikipediaLocation = locationString
-                loadWikipedia = true
-                wikipediaDetails = []
-                self.wikipediaTableView.reloadData()
-            }
-
             var safeToIgnore = false
             var tabId = TabIdentifier.none
             if currentMediaData != nil {
-                Async.background {
-                    if loadWikipedia {
-                        self.retrieveWikipediaDetails()
-                        Async.main {
-                            self.wikipediaTableView.reloadData()
-                        }
-                    }
-                }
                 for (index, md) in currentMediaData!.details.enumerated() {
                     if md.category != nil {
                         switch md.category! {
@@ -205,10 +205,36 @@ class FileInformationController : NSViewController
         }
     }
 
-    func retrieveWikipediaDetails() {
-        self.wikipediaDetails.append(contentsOf: WikipediaProvider().lookup(
-            latitude: self.currentMediaData!.location!.latitude,
-            longitude: self.currentMediaData!.location!.longitude))
+    func updateWikipedia() {
+        var loadWikipedia = false
+        var locationString = ""
+        if let md = currentMediaData, let loc = md.location {
+            locationString = "\(loc.latitude),\(loc.longitude)"
+        }
+
+        if self.lastWikipediaLocation != locationString {
+            self.lastWikipediaLocation = locationString
+            loadWikipedia = true
+            wikipediaDetails = []
+            self.wikipediaTableView.reloadData()
+            if self.showWikipediaOnMap {
+                Notifications.postNotification(Notifications.FileInformationController.ClearedWikipediaDetails, object: self, userInfo: nil)
+            }
+        }
+        
+        if loadWikipedia && self.currentMediaData != nil {
+            Async.background {
+                self.wikipediaDetails.append(contentsOf: WikipediaProvider().lookup(
+                    latitude: self.currentMediaData!.location!.latitude,
+                    longitude: self.currentMediaData!.location!.longitude))
+                Async.main {
+                    self.wikipediaTableView.reloadData()
+                    if self.showWikipediaOnMap {
+                        Notifications.postNotification(Notifications.FileInformationController.SetWikipediaDetails, object: self, userInfo: ["details": self.wikipediaDetails])
+                    }
+                }
+            }
+        }
     }
     
     // MARK: tab view
@@ -267,7 +293,7 @@ class FileInformationController : NSViewController
         if tabId == TabIdentifier.wikipedia.rawValue {
             switch (objectValueForTableColumn!.dataCell as AnyObject).tag {
             case 1:
-                return wikipediaDetails[row].title
+                return "\(wikipediaDetails[row].id) - \(wikipediaDetails[row].title)"
             case 2:
                 return String(wikipediaDetails[row].distance)
             case 3:
