@@ -54,14 +54,13 @@ open class PlacenameDetailsProvider {
         
         do {
             let json = try JSON(data: resultData!)
+            details.append(contentsOf: getDetails(json["ocd"], "ocd"))
+            details.append(contentsOf: getDetails(json["overpass"], "overpass"))
             details.append(contentsOf: getDetails(json["azure"], "azure"))
             details.append(contentsOf: getDetails(json["foursquare"], "foursquare"))
-            details.append(contentsOf: getDetails(json["ocd"], "ocd"))
-            details.append(contentsOf: getDetails(json["osm"], "osm"))
+            details.append(contentsOf: getDetails(json["ocd_results"], "ocd_results"))
             details.append(contentsOf: getDetails(json["azure_results"], "azure_results"))
-            details.append(contentsOf: getDetails(json["foursquare_compact"], "foursquare_venues"))
-            details.append(contentsOf: getDetails(json["ocd_components"], "ocd_components"))
-            details.append(contentsOf: getDetails(json["osm_address"], "osm_address"))
+            details.append(contentsOf: getDetails(json["overpass_elements"], "overpass_elements"))
             return details
         } catch {
             return details
@@ -73,8 +72,17 @@ open class PlacenameDetailsProvider {
         if let validJson = json {
             for (key,subJson):(String, JSON) in validJson {
                 if let jsonArray = subJson.array {
-                    for (index, arraySubJson) in jsonArray.enumerated() {
-                        details.append(contentsOf: getDetails(arraySubJson, "\(prefix).\(key).\(index)"))
+                    // If it's an array of objects, call recursively, otherwise convert each item to a string
+                    if let first = jsonArray.first {
+                        if nil != first.rawValue as? String {
+                            let items: [String] = jsonArray.compactMap({ $0.rawValue as? String })
+                            let val = "[" + items.joined(separator: ", ") + "]"
+                            details.append(PlacenameDetail(name: prefix + "." + key, value: val))
+                        } else {
+                            for (index, arraySubJson) in jsonArray.enumerated() {
+                                details.append(contentsOf: getDetails(arraySubJson, "\(prefix).\(key).\(index)"))
+                            }
+                        }
                     }
                 } else if let jsonDictionary = subJson.dictionary {
                     for (dictionaryKey, dictionaryJson) in jsonDictionary {

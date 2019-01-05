@@ -222,7 +222,7 @@ class FileInformationController : NSViewController
             }
         }
         
-        if loadWikipedia && self.currentMediaData != nil {
+        if loadWikipedia && self.currentMediaData != nil && self.currentMediaData?.location != nil  {
             Async.background {
                 self.wikipediaDetails.append(contentsOf: WikipediaProvider().lookup(
                     latitude: self.currentMediaData!.location!.latitude,
