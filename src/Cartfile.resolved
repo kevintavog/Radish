@@ -1,4 +1,4 @@
-github "Alamofire/Alamofire" "5da547fdd8a7352709a0c849f9feac8fc84c944c"
-github "CocoaLumberjack/CocoaLumberjack" "ef7ecd1767d1af298c85937fd43df1be1ac6552c"
-github "SwiftyJSON/SwiftyJSON" "4.0.0"
-github "duemunk/Async" "6868449ee0c1da13d48a78ee4d1e3c70170bb74c"
+github "Alamofire/Alamofire" "4.9.0"
+github "CocoaLumberjack/CocoaLumberjack" "f92141df1c76125ec1d985965e4875c382e86519"
+github "SwiftyJSON/SwiftyJSON" "5.0.0"
+github "duemunk/Async" "22b1784a83874e2b761c35ad1f7dee5082176d8a"

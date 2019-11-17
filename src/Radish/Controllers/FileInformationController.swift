@@ -165,6 +165,9 @@ class FileInformationController : NSViewController
                         case "Placename": tabId = TabIdentifier.placename
                         case "JFIF": tabId = TabIdentifier.none; safeToIgnore = true
                         case "ICC_Profile": tabId = TabIdentifier.none; safeToIgnore = true
+                        case "QuickTime": tabId = TabIdentifier.none; safeToIgnore = true
+                        case "MakerNotes": tabId = TabIdentifier.none; safeToIgnore = true
+                        case "Photoshop": tabId = TabIdentifier.none; safeToIgnore = true
                         default: Logger.error("Unrecognized category: \(md.category!)")
                             tabId = TabIdentifier.none
                         }
@@ -304,16 +307,21 @@ class FileInformationController : NSViewController
             }
         }
 
-        let detail = currentMediaData?.details[self.tabStart[tabId] + row]
-        switch (objectValueForTableColumn!.dataCell as AnyObject).tag {
-        case 1:
-            return detail?.name == nil ? "" : (detail?.name)!
-        case 2:
-            return detail?.value == nil ? "" : (detail?.value)!
-        default:
-            Logger.error("Unhandled information column tag: \(String(describing: (objectValueForTableColumn!.dataCell as AnyObject).tag))")
-            return ""
+        if let mediaDetails = currentMediaData?.details {
+            if (self.tabStart[tabId] + row) < mediaDetails.count {
+                let detail = mediaDetails[self.tabStart[tabId] + row]
+                switch (objectValueForTableColumn!.dataCell as AnyObject).tag {
+                case 1:
+                    return detail.name == nil ? "" : (detail.name)!
+                case 2:
+                    return detail.value == nil ? "" : (detail.value)!
+                default:
+                    Logger.error("Unhandled information column tag: \(String(describing: (objectValueForTableColumn!.dataCell as AnyObject).tag))")
+                    return ""
+                }
+            }
         }
+        return ""
     }
 
     @objc
