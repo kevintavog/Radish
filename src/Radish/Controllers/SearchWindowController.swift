@@ -7,7 +7,7 @@ import Async
 import RangicCore
 
 
-class SearchWindowController : NSWindowController
+class SearchWindowController : NSWindowController, NSWindowDelegate
 {
     var viewSearchResults = false
     @IBOutlet weak var hostText: NSTextField!
@@ -16,6 +16,9 @@ class SearchWindowController : NSWindowController
     @IBOutlet weak var statusLabel: NSTextField!
     @IBOutlet weak var workingIndicator: NSProgressIndicator!
 
+    override func windowDidLoad() {
+        self.window?.delegate = self
+    }
     
     override func awakeFromNib()
     {
@@ -47,6 +50,10 @@ class SearchWindowController : NSWindowController
         workingIndicator.startAnimation(sender)
         workingIndicator.isHidden = false
         Preferences.lastSearchText = searchText.stringValue
+        
+        let hostValue = self.hostText.stringValue
+        let searchValue = self.searchText.stringValue
+        
 
         // Run search (clear status text, start working indicator)
         // When it completes (end working indicator)
@@ -54,8 +61,8 @@ class SearchWindowController : NSWindowController
         // If it fails, set status message and stay open
         Async.background {
             FindAPhotoResults.search(
-                self.hostText.stringValue,
-                text: self.searchText.stringValue,
+                hostValue,
+                text: searchValue,
                 first: 1,
                 count: 1,
                 completion: { (result: FindAPhotoResults) -> () in
@@ -68,17 +75,15 @@ class SearchWindowController : NSWindowController
                             self.statusImage.image = NSImage(named: "FailedCheck")
                             self.statusLabel.stringValue = "FAILED: \(result.errorMessage!)"
                         } else {
-                            Preferences.findAPhotoHost = self.hostText.stringValue
+                            Preferences.findAPhotoHost = hostValue
                             self.statusImage.image = NSImage(named: "SucceededCheck")
                             if result.totalMatches! == 0 {
                                 self.statusLabel.stringValue = "Succeeded - but there are no matches"
                             } else {
                                 self.statusLabel.stringValue = "Succeeded with a total of \(result.totalMatches!) matches"
-                                
-                                Async.main {
-                                    self.viewSearchResults = true
-                                    self.close()
-                                }
+
+                                self.viewSearchResults = true
+                                self.close()
                             }
                         }
                     }

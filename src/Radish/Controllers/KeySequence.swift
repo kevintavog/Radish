@@ -23,8 +23,10 @@ class KeySequence : Hashable, CustomStringConvertible
         }
         return "\(modifierFlags)->\(chars) (\(charValues))"
     }
-
-    var hashValue: Int { return /* modifierFlags.rawValue.hashValue * */ chars.hashValue }
+    
+    func hash(into hasher: inout Hasher) {
+        chars.hash(into: &hasher)
+    }
 }
 
 func == (lhs: KeySequence, rhs: KeySequence) -> Bool

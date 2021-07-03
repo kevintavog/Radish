@@ -5,7 +5,7 @@
 
 import Quartz
 
-protocol RadishImageBrowserViewDelegate: class
+protocol RadishImageBrowserViewDelegate: AnyObject
 {
     func viewSelectedFile()
 }
