@@ -24,11 +24,11 @@ class AppDelegate: NSObject, NSApplicationDelegate
     // MARK: Application hooks
     func applicationDidFinishLaunching(_ aNotification: Notification)
     {
-        #if DEBUG
-            defaultDebugLevel = DDLogLevel.verbose
-            #else
-            defaultDebugLevel = DDLogLevel.info
-        #endif
+//        #if DEBUG
+//            defaultDebugLevel = DDLogLevelVerbose
+//            #else
+//            defaultDebugLevel = DDLogLevelInfo
+//        #endif
         Logger.configure()
 
         Preferences.setMissingDefaults()

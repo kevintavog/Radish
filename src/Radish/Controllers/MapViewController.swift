@@ -56,9 +56,11 @@ class MapViewController: NSWindowController
     
     @objc func detailsUpdated(_ notification: Notification)
     {
-        if panel.isVisible {
-            if let _ = notification.object as? MediaData {
-                updateView()
+        if let _ = notification.object as? MediaData {
+            Async.main {
+                if self.panel.isVisible {
+                    self.updateView()
+                }
             }
         }
     }
