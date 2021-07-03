@@ -8,11 +8,11 @@ import RangicCore
 open class RadishImageBrowserCell : IKImageBrowserCell
 {
     static fileprivate var lineHeight: CGFloat?
-    static fileprivate let textAttrs = [NSAttributedStringKey.foregroundColor : NSColor.white, NSAttributedStringKey.font : NSFont.labelFont(ofSize: 14)]
+    static fileprivate let textAttrs = [NSAttributedString.Key.foregroundColor : NSColor.white, NSAttributedString.Key.font : NSFont.labelFont(ofSize: 14)]
     static fileprivate let badDateAttrs = [
-        NSAttributedStringKey.foregroundColor.rawValue : NSColor.yellow,
-        NSAttributedStringKey.font : NSFont.labelFont(ofSize: 14),
-        NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
+        NSAttributedString.Key.foregroundColor.rawValue : NSColor.yellow,
+        NSAttributedString.Key.font : NSFont.labelFont(ofSize: 14),
+        NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
     ] as! [String : Any]
 
 

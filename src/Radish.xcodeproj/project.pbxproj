@@ -252,7 +252,7 @@
 				TargetAttributes = {
 					4442A01C1B926784007251E6 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -482,7 +482,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -502,7 +502,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rangic.Radish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

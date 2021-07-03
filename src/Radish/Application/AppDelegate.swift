@@ -89,13 +89,13 @@ class AppDelegate: NSObject, NSApplicationDelegate
     
     @IBAction func preferences(_ sender: AnyObject)
     {
-        let preferencesController = PreferencesWindowController(windowNibName: NSNib.Name(rawValue: "Preferences"))
+        let preferencesController = PreferencesWindowController(windowNibName: "Preferences")
         NSApplication.shared.runModal(for: preferencesController.window!)
     }
 
     @IBAction func search(_ sender: AnyObject)
     {
-        let searchController = SearchWindowController(windowNibName: NSNib.Name(rawValue: "Search"))
+        let searchController = SearchWindowController(windowNibName: "Search")
         NSApplication.shared.runModal(for: searchController.window!)
 
         if searchController.viewSearchResults {

@@ -35,7 +35,7 @@ extension SingleViewWindowController
         Notifications.postNotification(Notifications.SingleView.ShowPlacenameDetails, object: self, userInfo: ["ShowPlacenameDetails": val])
     }
 
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool
     {
         switch MenuItemTag(rawValue: menuItem.tag)! {
         case .alwaysEnable:

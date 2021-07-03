@@ -25,7 +25,7 @@ class ThumbnailViewWindowController : NSWindowController, RadishImageBrowserView
         imageBrowser.setValue(NSColor.darkGray, forKey: IKImageBrowserBackgroundColorKey)
 
         let newAttrs = NSMutableDictionary(dictionary: imageBrowser.value(forKey: IKImageBrowserCellsTitleAttributesKey) as! [String:Any])
-        newAttrs.setValue(NSColor.white, forKeyPath: NSAttributedStringKey.foregroundColor.rawValue)
+        newAttrs.setValue(NSColor.white, forKeyPath: NSAttributedString.Key.foregroundColor.rawValue)
         imageBrowser?.setValue(newAttrs, forKey: IKImageBrowserCellsTitleAttributesKey)
 
         imageBrowser.viewFileDelegate = self

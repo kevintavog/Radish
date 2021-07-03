@@ -65,11 +65,11 @@ class SearchWindowController : NSWindowController
 
                         self.statusImage.isHidden = false
                         if result.hasError {
-                            self.statusImage.image = NSImage(named: NSImage.Name(rawValue: "FailedCheck"))
+                            self.statusImage.image = NSImage(named: "FailedCheck")
                             self.statusLabel.stringValue = "FAILED: \(result.errorMessage!)"
                         } else {
                             Preferences.findAPhotoHost = self.hostText.stringValue
-                            self.statusImage.image = NSImage(named: NSImage.Name(rawValue: "SucceededCheck"))
+                            self.statusImage.image = NSImage(named: "SucceededCheck")
                             if result.totalMatches! == 0 {
                                 self.statusLabel.stringValue = "Succeeded - but there are no matches"
                             } else {

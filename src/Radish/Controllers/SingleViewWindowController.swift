@@ -314,8 +314,8 @@ class SingleViewWindowController: NSWindowController
             else {
                 let fullRange = NSRange(location: 0, length: timestamp.count)
                 let attributeString = NSMutableAttributedString(string: timestamp)
-                attributeString.addAttribute(NSAttributedStringKey.foregroundColor, value: NSColor.yellow, range: fullRange)
-                attributeString.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: fullRange)
+                attributeString.addAttribute(NSAttributedString.Key.foregroundColor, value: NSColor.yellow, range: fullRange)
+                attributeString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: fullRange)
                 statusTimestamp.attributedStringValue = attributeString
             }
 

@@ -65,7 +65,7 @@ class PreferencesWindowController : NSWindowController
 
                 let succeeded = response.description.count > 0
                 let imageName = succeeded ? "SucceededCheck" : "FailedCheck"
-                self.testOsmResultImage.image = NSImage(named: NSImage.Name(rawValue: imageName))
+                self.testOsmResultImage.image = NSImage(named: imageName)
 
                 if !succeeded {
                     Logger.info("Response: \(response)")
